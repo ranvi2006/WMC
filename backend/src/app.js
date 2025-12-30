@@ -1,28 +1,40 @@
-const dotEnv=require('dotenv');
-dotEnv.config();
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');     
+const dotenv = require("dotenv");
+dotenv.config();
+
+const express = require("express");
+const cors = require("cors");
+const { sendEmail } = require("./controllers/sendEmail");
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
 
-
+// =======================
 // Middleware
-app.use(bodyParser.json());
-app.use(cors());     
+// =======================
+app.use(express.json());
+app.use(cors());
 
-
-// Sample route
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+// =======================
+// Routes
+// =======================
+app.get("/", (req, res) => {
+  res.send("Education App API is running 🚀");
 });
 
+// Email Route
+app.post("/api/send-email", sendEmail);
 
-// send email route
-const { sendEmail } = require('./controllers/sendEmail');
-app.post('/send-email', sendEmail);
+// Auth Routes
+app.use("/api/auth", authRoutes);
 
-app.all(/.*/, (req, res) => {
-    res.status(404).send({ message: `Route ${req.originalUrl} not found.` });
+// =======================
+// 404 Handler (MUST BE LAST)
+// =======================
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.originalUrl} not found`
+  });
 });
 
 module.exports = app;

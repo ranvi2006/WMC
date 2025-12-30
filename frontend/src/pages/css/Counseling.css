@@ -1,0 +1,138 @@
+/* =========================
+   PAGE CONTAINER
+========================= */
+
+.counseling-page {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: var(--background-color);
+  }
+  
+  /* =========================
+     CARD
+  ========================= */
+  
+  .counseling-card {
+    width: 100%;
+    max-width: 520px;
+    background: var(--white);
+    padding: 36px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* =========================
+     TEXT
+  ========================= */
+  
+  .counseling-card h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+  }
+  
+  .muted {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+  }
+  
+  /* =========================
+     FORM ELEMENTS
+  ========================= */
+  
+  .input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    transition: var(--transition);
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(11, 60, 109, 0.15);
+  }
+  
+  .textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  
+  /* =========================
+     BUTTON
+  ========================= */
+  
+  .btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .btn:hover {
+    background: linear-gradient(
+      135deg,
+      var(--secondary-color),
+      var(--accent-color)
+    );
+  }
+  
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* =========================
+     STATUS MESSAGES
+  ========================= */
+  
+  .error {
+    color: var(--danger);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .success {
+    color: var(--success);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  /* =========================
+     RESPONSIVE
+  ========================= */
+  
+  @media (max-width: 480px) {
+    .counseling-card {
+      padding: 24px;
+    }
+  
+    .row {
+      grid-template-columns: 1fr;
+    }
+  }
+  
