@@ -10,7 +10,7 @@ const Register = () => {
   const navigate = useNavigate();
   const details = useSelector((state) => state.details);
 
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(1);
 
   // ===== Form Fields =====
   const [email, setEmail] = useState("");
@@ -59,32 +59,32 @@ const Register = () => {
 
   // ================= STEP 3: REGISTER =================
    const createAccount = async() => {
-    // setError("");
+    setError("");
 
-    // if (!name) return setError("Full name is required");
-    // if (!phone) return setError("Phone number is required");
-    // if (!/^[0-9]{10}$/.test(phone))
-    //   return setError("Phone number must be 10 digits");
+    if (!name) return setError("Full name is required");
+    if (!phone) return setError("Phone number is required");
+    if (!/^[0-9]{10}$/.test(phone))
+      return setError("Phone number must be 10 digits");
 
-    // if (!password) return setError("Password is required");
-    // if (password.length < 6)
-    //   return setError("Password must be at least 6 characters");
+    if (!password) return setError("Password is required");
+    if (password.length < 6)
+      return setError("Password must be at least 6 characters");
 
-    // const payload = { name, email, phone, password, role };
-    // console.log("REGISTER PAYLOAD:", payload);
+    const payload = { name, email, phone, password, role };
+    console.log("REGISTER PAYLOAD:", payload);
 
-    // // call /api/auth/register later
+    // call /api/auth/register later
 
-    // await axios.post(`${apiUrl}/api/auth/register`, payload)
-    //   .then((res) => {
-    //     localStorage.setItem("token", res.data.token);
-    //     localStorage.setItem("user", JSON.stringify(res.data.user));
-    //     // redirect later
-    //     navigate("/home");
-    //   })
-    //   .catch((err) => {
-    //     setError(err.response?.data?.message || "Registration failed");
-    //   }); 
+    await axios.post(`${apiUrl}/api/auth/register`, payload)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        // redirect later
+        navigate("/home");
+      })
+      .catch((err) => {
+        setError(err.response?.data?.message || "Registration failed");
+      }); 
     navigate("/");
   };
 
