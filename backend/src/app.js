@@ -16,6 +16,11 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+
+// send email route
+const { sendEmail } = require('./controllers/sendEmail');
+app.post('/send-email', sendEmail);
+
 app.all(/.*/, (req, res) => {
     res.status(404).send({ message: `Route ${req.originalUrl} not found.` });
 });
