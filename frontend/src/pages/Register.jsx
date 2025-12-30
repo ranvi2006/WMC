@@ -35,7 +35,7 @@ const Register = () => {
       return setError("Enter a valid email address");
 
     try {
-      const res = await axios.post(`${apiUrl}/send-email`, { email });
+      const res = await axios.post(`${apiUrl}/api/send-email`, { email });
       dispatch(otpSetter(res.data.otp));
       setStep(2);
     } catch {
