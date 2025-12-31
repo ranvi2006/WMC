@@ -5,6 +5,9 @@ const express = require("express");
 const cors = require("cors");
 const { sendEmail } = require("./controllers/sendEmail");
 const authRoutes = require("./routes/authRoutes");
+const courseRoutes = require("./routes/courseRoutes");
+const roadmapRoutes = require("./routes/roadmapRoutes");
+const enrollmentRoutes = require("./routes/enrollmentRoutes");
 
 const app = express();
 
@@ -27,6 +30,15 @@ app.post("/api/send-email", sendEmail);
 // Auth Routes
 app.use("/api/auth", authRoutes);
 
+// Course Routes
+app.use("/api/courses", courseRoutes);
+
+// Roadmap Routes
+app.use("/api/roadmaps", roadmapRoutes);
+
+// Enrollment Routes
+app.use("/api/enrollments", enrollmentRoutes);
+  
 // =======================
 // 404 Handler (MUST BE LAST)
 // =======================
