@@ -1,179 +1,166 @@
 import { useState } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { otpSetter } from "../store/slices/detailsSlice";
-import "./css/Login.css"
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { registerUser } from "../services/authService";
+import { loginSuccess } from "../store/slices/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const details = useSelector((state) => state.details);
 
-  const [step, setStep] = useState(1);
-
-  // ===== Form Fields =====
-  const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [role] = useState("STUDENT");
-
-  // ===== Error =====
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    role: "STUDENT"
+  });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-  // ================= STEP 1: SEND OTP =================
-  const sendOTP = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
     setError("");
+    setLoading(true);
 
-    if (!email) return setError("Email is required");
-    if (!/^\S+@\S+\.\S+$/.test(email))
-      return setError("Enter a valid email address");
+    // Validation
+    if (!formData.name || !formData.email || !formData.phone || !formData.password) {
+      setError("Please fill in all fields");
+      setLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters");
+      setLoading(false);
+      return;
+    }
 
     try {
-      const res = await axios.post(`${apiUrl}/api/send-email`, { email });
-      dispatch(otpSetter(res.data.otp));
-      setStep(2);
-    } catch {
-      setError("Failed to send OTP");
+      const res = await registerUser(formData);
+      dispatch(loginSuccess(res.data));
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data?.message || "Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  };
-
-  // ================= STEP 2: VERIFY OTP =================
-  const verifyOTP = () => {
-    setError("");
-
-    if (!otp) return setError("OTP is required");
-    if (otp.length !== 6) return setError("OTP must be 6 digits");
-
-    if (details.otp == otp) {
-      setStep(3);
-    } else {
-      setError("Invalid OTP");
-    }
-  };
-
-  // ================= STEP 3: REGISTER =================
-   const createAccount = async() => {
-    setError("");
-
-    if (!name) return setError("Full name is required");
-    if (!phone) return setError("Phone number is required");
-    if (!/^[0-9]{10}$/.test(phone))
-      return setError("Phone number must be 10 digits");
-
-    if (!password) return setError("Password is required");
-    if (password.length < 6)
-      return setError("Password must be at least 6 characters");
-
-    const payload = { name, email, phone, password, role };
-    console.log("REGISTER PAYLOAD:", payload);
-
-    // call /api/auth/register later
-
-    await axios.post(`${apiUrl}/api/auth/register`, payload)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        // redirect later
-        navigate("/home");
-      })
-      .catch((err) => {
-        setError(err.response?.data?.message || "Registration failed");
-      }); 
-    navigate("/");
   };
 
   return (
     <div className="auth-container">
-      <div className="auth-card">
-        <img src="/images/logo.jpg" className="auth-logo" alt="logo" />
+      <div className="auth-card fade-in">
+        <img
+          src="/images/logo.jpg"
+          alt="We Make Coder Logo"
+          className="auth-logo"
+          onError={(e) => {
+            e.target.style.display = "none";
+          }}
+        />
+        <h2 className="auth-title">Create Your Account</h2>
+        <p className="auth-subtitle">Start your coding journey today</p>
 
-        {error && <p className="error">{error}</p>}
+        {error && <div className="error">{error}</div>}
 
-        {/* ===== STEP 1 ===== */}
-        {step === 1 && (
-          <>
-            <h2 className="auth-title">Verify your email</h2>
-
+        <form className="auth-form" onSubmit={handleRegister}>
+          <div className="input-group">
+            <label className="input-label" htmlFor="name">
+              Full Name
+            </label>
             <input
+              id="name"
+              type="text"
+              name="name"
               className="input"
+              placeholder="Enter your full name"
+              value={formData.name}
+              onChange={handleChange}
+              disabled={loading}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label className="input-label" htmlFor="email">
+              Email Address
+            </label>
+            <input
+              id="email"
               type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <button className="btn" onClick={sendOTP}>
-              Send OTP
-            </button>
-          </>
-        )}
-
-        {/* ===== STEP 2 ===== */}
-        {step === 2 && (
-          <>
-            <h2 className="auth-title">Enter OTP</h2>
-
-            <input
+              name="email"
               className="input"
-              placeholder="6-digit OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              disabled={loading}
+              required
             />
+          </div>
 
-            <button className="btn" onClick={verifyOTP}>
-              Verify OTP
-            </button>
-          </>
-        )}
-
-        {/* ===== STEP 3 ===== */}
-        {step === 3 && (
-          <>
-            <h2 className="auth-title">Create Account</h2>
-
+          <div className="input-group">
+            <label className="input-label" htmlFor="phone">
+              Phone Number
+            </label>
             <input
-              className="input"
-              placeholder="Full Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-
-            <input
-              className="input"
+              id="phone"
               type="tel"
-              placeholder="Phone Number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-
-            <input
+              name="phone"
               className="input"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your phone number"
+              value={formData.phone}
+              onChange={handleChange}
+              disabled={loading}
+              required
             />
+          </div>
 
-            <button className="btn" onClick={createAccount}>
-              Create Account
-            </button>
-          </>
-        )}
+          <div className="input-group">
+            <label className="input-label" htmlFor="password">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              className="input"
+              placeholder="Create a strong password (min. 6 characters)"
+              value={formData.password}
+              onChange={handleChange}
+              disabled={loading}
+              required
+              minLength={6}
+            />
+          </div>
 
-        {/* 🔹 GO TO LOGIN */}
-        <button
-          className="btn btn-secondary"
-          style={{ marginTop: "12px" }}
-          onClick={() => navigate("/login")}
-        >
-          Already have an account? Login
-        </button>
+          <button
+            type="submit"
+            className="btn btn-cta"
+            disabled={loading}
+            style={{ width: "100%", marginTop: "var(--spacing-sm)" }}
+          >
+            {loading ? (
+              <>
+                <span className="loading"></span>
+                Creating account...
+              </>
+            ) : (
+              "Create Account"
+            )}
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          Already have an account?{" "}
+          <Link to="/login">Sign in here</Link>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 const Course = require("../models/Course");
+const Enrollment = require("../models/Enrollment");
 
 // ✅ CREATE COURSE
 exports.createCourse = async (req, res) => {
@@ -30,7 +31,7 @@ exports.updateCourse = async (req, res) => {
     // Ownership check
     if (
       course.createdBy.toString() !== req.user.id &&
-      req.user.role !== "admin"
+      req.user.role !== "ADMIN"
     ) {
       return res.status(403).json({ success: false, message: "Access denied" });
     }
@@ -59,7 +60,7 @@ exports.deleteCourse = async (req, res) => {
 
     if (
       course.createdBy.toString() !== req.user.id &&
-      req.user.role !== "admin"
+      req.user.role !== "ADMIN"
     ) {
       return res.status(403).json({ success: false, message: "Access denied" });
     }
@@ -114,5 +115,42 @@ exports.getMyCourses = async (req, res) => {
     res.json({ success: true, data: courses });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+exports.getAllUserCourses = async (req, res) => {
+  try {
+    const { id } = req.params; // studentId from URL
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: 'Student ID is required'
+      });
+    }
+
+    const enrollments = await Enrollment.find({ studentId: id })
+      .populate({
+        path: 'courseId',
+        select: 'title description level category language price averageRating totalEnrollments status'
+      })
+      .populate({
+        path: 'roadmapId',
+        select: 'title description'
+      })
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      count: enrollments.length,
+      data: enrollments
+    });
+
+  } catch (error) {
+    console.error('Get User Courses Error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'Server error while fetching user courses'
+    });
   }
 };

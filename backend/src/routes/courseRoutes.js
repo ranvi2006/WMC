@@ -7,7 +7,8 @@ const {
   deleteCourse,
   getAllCourses,
   getCourseById,
-  getMyCourses
+  getMyCourses,
+  getAllUserCourses
 } = require("../controllers/courseController");
 
 const { isAuthenticated } = require("../middlewares/authMiddleware");
@@ -17,7 +18,7 @@ const { allowRoles } = require("../middlewares/roleMiddleware");
 router.post(
   "/",
   isAuthenticated,
-  allowRoles("admin", "instructor"),
+  allowRoles("ADMIN", "TEACHER"),
   createCourse
 );
 
@@ -25,7 +26,7 @@ router.post(
 router.put(
   "/:id",
   isAuthenticated,
-  allowRoles("admin", "instructor"),
+  allowRoles("ADMIN", "TEACHER"),
   updateCourse
 );
 
@@ -33,7 +34,7 @@ router.put(
 router.delete(
   "/:id",
   isAuthenticated,
-  allowRoles("admin", "instructor"),
+  allowRoles("ADMIN", "TEACHER"),
   deleteCourse
 );
 
@@ -44,11 +45,14 @@ router.get("/", getAllCourses);
 router.get(
   "/my/courses",
   isAuthenticated,
-  allowRoles("instructor"),
+  allowRoles("TEACHER"),
   getMyCourses
 );
 
 // Public - parameterized route must come after specific routes
 router.get("/:id", getCourseById);
+
+// Get all user courses
+router.get('/user/:id/courses', getAllUserCourses);
 
 module.exports = router;

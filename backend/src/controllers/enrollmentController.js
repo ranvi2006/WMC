@@ -2,11 +2,15 @@ const Enrollment = require("../models/Enrollment");
 const Course = require("../models/Course");
 const Roadmap = require("../models/Roadmap");
 
-// ✅ ENROLL IN COURSE
+/* =====================================
+   ✅ ENROLL IN COURSE (STUDENT)
+===================================== */
 exports.enrollCourse = async (req, res) => {
   try {
     const { courseId } = req.body;
+    const studentId = req.user.id;
 
+    // 1️⃣ Check course
     const course = await Course.findOne({
       _id: courseId,
       status: "published"
@@ -19,9 +23,9 @@ exports.enrollCourse = async (req, res) => {
       });
     }
 
-    // Prevent duplicate enrollment
+    // 2️⃣ Prevent duplicate enrollment
     const existing = await Enrollment.findOne({
-      studentId: req.user.id,
+      studentId,
       courseId
     });
 
@@ -32,63 +36,101 @@ exports.enrollCourse = async (req, res) => {
       });
     }
 
-    // Get active roadmap
+    // 3️⃣ Get active roadmap
     const roadmap = await Roadmap.findOne({
       courseId,
       isActive: true
     });
 
+    // 4️⃣ Create enrollment
     const enrollment = await Enrollment.create({
-      studentId: req.user.id,
+      studentId,
       courseId,
-      roadmapId: roadmap ? roadmap._id : null
+      roadmapId: roadmap ? roadmap._id : null,
+      status: "active"
     });
 
-    // Update analytics
-    course.totalEnrollments += 1;
-    await course.save();
+    // 5️⃣ Atomic analytics update
+    await Course.updateOne(
+      { _id: courseId },
+      { $inc: { totalEnrollments: 1 } }
+    );
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Enrolled successfully",
       data: enrollment
     });
+
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Enroll Course Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Enrollment failed"
+    });
   }
 };
 
-// ✅ MY ENROLLMENTS (STUDENT)
+/* =====================================
+   ✅ MY ENROLLMENTS (STUDENT)
+===================================== */
 exports.getMyEnrollments = async (req, res) => {
   try {
     const enrollments = await Enrollment.find({
-      studentId: req.user.id
+      studentId: req.user.id,
+      status: "active"
     })
-      .populate("courseId")
-      .populate("roadmapId")
+      .populate({
+        path: "courseId",
+        select:
+          "title description level category language price averageRating totalEnrollments status"
+      })
+      .populate({
+        path: "roadmapId",
+        select: "title description"
+      })
       .sort({ enrolledAt: -1 });
 
-    res.json({ success: true, data: enrollments });
+    return res.status(200).json({
+      success: true,
+      count: enrollments.length,
+      data: enrollments
+    });
+
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Get My Enrollments Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch enrollments"
+    });
   }
 };
 
-// ✅ COURSE ENROLLMENTS (ADMIN)
+/* =====================================
+   ✅ COURSE ENROLLMENTS (ADMIN)
+===================================== */
 exports.getCourseEnrollments = async (req, res) => {
   try {
     const enrollments = await Enrollment.find({
       courseId: req.params.id
     })
-      .populate("studentId", "name email")
+      .populate({
+        path: "studentId",
+        select: "name email role"
+      })
       .sort({ enrolledAt: -1 });
 
-    res.json({
+    return res.status(200).json({
       success: true,
       count: enrollments.length,
       data: enrollments
     });
+
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error("Get Course Enrollments Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch course enrollments"
+    });
   }
 };
