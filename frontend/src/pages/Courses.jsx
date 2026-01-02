@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllCourses } from "../services/courseService";
-
 import "../styles/Courses.css";
 
 const Courses = () => {
@@ -52,12 +51,21 @@ const Courses = () => {
                 <strong>Level:</strong> {course.level}
               </p>
 
-              <Link
-                to={`/courses/${course._id}`}
-                className="btn btn-outline course-btn"
-              >
-                View Details
-              </Link>
+              <div className="course-actions">
+                <Link
+                  to={`/courses/${course._id}`}
+                  className="btn btn-outline"
+                >
+                  View Details
+                </Link>
+
+                <Link
+                  to={`/courses/${course._id}/showroadmap`}
+                  className="btn btn-primary"
+                >
+                  View Roadmap
+                </Link>
+              </div>
             </div>
           ))}
         </div>

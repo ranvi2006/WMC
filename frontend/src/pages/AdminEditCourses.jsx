@@ -8,6 +8,7 @@ const AdminEditCourses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // 🔹 Fetch all courses (admin)
   const fetchAllCourses = async () => {
     try {
       const res = await api.get("/api/courses");
@@ -24,20 +25,31 @@ const AdminEditCourses = () => {
     fetchAllCourses();
   }, []);
 
-  const handleDelete = async (courseId) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this course?"
-    );
-    if (!confirmDelete) return;
+  // 🔴 Delete course
+  const handleDeleteCourse = async (courseId) => {
+    if (!window.confirm("Are you sure you want to delete this course?")) return;
 
     try {
-      const res = await api.delete(`/api/courses/${courseId}`);
-      console.log("Course deleted:", res);
+      await api.delete(`/api/courses/${courseId}`);
       setCourses((prev) =>
         prev.filter((course) => course._id !== courseId)
       );
-    } catch (err) {
+    } catch {
       alert("Failed to delete course");
+    }
+  };
+
+  // 🔴 Delete roadmap (admin)
+  const handleDeleteRoadmap = async (courseId) => {
+    if (!window.confirm("Are you sure you want to delete this roadmap?")) return;
+
+    try {
+      await api.delete(`/api/roadmaps/course/${courseId}`);
+      alert("Roadmap deleted successfully");
+    } catch (err) {
+      alert(
+        err.response?.data?.message || "Failed to delete roadmap"
+      );
     }
   };
 
@@ -55,6 +67,7 @@ const AdminEditCourses = () => {
         </Link>
       </div>
 
+      {/* Empty state */}
       {courses.length === 0 ? (
         <div className="edit-courses-empty">
           <p>No courses found.</p>
@@ -82,7 +95,9 @@ const AdminEditCourses = () => {
                 </span>
               </div>
 
+              {/* 🔹 ACTION BUTTONS */}
               <div className="course-actions">
+                {/* View course */}
                 <Link
                   to={`/courses/${course._id}`}
                   className="btn btn-outline"
@@ -90,19 +105,44 @@ const AdminEditCourses = () => {
                   View
                 </Link>
 
+                {/* Edit course */}
                 <Link
-                ///instructor/courses/edit/:courseId
                   to={`/admin/courses/edit/${course._id}`}
                   className="btn btn-primary"
                 >
                   Edit
                 </Link>
 
+                {/* ✅ UPLOAD / REPLACE ROADMAP */}
+                <Link
+                  to={`/instructor/courses/${course._id}/roadmap`}
+                  className="btn btn-secondary"
+                >
+                  Upload Roadmap
+                </Link>
+
+                {/* 👁 VIEW ROADMAP */}
+                <Link
+                  to={`/courses/${course._id}/showroadmap`}
+                  className="btn btn-outline"
+                >
+                  View Roadmap
+                </Link>
+
+                {/* ❌ DELETE ROADMAP */}
+                <button
+                  className="btn btn-outline btn-danger"
+                  onClick={() => handleDeleteRoadmap(course._id)}
+                >
+                  Delete Roadmap
+                </button>
+
+                {/* ❌ DELETE COURSE */}
                 <button
                   className="btn btn-danger"
-                  onClick={() => handleDelete(course._id)}
+                  onClick={() => handleDeleteCourse(course._id)}
                 >
-                  Delete
+                  Delete Course
                 </button>
               </div>
             </div>

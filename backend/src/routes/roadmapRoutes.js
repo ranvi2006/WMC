@@ -1,16 +1,26 @@
 const express = require("express");
 const router = express.Router();
 
-const { uploadRoadmap } = require("../controllers/roadmapController");
+const upload = require("../middlewares/pdfUpload");
+const { uploadRoadmap,getRoadmapByCourse,deleteRoadmapByCourse } = require("../controllers/roadmapController");
 const { isAuthenticated } = require("../middlewares/authMiddleware");
-const { allowRoles } = require("../middlewares/roleMiddleware");
-const pdfUpload = require("../middlewares/pdfUpload");
 
 router.post(
   "/upload",
   isAuthenticated,
-  pdfUpload.single("roadmap"),
+  upload.single("pdf"), // 👈 field name MUST match frontend
   uploadRoadmap
 );
+router.get(
+  "/course/:courseId",
+  isAuthenticated,
+  getRoadmapByCourse
+);
+router.delete(
+  "/course/:courseId",
+  isAuthenticated,
+  deleteRoadmapByCourse
+);
+
 
 module.exports = router;

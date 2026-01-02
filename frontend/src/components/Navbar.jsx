@@ -9,7 +9,21 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  // Get user from Redux or localStorage
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem("user"));
+  } catch (e) {
+    user = null;
+  }
+  // If Redux is used, prefer Redux state
+  // import { useSelector } from 'react-redux'; and use below if needed:
+  // const reduxUser = useSelector((state) => state.auth?.user);
+  // user = reduxUser || user;
+
+  const userId = user?.id;
+
   const toggleMobileMenu = () => {
     setIsMobileOpen(!isMobileOpen);
   };

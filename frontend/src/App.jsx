@@ -21,6 +21,7 @@ import EditSingleCourse from "./pages/EditSingleCourse";
 import AdminEditCourses from "./pages/AdminEditCourses";
 import AdminSingleEditCourse from "./pages/AdminSingleEditCourse";
 import AdminCreateCourse from "./pages/AdminCreateCourse";
+import ViewRoadmap from "./pages/ViewRoadmap";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
         <Route path="/course/my-courses" element={<MyCourses />} />
 
 
+
         <Route
           path="/student/dashboard"
           element={<StudentDashboard />} />
@@ -69,14 +71,18 @@ function App() {
           }
         />
 
-<Route
-  path="/instructor/courses/:courseId/roadmap"
-  element={
-    <ProtectedRoute>
-      <UploadRoadmap />
-    </ProtectedRoute>
-  }
-/>
+        <Route
+          path="/instructor/courses/:courseId/roadmap"
+          element={
+            <ProtectedRoute>
+              <UploadRoadmap />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/courses/:courseId/showroadmap"
+          element={<ViewRoadmap />}
+        />
 
         <Route
           path="/instructor/courses/create"
@@ -104,31 +110,31 @@ function App() {
           }
         />
         <Route
-  path="/instructor/courses/edit/:courseId"
-  element={
-    <ProtectedRoute>
-      <EditSingleCourse />
-    </ProtectedRoute>
-  }
-/>
+          path="/instructor/courses/edit/:courseId"
+          element={
+            <ProtectedRoute>
+              <EditSingleCourse />
+            </ProtectedRoute>
+          }
+        />
 
-<Route
-  path="/admin/courses/edit/:courseId"
-  element={
-    <ProtectedRoute roles={["admin"]}>
-      <AdminSingleEditCourse/>
-    </ProtectedRoute>
-  }
-/>
+        <Route
+          path="/admin/courses/edit/:courseId"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminSingleEditCourse />
+            </ProtectedRoute>
+          }
+        />
 
-<Route
-  path="/admin/courses"
-  element={
-    <ProtectedRoute roles={["admin"]}>
-      <AdminEditCourses />
-    </ProtectedRoute>
-  }
-/>
+        <Route
+          path="/admin/courses"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminEditCourses />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Future protected routes */}
         {/*

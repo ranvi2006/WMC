@@ -7,6 +7,7 @@ const { sendEmail } = require("./controllers/sendEmail");
 const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
+const roadmapRoutes = require("./routes/roadmapRoutes");
 
 const app = express();
 const path = require("path");
@@ -37,6 +38,8 @@ app.use("/api/courses", courseRoutes);
 
 // Enrollment Routes
 app.use("/api/enrollments", enrollmentRoutes);
+
+app.use("/api/roadmaps",roadmapRoutes);
 
   
 

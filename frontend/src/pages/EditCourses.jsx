@@ -24,6 +24,19 @@ const EditCourses = () => {
     fetchMyCourses();
   }, []);
 
+  const handleDeleteRoadmap = async (courseId) => {
+    if (!window.confirm("Are you sure you want to delete this roadmap?")) return;
+
+    try {
+      await api.delete(`/api/roadmaps/course/${courseId}`);
+      alert("Roadmap deleted successfully");
+    } catch (err) {
+      alert(
+        err.response?.data?.message || "Failed to delete roadmap"
+      );
+    }
+  };
+
   if (loading) {
     return <p className="container">Loading courses...</p>;
   }
@@ -84,26 +97,35 @@ const EditCourses = () => {
                 >
                   View
                 </Link>
+
                 <Link
                   to={`/instructor/courses/edit/${course._id}`}
                   className="btn btn-primary"
                 >
                   Edit
                 </Link>
+
+                <Link
+                  to={`/instructor/courses/${course._id}/roadmap`}
+                  className="btn btn-secondary"
+                >
+                  Upload Roadmap
+                </Link>
+
+                {/* ✅ VIEW ROADMAP */}
+                <Link
+                  to={`/courses/${course._id}/showroadmap`}
+                  className="btn btn-outline"
+                >
+                  View Roadmap
+                </Link>
+
+                {/* ❌ DELETE ROADMAP */}
                 <button
                   className="btn btn-danger"
-                  onClick={async () => {
-                    if (window.confirm('Are you sure you want to delete this course?')) {
-                      try {
-                        await api.delete(`/api/courses/${course._id}`);
-                        setCourses(courses.filter(c => c._id !== course._id));
-                      } catch (err) {
-                        alert('Failed to delete course');
-                      }
-                    }
-                  }}
+                  onClick={() => handleDeleteRoadmap(course._id)}
                 >
-                  Delete
+                  Delete Roadmap
                 </button>
               </div>
             </div>
