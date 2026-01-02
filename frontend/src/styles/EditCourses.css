@@ -1,0 +1,85 @@
+.edit-courses {
+    margin-top: 40px;
+  }
+  
+  /* Header */
+  .edit-courses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .edit-courses-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  /* Empty state */
+  .edit-courses-empty {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .edit-courses-empty p {
+    margin-bottom: 16px;
+    color: #555;
+  }
+  
+  /* Grid */
+  .edit-courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  
+  /* Card */
+  .edit-course-card {
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-course-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .course-description {
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 14px;
+  }
+  
+  /* Meta */
+  .course-meta {
+    margin-top: 12px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    color: #374151;
+  }
+  
+  /* Actions */
+  .course-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    .edit-courses-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+  

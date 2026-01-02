@@ -33,7 +33,7 @@ const CourseDetails = () => {
 
   const handleEnroll = async () => {
     if (!isAuthenticated) return setMessage("Please login as student to enroll");
-    if (user?.role != "STUDENT") return setMessage("Only students can enroll");
+    if (user?.role != "student") return setMessage("Only students can enroll");
 
     try {
       setEnrolling(true);
@@ -63,18 +63,7 @@ const CourseDetails = () => {
           <div><strong>Instructor:</strong> {course.createdBy?.name}</div>
         </div>
 
-        {course.roadmap && (
-          <div className="course-roadmap">
-            <a
-              href={course.roadmap.pdfUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-outline"
-            >
-              View Roadmap (PDF)
-            </a>
-          </div>
-        )}
+        {/* Roadmap removed */}
 
         <div className="course-actions">
           <button

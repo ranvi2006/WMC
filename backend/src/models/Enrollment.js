@@ -14,10 +14,6 @@ const enrollmentSchema = new mongoose.Schema(
       required: true
     },
 
-    roadmapId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Roadmap"
-    },
 
     enrolledAt: {
       type: Date,

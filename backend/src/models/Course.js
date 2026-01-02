@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const courseSchema = new mongoose.Schema(
   {
@@ -6,82 +7,88 @@ const courseSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      index: true
+      index: true,
     },
 
     slug: {
       type: String,
       unique: true,
-      lowercase: true
+      lowercase: true,
     },
 
     description: {
       type: String,
-      required: true
+      required: true,
     },
 
     thumbnail: {
-      type: String // cloudinary / s3 URL
+      type: String,
     },
 
     level: {
       type: String,
       enum: ["beginner", "intermediate", "advanced"],
-      default: "beginner"
+      default: "beginner",
     },
 
     category: {
       type: String,
-      index: true
+      index: true,
     },
 
     language: {
       type: String,
-      default: "English"
+      default: "English",
     },
 
     price: {
       type: Number,
-      default: 0 // future paid courses
-    },
-
-    roadmap: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Roadmap"
+      default: 0,
     },
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
 
     status: {
       type: String,
       enum: ["draft", "published", "archived"],
-      default: "draft"
+      default: "draft",
     },
 
     totalEnrollments: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     averageRating: {
       type: Number,
-      default: 0
+      default: 0,
     },
 
     isFeatured: {
       type: Boolean,
-      default: false
+      default: false,
     },
 
     tags: [String],
 
-    publishedAt: Date
+    publishedAt: Date,
   },
   { timestamps: true }
 );
+
+
+/// ✅ AUTO-GENERATE SLUG (SAFE & MODERN)
+courseSchema.pre("validate", async function () {
+  if (this.isModified("title")) {
+    this.slug = slugify(this.title, {
+      lower: true,
+      strict: true,
+    });
+  }
+});
 
 module.exports = mongoose.model("Course", courseSchema);

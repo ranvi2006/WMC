@@ -108,9 +108,7 @@ const MyCourses = () => {
             </div>
 
             <div className="course-footer">
-              <span className="roadmap">
-                🧭 {item.roadmapId?.title || "No roadmap"}
-              </span>
+              {/* Roadmap removed */}
 
               <button className="continue-btn">
                 Continue

@@ -74,7 +74,7 @@ const InstructorDashboard = () => {
                   View Course
                 </Link>
 
-                {/* Future actions: Edit / Upload Roadmap */}
+                {/* Roadmap removed */}
               </div>
             </div>
           ))}

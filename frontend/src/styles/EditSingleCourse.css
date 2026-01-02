@@ -1,0 +1,50 @@
+.edit-single-course {
+  max-width: 720px;
+  margin-top: 40px;
+}
+
+.page-header {
+  margin-bottom: 20px;
+}
+
+.course-form {
+  background: #fff;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.error {
+  color: #dc2626;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 640px) {
+  .course-form {
+    padding: 20px;
+  }
+}

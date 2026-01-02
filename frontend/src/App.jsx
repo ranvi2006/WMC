@@ -14,6 +14,14 @@ import UserNavbar from "./components/UserNavbar";
 import TeacherNavbar from "./components/TeacherNavbar";
 import AdminNavbar from "./components/AdminNavbar";
 import MyCourses from "./pages/MyCourses";
+import CreateCourse from "./pages/CreateCourse";
+import EditCourses from "./pages/EditCourses";
+import UploadRoadmap from "./pages/UploadRoadmap";
+import EditSingleCourse from "./pages/EditSingleCourse";
+import AdminEditCourses from "./pages/AdminEditCourses";
+import AdminSingleEditCourse from "./pages/AdminSingleEditCourse";
+import AdminCreateCourse from "./pages/AdminCreateCourse";
+
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -24,11 +32,11 @@ function App() {
       {
         !isAuthenticated ? (
           <Navbar />
-        ) : user?.role === "STUDENT" ? (
+        ) : user?.role === "student" ? (
           <UserNavbar />
-        ) : user?.role === "TEACHER" ? (
+        ) : user?.role === "teacher" ? (
           <TeacherNavbar />
-        ) : user?.role === "ADMIN" ? (
+        ) : user?.role === "admin" ? (
           <AdminNavbar />
         ) : null
       }
@@ -43,17 +51,50 @@ function App() {
         {/* Course details (public view, student enroll inside) */}
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:id" element={<CourseDetails />} />
-        <Route path="/course/my-courses" element={<MyCourses/>} />
-        
+        <Route path="/course/my-courses" element={<MyCourses />} />
+
 
         <Route
-          path="/dashboard"
+          path="/student/dashboard"
+          element={<StudentDashboard />} />
+
+
+
+        <Route
+          path="/instructor/courses"
           element={
             <ProtectedRoute>
-              <StudentDashboard />
+              <EditCourses />
             </ProtectedRoute>
           }
         />
+
+<Route
+  path="/instructor/courses/:courseId/roadmap"
+  element={
+    <ProtectedRoute>
+      <UploadRoadmap />
+    </ProtectedRoute>
+  }
+/>
+
+        <Route
+          path="/instructor/courses/create"
+          element={
+            <ProtectedRoute>
+              <CreateCourse />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/courses/create"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminCreateCourse />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/instructor/dashboard"
           element={
@@ -62,6 +103,32 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/instructor/courses/edit/:courseId"
+  element={
+    <ProtectedRoute>
+      <EditSingleCourse />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin/courses/edit/:courseId"
+  element={
+    <ProtectedRoute roles={["admin"]}>
+      <AdminSingleEditCourse/>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/admin/courses"
+  element={
+    <ProtectedRoute roles={["admin"]}>
+      <AdminEditCourses />
+    </ProtectedRoute>
+  }
+/>
 
         {/* Future protected routes */}
         {/*

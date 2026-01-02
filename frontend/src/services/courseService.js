@@ -13,3 +13,6 @@ export const getAllCourses = () => {
 export const getCourseById = (id) => {
   return api.get(`/api/courses/${id}`);
 };
+
+export const updateCourse = (id, data) =>
+  api.put(`/api/courses/${id}`, data);

@@ -18,7 +18,7 @@ const { allowRoles } = require("../middlewares/roleMiddleware");
 router.post(
   "/",
   isAuthenticated,
-  allowRoles("ADMIN", "TEACHER"),
+  allowRoles("admin", "teacher"),
   createCourse
 );
 
@@ -26,7 +26,7 @@ router.post(
 router.put(
   "/:id",
   isAuthenticated,
-  allowRoles("ADMIN", "TEACHER"),
+  allowRoles("admin", "teacher"),
   updateCourse
 );
 
@@ -34,25 +34,25 @@ router.put(
 router.delete(
   "/:id",
   isAuthenticated,
-  allowRoles("ADMIN", "TEACHER"),
+  allowRoles("admin"),
   deleteCourse
 );
 
 // Public
 router.get("/", getAllCourses);
 
-// Instructor - must be before /:id route
+// Instructor courses
 router.get(
-  "/my/courses",
+  "/my",
   isAuthenticated,
-  allowRoles("TEACHER"),
+  allowRoles("teacher"),
   getMyCourses
 );
 
-// Public - parameterized route must come after specific routes
-router.get("/:id", getCourseById);
+// User courses
+router.get("/user/:id/courses", getAllUserCourses);
 
-// Get all user courses
-router.get('/user/:id/courses', getAllUserCourses);
+// Public single course (LAST)
+router.get("/:id", getCourseById);
 
 module.exports = router;

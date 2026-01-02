@@ -1,98 +1,87 @@
-/* =========================
-   STUDENT DASHBOARD
-========================= */
-
 .student-dashboard {
-    margin-top: var(--spacing-xl);
-  }
-  
-  /* HEADER */
+  margin-top: 40px;
+}
+
+/* Header */
+.dashboard-header {
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.dashboard-subtitle {
+  margin-top: 6px;
+  color: #6b7280;
+}
+
+/* Empty State */
+.dashboard-empty {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-empty p {
+  margin-bottom: 16px;
+  color: #555;
+}
+
+/* Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Course Card */
+.dashboard-card {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashboard-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.dashboard-description {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Meta */
+.dashboard-meta {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* Actions */
+.dashboard-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
   .dashboard-header h1 {
-    font-size: var(--font-size-4xl);
-    margin-bottom: var(--spacing-xs);
+    font-size: 22px;
   }
-  
-  .dashboard-subtitle {
-    color: var(--color-text-light);
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--spacing-xl);
-  }
-  
-  /* EMPTY STATE */
-  .dashboard-empty {
-    background: var(--color-white);
-    padding: var(--spacing-2xl);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    text-align: center;
-  }
-  
-  .dashboard-empty p {
-    margin-bottom: var(--spacing-md);
-    font-size: var(--font-size-lg);
-  }
-  
-  /* GRID */
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--spacing-lg);
-  }
-  
-  /* CARD */
+
   .dashboard-card {
-    background: var(--color-white);
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    padding: 18px;
   }
-  
-  .dashboard-card h3 {
-    margin-bottom: var(--spacing-xs);
-  }
-  
-  .dashboard-description {
-    color: var(--color-text-light);
-    font-size: var(--font-size-sm);
-    line-height: 1.6;
-    margin-bottom: var(--spacing-md);
-  }
-  
-  /* META */
-  .dashboard-meta {
-    margin-bottom: var(--spacing-md);
-    font-size: var(--font-size-sm);
-  }
-  
-  /* ACTIONS */
-  .dashboard-actions {
-    margin-top: auto;
-    display: flex;
-    gap: var(--spacing-sm);
-    flex-wrap: wrap;
-  }
-  
-  .dashboard-actions .btn {
-    flex: 1;
-  }
-  
-  /* =========================
-     MOBILE
-  ========================= */
-  @media (max-width: 768px) {
-    .dashboard-header h1 {
-      font-size: var(--font-size-3xl);
-    }
-  
-    .dashboard-actions {
-      flex-direction: column;
-    }
-  
-    .dashboard-actions .btn {
-      width: 100%;
-    }
-  }
-  
+}

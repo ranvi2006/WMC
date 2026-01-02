@@ -9,7 +9,6 @@ const pdfUpload = require("../middlewares/pdfUpload");
 router.post(
   "/upload",
   isAuthenticated,
-  allowRoles("admin", "instructor"),
   pdfUpload.single("roadmap"),
   uploadRoadmap
 );

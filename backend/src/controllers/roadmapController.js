@@ -13,8 +13,8 @@ exports.uploadRoadmap = async (req, res) => {
 
     // Ownership check
     if (
-      course.createdBy.toString() !== req.user.id &&
-      req.user.role !== "admin"
+      course.createdBy.toString() != req.user.id &&
+      req.user.role != "admin"
     ) {
       return res.status(403).json({ success: false, message: "Access denied" });
     }
@@ -31,7 +31,7 @@ exports.uploadRoadmap = async (req, res) => {
       title,
       description,
       courseId,
-      pdfUrl: req.file.path,
+      pdfUrl: `/uploads/roadmaps/${req.file.filename}`,
       version: roadmapCount + 1,
       uploadedBy: req.user.id
     });

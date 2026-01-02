@@ -7,6 +7,7 @@ import "../styles/StudentDashboard.css";
 
 const StudentDashboard = () => {
   const { user } = useSelector((state) => state.auth);
+
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -15,8 +16,9 @@ const StudentDashboard = () => {
     const fetchEnrollments = async () => {
       try {
         const res = await getMyEnrollments();
-        setEnrollments(res.data.data);
-      } catch {
+        setEnrollments(res.data?.data || []);
+      } catch (err) {
+        console.error("Enrollment fetch error:", err);
         setError("Failed to load enrollments");
       } finally {
         setLoading(false);
@@ -26,11 +28,17 @@ const StudentDashboard = () => {
     fetchEnrollments();
   }, []);
 
-  if (loading) return <p className="container">Loading dashboard...</p>;
-  if (error) return <p className="container error">{error}</p>;
+  if (loading) {
+    return <p className="container">Loading dashboard...</p>;
+  }
+
+  if (error) {
+    return <p className="container error">{error}</p>;
+  }
 
   return (
     <div className="container student-dashboard">
+      {/* Header */}
       <header className="dashboard-header">
         <h1>Welcome, {user?.name}</h1>
         <p className="dashboard-subtitle">
@@ -38,6 +46,7 @@ const StudentDashboard = () => {
         </p>
       </header>
 
+      {/* Empty State */}
       {enrollments.length === 0 ? (
         <div className="dashboard-empty">
           <p>You have not enrolled in any courses yet.</p>
@@ -46,6 +55,7 @@ const StudentDashboard = () => {
           </Link>
         </div>
       ) : (
+        /* Courses Grid */
         <div className="dashboard-grid">
           {enrollments.map((item) => (
             <div key={item._id} className="dashboard-card">
@@ -62,16 +72,7 @@ const StudentDashboard = () => {
               </div>
 
               <div className="dashboard-actions">
-                {item.roadmapId && (
-                  <a
-                    href={item.roadmapId.pdfUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn btn-outline"
-                  >
-                    View Roadmap
-                  </a>
-                )}
+                {/* Roadmap removed */}
 
                 <Link
                   to={`/courses/${item.courseId?._id}`}

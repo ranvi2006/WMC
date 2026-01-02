@@ -1,27 +1,35 @@
 const multer = require("multer");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("../config/cloudinary");
+const fs = require("fs");
+const path = require("path");
 
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "roadmaps",
-    resource_type: "raw", // IMPORTANT for PDFs
-    format: "pdf"
-  }
+const uploadDir = path.join(__dirname, "../uploads/roadmaps");
+
+// ✅ Ensure directory exists
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
 });
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === "application/pdf") {
+    cb(null, true);
+  } else {
+    cb(new Error("Only PDF files are allowed"), false);
+  }
+};
 
 const pdfUpload = multer({
   storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB
-  },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype !== "application/pdf") {
-      cb(new Error("Only PDF files allowed"));
-    }
-    cb(null, true);
-  }
+  fileFilter,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
 });
 
 module.exports = pdfUpload;

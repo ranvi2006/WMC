@@ -36,17 +36,10 @@ exports.enrollCourse = async (req, res) => {
       });
     }
 
-    // 3️⃣ Get active roadmap
-    const roadmap = await Roadmap.findOne({
-      courseId,
-      isActive: true
-    });
-
     // 4️⃣ Create enrollment
     const enrollment = await Enrollment.create({
       studentId,
       courseId,
-      roadmapId: roadmap ? roadmap._id : null,
       status: "active"
     });
 
@@ -84,10 +77,6 @@ exports.getMyEnrollments = async (req, res) => {
         path: "courseId",
         select:
           "title description level category language price averageRating totalEnrollments status"
-      })
-      .populate({
-        path: "roadmapId",
-        select: "title description"
       })
       .sort({ enrolledAt: -1 });
 

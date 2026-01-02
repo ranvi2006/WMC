@@ -1,0 +1,6 @@
+c:/2026/wemakecorder/backend/src/controllers/roadmapController.js
+c:/2026/wemakecorder/backend/src/routes/roadmapRoutes.js
+c:/2026/wemakecorder/backend/src/models/Roadmap.js
+c:/2026/wemakecorder/backend/src/middlewares/pdfUpload.js
+c:/2026/wemakecorder/frontend/src/pages/UploadRoadmap.jsx
+c:/2026/wemakecorder/frontend/src/styles/UploadRoadmap.css

@@ -6,16 +6,17 @@ const cors = require("cors");
 const { sendEmail } = require("./controllers/sendEmail");
 const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
-const roadmapRoutes = require("./routes/roadmapRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
 
 const app = express();
+const path = require("path");
 
 // =======================
 // Middleware
 // =======================
 app.use(express.json());
 app.use(cors());
+
 
 // =======================
 // Routes
@@ -33,20 +34,30 @@ app.use("/api/auth", authRoutes);
 // Course Routes
 app.use("/api/courses", courseRoutes);
 
-// Roadmap Routes
-app.use("/api/roadmaps", roadmapRoutes);
 
 // Enrollment Routes
 app.use("/api/enrollments", enrollmentRoutes);
 
   
+
 // =======================
-// 404 Handler (MUST BE LAST)
+// 404 Handler (MUST BE LAST before error handler)
 // =======================
-app.use((req, res) => {
+app.use((req, res, next) => {
   res.status(404).json({
     success: false,
     message: `Route ${req.originalUrl} not found`
+  });
+});
+
+// =======================
+// GLOBAL ERROR HANDLER (MUST BE VERY LAST)
+// =======================
+app.use((err, req, res, next) => {
+  console.error("Global error handler:", err);
+  res.status(500).json({
+    success: false,
+    message: err.message || "Internal Server Error"
   });
 });
 
