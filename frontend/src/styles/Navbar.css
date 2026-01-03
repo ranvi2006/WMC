@@ -1,0 +1,32 @@
+/* Logo Only - Enhanced Focus */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 64px; /* Larger logo prominence */
+  width: auto;
+  border-radius: 20px;
+  box-shadow: 
+    0 12px 40px rgba(251, 191, 36, 0.4),
+    0 4px 16px rgba(30, 58, 138, 0.2);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar.scrolled .logo-img {
+  height: 52px;
+  box-shadow: 
+    0 8px 28px rgba(251, 191, 36, 0.3),
+    0 2px 8px rgba(30, 58, 138, 0.15);
+}
+
+/* Logo glow on hover */
+.navbar-logo:hover .logo-img {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 
+    0 20px 60px rgba(251, 191, 36, 0.5),
+    0 8px 24px rgba(30, 58, 138, 0.3);
+}
