@@ -89,8 +89,12 @@ const UserNavbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/student/meetings" className="nav-link" onClick={toggleMobileMenu}>
-              My Meetings
+            <Link
+              to="/student/interviews"
+              className="nav-link"
+              onClick={toggleMobileMenu}
+            >
+              My Interviews
             </Link>
           </li>
           <li>
@@ -101,7 +105,7 @@ const UserNavbar = () => {
 
           <li className="nav-cta">
             <Link
-              to="/book-interview"
+              to="/student/book-interview"
               className="cta-button premium-cta"
               onClick={toggleMobileMenu}
             >

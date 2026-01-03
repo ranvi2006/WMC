@@ -91,12 +91,21 @@ const TeacherNavbar = () => {
           <li>
             <Link
               className="nav-link"
-              to="/instructor/meetings"
+              to="/teacher/interviews"
               onClick={toggleMobileMenu}
             >
-              My Meetings
+              My Interviews
             </Link>
           </li>
+          <li>
+  <Link
+    className="nav-link"
+    to="/teacher/availability"
+    onClick={toggleMobileMenu}
+  >
+    Availability
+  </Link>
+</li>
 
           <li>
             <Link

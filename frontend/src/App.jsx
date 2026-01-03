@@ -1,72 +1,163 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import CourseDetails from "./pages/CourseDetails";
-
-import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";
-import StudentDashboard from "./pages/StudentDashboard";
-import Courses from "./pages/Courses";
-import InstructorDashboard from "./pages/InstructorDashboard";
 import { useSelector } from "react-redux";
+
+/* =======================
+   NAVBARS
+======================= */
+import Navbar from "./components/Navbar";
 import UserNavbar from "./components/UserNavbar";
 import TeacherNavbar from "./components/TeacherNavbar";
 import AdminNavbar from "./components/AdminNavbar";
+
+/* =======================
+   AUTH & COMMON PAGES
+======================= */
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Courses from "./pages/Courses";
+import CourseDetails from "./pages/CourseDetails";
+import ViewRoadmap from "./pages/ViewRoadmap";
+
+/* =======================
+   STUDENT PAGES
+======================= */
+import StudentDashboard from "./pages/StudentDashboard";
 import MyCourses from "./pages/MyCourses";
-import CreateCourse from "./pages/CreateCourse";
+import BookInterview from "./pages/student/BookInterview";
+import MyInterviews from "./pages/student/MyInterviews";
+
+/* =======================
+   TEACHER PAGES
+======================= */
+import InstructorDashboard from "./pages/InstructorDashboard";
 import EditCourses from "./pages/EditCourses";
-import UploadRoadmap from "./pages/UploadRoadmap";
+import CreateCourse from "./pages/CreateCourse";
 import EditSingleCourse from "./pages/EditSingleCourse";
+import UploadRoadmap from "./pages/UploadRoadmap";
+import Availability from "./pages/teacher/Availability";
+import TeacherInterviews from "./pages/teacher/TeacherInterviews";
+import Feedback from "./pages/teacher/Feedback";
+
+/* =======================
+   ADMIN PAGES
+======================= */
 import AdminEditCourses from "./pages/AdminEditCourses";
 import AdminSingleEditCourse from "./pages/AdminSingleEditCourse";
 import AdminCreateCourse from "./pages/AdminCreateCourse";
-import ViewRoadmap from "./pages/ViewRoadmap";
 
+/* =======================
+   PROTECTED ROUTE
+======================= */
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
-  console.log(isAuthenticated, user);
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <Router>
-      {/* <Navbar /> */}
-      {
-        (!user) ? (
-          <Navbar />
-        ) : user?.role === "student" ? (
-          <UserNavbar />
-        ) : user?.role === "teacher" ? (
-          <TeacherNavbar />
-        ) : user?.role === "admin" ? (
-          <AdminNavbar />
-        ) : null
-      }
+
+      {/* =======================
+         ROLE BASED NAVBAR
+      ======================= */}
+      {!user ? (
+        <Navbar />
+      ) : user.role === "student" ? (
+        <UserNavbar />
+      ) : user.role === "teacher" ? (
+        <TeacherNavbar />
+      ) : user.role === "admin" ? (
+        <AdminNavbar />
+      ) : null}
 
       <Routes>
-        {/* Public routes */}
+
+        {/* =======================
+           PUBLIC ROUTES
+        ======================= */}
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Course details (public view, student enroll inside) */}
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:id" element={<CourseDetails />} />
-        <Route path="/course/my-courses" element={<MyCourses />} />
+        <Route path="/courses/:courseId/showroadmap" element={<ViewRoadmap />} />
 
-
-
+        {/* =======================
+           STUDENT ROUTES
+        ======================= */}
         <Route
           path="/student/dashboard"
-          element={<StudentDashboard />} />
+          element={
+            <ProtectedRoute roles={["student"]}>
+              <StudentDashboard />
+            </ProtectedRoute>
+          }
+        />
 
+        <Route
+          path="/course/my-courses"
+          element={
+            <ProtectedRoute roles={["student"]}>
+              <MyCourses />
+            </ProtectedRoute>
+          }
+        />
 
+        <Route
+          path="/student/book-interview"
+          element={
+            <ProtectedRoute roles={["student"]}>
+              <BookInterview />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/student/interviews"
+          element={
+            <ProtectedRoute roles={["student"]}>
+              <MyInterviews />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* =======================
+           TEACHER ROUTES
+        ======================= */}
+        <Route
+          path="/instructor/dashboard"
+          element={
+            <ProtectedRoute roles={["teacher"]}>
+              <InstructorDashboard />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/instructor/courses"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute roles={["teacher"]}>
               <EditCourses />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/instructor/courses/create"
+          element={
+            <ProtectedRoute roles={["teacher"]}>
+              <CreateCourse />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/instructor/courses/edit/:courseId"
+          element={
+            <ProtectedRoute roles={["teacher"]}>
+              <EditSingleCourse />
             </ProtectedRoute>
           }
         />
@@ -74,46 +165,56 @@ function App() {
         <Route
           path="/instructor/courses/:courseId/roadmap"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute roles={["teacher"]}>
               <UploadRoadmap />
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/courses/:courseId/showroadmap"
-          element={<ViewRoadmap />}
-        />
 
         <Route
-          path="/instructor/courses/create"
+          path="/teacher/availability"
           element={
-            <ProtectedRoute>
-              <CreateCourse />
+            <ProtectedRoute roles={["teacher"]}>
+              <Availability />
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/teacher/interviews"
+          element={
+            <ProtectedRoute roles={["teacher"]}>
+              <TeacherInterviews />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/teacher/feedback/:interviewId"
+          element={
+            <ProtectedRoute roles={["teacher"]}>
+              <Feedback />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* =======================
+           ADMIN ROUTES
+        ======================= */}
+        <Route
+          path="/admin/courses"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminEditCourses />
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/admin/courses/create"
           element={
             <ProtectedRoute roles={["admin"]}>
               <AdminCreateCourse />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/instructor/dashboard"
-          element={
-            <ProtectedRoute>
-              <InstructorDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/instructor/courses/edit/:courseId"
-          element={
-            <ProtectedRoute>
-              <EditSingleCourse />
             </ProtectedRoute>
           }
         />
@@ -127,26 +228,6 @@ function App() {
           }
         />
 
-        <Route
-          path="/admin/courses"
-          element={
-            <ProtectedRoute roles={["admin"]}>
-              <AdminEditCourses />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Future protected routes */}
-        {/*
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        */}
       </Routes>
     </Router>
   );

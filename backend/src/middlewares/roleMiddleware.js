@@ -8,6 +8,8 @@ exports.allowRoles = (...roles) => {
       });
     }
 
+    const userRole = req.user.role;
+    console.log("User Role:", userRole);
     if (!roles.includes(req.user.role)) {
       return res.status(403).json({
         success: false,

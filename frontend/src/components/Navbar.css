@@ -1,0 +1,149 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar wrapper */
+.navbar {
+  width: 100%;
+  background-color: #0f172a; /* dark blue */
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Container */
+.navbar-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Menu */
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #e5e7eb;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #38bdf8;
+}
+
+/* CTA */
+.nav-cta .cta-button {
+  background-color: #38bdf8;
+  color: #0f172a;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.nav-cta .cta-button:hover {
+  background-color: #0ea5e9;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger-line {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+}
+
+/* Mobile overlay */
+.mobile-overlay {
+  display: none;
+}
+
+/* ========================= */
+/* Mobile styles */
+/* ========================= */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    width: 260px;
+    height: calc(100vh - 70px);
+    background-color: #020617;
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 20px;
+    transition: right 0.3s ease;
+    z-index: 1001;
+  }
+
+  .navbar-menu.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
+
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+
+  .mobile-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
