@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "../styles/home.css";
+import "../styles/Home.css";
 
 export default function Home() {
   const { isAuthenticated } = useSelector((state) => state.auth);
