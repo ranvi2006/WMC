@@ -26,7 +26,7 @@ import ViewRoadmap from "./pages/ViewRoadmap";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-  // console.log(isAuthenticated, user);
+  console.log(isAuthenticated, user);
   return (
     <Router>
       {/* <Navbar /> */}
