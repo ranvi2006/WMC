@@ -19,7 +19,7 @@ exports.registerValidation = [
 
   body("role")
     .optional()
-    .isIn(["STUDENT", "INSTRUCTOR"])
+    .isIn(["student", "teacher", "admin"])
     .withMessage("Invalid role")
 ];
 

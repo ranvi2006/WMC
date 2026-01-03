@@ -13,7 +13,7 @@ const Register = () => {
     email: "",
     phone: "",
     password: "",
-    role: "STUDENT"
+    role: "student"
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
