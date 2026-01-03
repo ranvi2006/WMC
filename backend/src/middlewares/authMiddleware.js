@@ -52,7 +52,7 @@ exports.isAuthenticated = async (req, res, next) => {
       email: user.email,
       name: user.name
     };
-    console.log(req.user);
+    // console.log(req.user);
 
     next();
   } catch (error) {

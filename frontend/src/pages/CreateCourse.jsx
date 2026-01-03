@@ -34,7 +34,7 @@ const CreateCourse = () => {
     try {
       setLoading(true);
       const res=await api.post("/api/courses", form);
-      console.log("Create Course",res.data );
+      // console.log("Create Course",res.data );
       navigate("/instructor/dashboard");
     } catch (err) {
       console.error(err);
