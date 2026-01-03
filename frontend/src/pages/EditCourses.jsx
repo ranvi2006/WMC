@@ -121,12 +121,12 @@ const EditCourses = () => {
                 </Link>
 
                 {/* ❌ DELETE ROADMAP */}
-                <button
+                {/* <button
                   className="btn btn-danger"
                   onClick={() => handleDeleteRoadmap(course._id)}
                 >
                   Delete Roadmap
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
