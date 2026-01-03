@@ -31,7 +31,7 @@ function App() {
     <Router>
       {/* <Navbar /> */}
       {
-        (!isAuthenticated && user == null) ? (
+        (!user) ? (
           <Navbar />
         ) : user?.role === "student" ? (
           <UserNavbar />
