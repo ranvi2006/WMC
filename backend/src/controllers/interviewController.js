@@ -246,6 +246,32 @@ const addInterviewMeetingLink = async (req, res) => {
   }
 };
 
+// GET /api/interviews/admin
+const getAllInterviewsAdmin = async (req, res, next) => {
+  try {
+    const interviews = await Interview.find()
+      .populate("studentId", "name email")
+      .populate("teacherId", "name email")
+      .sort({ scheduledAt: -1 });
+
+    console.log(
+      "Admin fetched all interviews. Count:",
+      interviews.length
+    );
+
+    res.status(200).json({
+      success: true,
+      count: interviews.length,
+      interviews,
+    });
+  } catch (error) {
+    console.error("Admin interview fetch failed:", error);
+    next(error); // goes to global error handler
+  }
+};
+
+
+
  const getInterviewById = async (req, res) => {
   const interview = await Interview.findById(req.params.id)
     .populate("teacherId", "name email");
@@ -257,6 +283,25 @@ const addInterviewMeetingLink = async (req, res) => {
   res.json({ success: true, interview });
 };
 
+// PATCH /api/interviews/:id/admin-cancel
+const adminCancelInterview = async (req, res) => {
+  const interview = await Interview.findById(req.params.id);
+
+  if (!interview) {
+    return res.status(404).json({ message: "Interview not found" });
+  }
+
+  interview.status = "cancelled";
+  interview.cancelledBy = "admin";
+  await interview.save();
+
+  res.json({
+    success: true,
+    interview,
+  });
+};
+
+
 
 module.exports = {
   bookInterview,
@@ -265,5 +310,7 @@ module.exports = {
   cancelInterview,
   updateInterviewStatus,
   addInterviewMeetingLink,
-  getInterviewById
+  getInterviewById,
+  getAllInterviewsAdmin,
+  adminCancelInterview,
 };

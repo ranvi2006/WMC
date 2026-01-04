@@ -1,0 +1,87 @@
+.admin-interviews-page {
+  padding: 24px;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+h2 {
+  margin-bottom: 16px;
+}
+
+select {
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  background: #fff;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f0f2f5;
+  text-align: left;
+}
+
+/* BUTTONS */
+.view-btn {
+  margin-right: 8px;
+  padding: 6px 12px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  background: #2980b9;
+}
+
+.cancel-btn {
+  padding: 6px 12px;
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #c0392b;
+}
+
+.back-btn {
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* DETAILS PAGE */
+.details-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+.details-card h3 {
+  margin-top: 12px;
+}
+
+.details-card hr {
+  margin: 16px 0;
+}

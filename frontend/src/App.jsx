@@ -49,6 +49,7 @@ import RescheduleRequests from "./pages/teacher/RescheduleRequests";
 import AdminEditCourses from "./pages/AdminEditCourses";
 import AdminSingleEditCourse from "./pages/AdminSingleEditCourse";
 import AdminCreateCourse from "./pages/AdminCreateCourse";
+import AdminInterviews from "./pages/admin/AdminInterviews";
 
 /* =======================
    PROTECTED ROUTE
@@ -255,6 +256,14 @@ function App() {
           element={
             <ProtectedRoute roles={["admin"]}>
               <AdminSingleEditCourse />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/interviews"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminInterviews />
             </ProtectedRoute>
           }
         />
