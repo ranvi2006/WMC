@@ -4,7 +4,8 @@ const {
   getMyInterviews,
   getTeacherInterviews,
   cancelInterview,
-  updateInterviewStatus
+  updateInterviewStatus,
+  addInterviewMeetingLink
 } = require("../controllers/interviewController");
 const { isAuthenticated} = require("../middlewares/authMiddleware");
 const {allowRoles} = require("../middlewares/roleMiddleware");
@@ -26,6 +27,12 @@ router.patch(
   isAuthenticated,
   allowRoles("teacher", "admin"),
   updateInterviewStatus
+);
+router.patch(
+  "/:id/addlink",
+  isAuthenticated,
+  allowRoles("teacher", "admin"),
+  addInterviewMeetingLink
 );
 
 module.exports = router;

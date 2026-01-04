@@ -28,7 +28,24 @@ const getAvailability = async (req, res) => {
     availability,
   });
 };
+
+ const getAvailabilitys = async (req, res) => {
+  console.log("getAvailabilitys called with query:", req.query);
+  const { date } = req.query;
+
+  const query = date ? { date } : {};
+
+  const availability = await Availability.find(query)
+    .populate("teacherId", "name email");
+
+  res.status(200).json({
+    success: true,
+    availability,
+  });
+};
+
 module.exports = {
   setAvailability,
-  getAvailability
+  getAvailability,
+  getAvailabilitys
 };

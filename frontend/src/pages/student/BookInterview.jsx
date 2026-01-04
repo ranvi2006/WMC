@@ -1,56 +1,60 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./BookInterview.css";
 
-export default function BookInterview() {
-  const { user } = useSelector((state) => state.auth);
+const BookInterview = () => {
   const navigate = useNavigate();
 
-  // ===== DATE SETUP (TODAY DEFAULT) =====
-  const today = new Date().toISOString().split("T")[0];
-
-  // ===== STATE =====
-  const [date, setDate] = useState(today);
-  const [slots, setSlots] = useState([]);
+  const [availability, setAvailability] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlot, setSelectedSlot] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [booking, setBooking] = useState(false);
 
-  /* =========================
-     FETCH AVAILABLE SLOTS
-     (Today + Future only)
-  ========================== */
+  // 🔹 Fetch all availability
   useEffect(() => {
-    if (!date) return;
-
-    const fetchSlots = async () => {
+    const fetchAvailability = async () => {
       try {
-        const res = await api.post("/api/availability/getAll", { date });
-
-        const availability = res.data?.availability || [];
-
-        // Flatten teacher-wise availability
-        const allSlots = availability.flatMap((item) =>
-          item.slots.map((slot) => ({
-            ...slot,
-            teacherId: item.teacherId,
-          }))
-        );
-
-        setSlots(allSlots);
+        const res = await api.get("/api/availability");
+        setAvailability(res.data.availability || []);
       } catch (err) {
-        console.error("Slot fetch error:", err);
-        setSlots([]);
+        alert("Failed to load availability");
+      } finally {
+        setPageLoading(false);
       }
     };
 
-    fetchSlots();
-  }, [date]);
+    fetchAvailability();
+  }, []);
 
-  /* =========================
-     BOOK INTERVIEW
-  ========================== */
+  // 🔹 Unique sorted dates
+  const availableDates = useMemo(() => {
+    const dates = availability.map((a) => a.date);
+    return [...new Set(dates)].sort();
+  }, [availability]);
+
+  // 🔹 Auto-select nearest date
+  useEffect(() => {
+    if (availableDates.length > 0 && !selectedDate) {
+      setSelectedDate(availableDates[0]);
+    }
+  }, [availableDates, selectedDate]);
+
+  // 🔹 Slots for selected date (BOOKED + FREE)
+  const slotsForDate = useMemo(() => {
+    return availability
+      .filter((a) => a.date === selectedDate)
+      .flatMap((a) =>
+        a.slots.map((slot) => ({
+          ...slot,
+          teacherId: a.teacherId._id,
+          teacherName: a.teacherId.name,
+        }))
+      );
+  }, [availability, selectedDate]);
+
+  // 🔹 Book interview
   const handleBook = async () => {
     if (!selectedSlot) {
       alert("Please select a slot");
@@ -58,14 +62,12 @@ export default function BookInterview() {
     }
 
     try {
-      setLoading(true);
-
-      // TEMP payment id (replace with real payment later)
+      setBooking(true);
       const paymentId = "6958d2baaeb92aa0cb06634b";
 
       await api.post("/api/interviews/book", {
         teacherId: selectedSlot.teacherId,
-        date,
+        date: selectedDate,
         startTime: selectedSlot.startTime,
         duration: 30,
         paymentId,
@@ -76,75 +78,91 @@ export default function BookInterview() {
     } catch (err) {
       alert(err.response?.data?.message || "Booking failed");
     } finally {
-      setLoading(false);
+      setBooking(false);
     }
   };
 
+  if (pageLoading) {
+    return <p className="loading">Loading availability...</p>;
+  }
+
   return (
     <div className="book-interview-page">
-      <h2>Book Interview</h2>
+      <h2>Book an Interview</h2>
 
-      {/* USER DETAILS */}
-      <div className="user-info">
-        <p><strong>Name:</strong> {user?.name}</p>
-        <p><strong>Email:</strong> {user?.email}</p>
+      {/* DATE SELECTOR */}
+      <div className="date-selector">
+        {availableDates.map((date) => (
+          <button
+            key={date}
+            className={`date-btn ${
+              date === selectedDate ? "active" : ""
+            }`}
+            onClick={() => {
+              setSelectedDate(date);
+              setSelectedSlot(null);
+            }}
+          >
+            {date}
+          </button>
+        ))}
       </div>
 
-      {/* DATE PICKER */}
-      <div className="date-picker">
-        <label>Select Date</label>
-        <input
-          type="date"
-          min={today}
-          value={date}
-          onChange={(e) => {
-            setDate(e.target.value);
-            setSelectedSlot(null);
-          }}
-        />
-      </div>
-
-      {/* AVAILABLE SLOTS */}
-      <div className="slots">
+      {/* SLOTS */}
+      <div className="slots-section">
         <h3>Available Slots</h3>
 
-        {slots.length === 0 && <p>No slots available</p>}
+        {slotsForDate.length === 0 ? (
+          <p className="empty">No slots available</p>
+        ) : (
+          <div className="slots-grid">
+            {slotsForDate.map((slot) => {
+              const isBooked = slot.isBooked;
+              const isSelected = selectedSlot?._id === slot._id;
 
-        <div className="slot-grid">
-          {slots.map((slot) => {
-            const isSelected = selectedSlot?._id === slot._id;
+              return (
+                <div
+                  key={slot._id}
+                  className={`slot-card 
+                    ${isBooked ? "booked" : ""}
+                    ${isSelected ? "selected" : ""}
+                  `}
+                  onClick={() => {
+                    if (!isBooked) setSelectedSlot(slot);
+                  }}
+                >
+                  <p className="time">
+                    {slot.startTime} – {slot.endTime}
+                  </p>
 
-            return (
-              <button
-                key={slot._id}
-                className={`slot-btn 
-                  ${slot.isBooked ? "booked" : ""} 
-                  ${isSelected ? "active" : ""}
-                `}
-                disabled={slot.isBooked}
-                onClick={() => setSelectedSlot(slot)}
-              >
-                {slot.startTime} – {slot.endTime}
-              </button>
-            );
-          })}
-        </div>
+                  <p className="teacher">
+                    {slot.teacherName}
+                  </p>
 
-        {/* SLOT LEGEND */}
-        <div className="slot-legend">
-          <span><span className="legend-box available" /> Available</span>
-          <span><span className="legend-box booked" /> Booked</span>
-        </div>
+                  {isBooked && (
+                    <span className="booked-label">
+                      Booked
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* BOOK BUTTON */}
-      <button
-        className="book-btn"
-        onClick={handleBook}
-        disabled={loading || !selectedSlot}
-      >
-        {loading ? "Processing..." : "Book Interview (₹9)"}
-      </button>
+      <div className="book-footer">
+        <button
+          className="book-btn"
+          onClick={handleBook}
+          disabled={!selectedSlot || booking}
+        >
+          {booking ? "Booking..." : "Book Interview"}
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default BookInterview;

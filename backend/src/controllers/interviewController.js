@@ -53,12 +53,20 @@ const getMyInterviews = async (req, res) => {
   res.json({ success: true, interviews });
 };
 
+// GET /api/interviews/teacher
 const getTeacherInterviews = async (req, res) => {
-  const interviews = await Interview.find({ teacherId: req.user.id })
-    .populate("studentId", "name email");
+  const interviews = await Interview.find({
+    teacherId: req.user.id,
+  })
+    .populate("studentId", "name email")
+    .sort({ scheduledAt: 1 });
 
-  res.json({ success: true, interviews });
+  res.json({
+    success: true,
+    interviews,
+  });
 };
+
 
 const cancelInterview = async (req, res) => {
   const interview = await Interview.findById(req.params.id);
@@ -139,11 +147,81 @@ const updateInterviewStatus = async (req, res) => {
     interview,
   });
 };
+const addInterviewMeetingLink = async (req, res) => {
+  try {
+    const { meetingLink } = req.body;
+    const interviewId = req.params.id;
+    // console.log("Request to add meeting link for interview ID:", interviewId);
+    // console.log("User making request:", meetingLink);
+
+    // 🔹 Validation
+    if (!meetingLink) {
+      return res.status(400).json({
+        success: false,
+        message: "Meeting link is required",
+      });
+    }
+
+    const interview = await Interview.findById(interviewId);
+
+    if (!interview) {
+      return res.status(404).json({
+        success: false,
+        message: "Interview not found",
+      });
+    }
+
+    // 🔹 Only teacher/admin allowed
+    if (
+      req.user.role === "teacher" &&
+      interview.teacherId.toString() !== req.user.id
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "Not authorized to update this interview",
+      });
+    }
+
+    // ❌ Block cancelled interviews
+    if (interview.status === "cancelled") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot add meeting link to cancelled interview",
+      });
+    }
+
+    // ❌ Block completed interviews
+    if (interview.status === "completed") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot add meeting link after interview is completed",
+      });
+    }
+
+    // ✅ Save / update link (allowed multiple times before completion)
+    interview.meetingLink = meetingLink;
+    await interview.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Meeting link saved successfully",
+      interview,
+    });
+  } catch (error) {
+    console.error("Add meeting link error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+};
+
 
 module.exports = {
   bookInterview,
   getMyInterviews,
   getTeacherInterviews,
   cancelInterview,
-  updateInterviewStatus
+  updateInterviewStatus,
+  addInterviewMeetingLink
 };

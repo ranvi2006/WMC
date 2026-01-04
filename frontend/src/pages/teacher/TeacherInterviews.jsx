@@ -1,54 +1,230 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import { updateInterviewStatus } from "../../services/interviewService";
-import { Link } from "react-router-dom";
+import "./TeacherInterviews.css";
 
-export default function TeacherInterviews() {
+const TeacherInterviews = () => {
   const [interviews, setInterviews] = useState([]);
+  const [meetingLinks, setMeetingLinks] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [savingId, setSavingId] = useState(null);
+  const navigate = useNavigate();
+
+  // Fetch interviews
+  const fetchInterviews = async () => {
+    try {
+      const res = await api.get("/api/interviews/teacher");
+      setInterviews(res.data.interviews);
+
+      const links = {};
+      res.data.interviews.forEach((i) => {
+        links[i._id] = i.meetingLink || "";
+      });
+      setMeetingLinks(links);
+    } catch (err) {
+      alert("Failed to load interviews");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    api.get("/interviews/teacher").then((res) => {
-      setInterviews(res.data.interviews);
-    });
+    fetchInterviews();
   }, []);
 
-  const confirmInterview = async (id) => {
-    await updateInterviewStatus(id, "confirmed");
-    alert("Interview confirmed");
+  // Update status
+  const updateStatus = async (id, status) => {
+    try {
+      await api.patch(`/api/interviews/${id}/status`, { status });
+      setInterviews((prev) =>
+        prev.map((i) => (i._id === id ? { ...i, status } : i))
+      );
+    } catch (err) {
+      alert(err.response?.data?.message || "Status update failed");
+    }
   };
 
-  const completeInterview = async (id) => {
-    await updateInterviewStatus(id, "completed");
-    alert("Interview completed");
+  // Cancel interview
+  const cancelInterview = async (id) => {
+    if (!window.confirm("Cancel this interview?")) return;
+
+    try {
+      await api.patch(`/api/interviews/${id}/status`, {
+        status: "cancelled",
+      });
+      setInterviews((prev) =>
+        prev.map((i) =>
+          i._id === id ? { ...i, status: "cancelled" } : i
+        )
+      );
+    } catch (err) {
+      alert("Cancel failed");
+    }
   };
+
+  // Save / update meeting link
+  const saveMeetingLink = async (id) => {
+    try {
+      setSavingId(id);
+      await api.patch(`/api/interviews/${id}/addlink`, {
+        meetingLink: meetingLinks[id],
+      });
+
+      setInterviews((prev) =>
+        prev.map((i) =>
+          i._id === id
+            ? { ...i, meetingLink: meetingLinks[id] }
+            : i
+        )
+      );
+    } catch (err) {
+      alert("Failed to save meeting link");
+    } finally {
+      setSavingId(null);
+    }
+  };
+
+  if (loading) return <p className="loading">Loading interviews...</p>;
 
   return (
-    <div>
-      <h2>My Interviews</h2>
+    <div className="teacher-interviews">
+      <h2>Teacher Interviews</h2>
 
-      {interviews.map((i) => (
-        <div key={i._id} style={{ border: "1px solid #ccc", margin: "10px" }}>
-          <p>Status: {i.status}</p>
+      <button
+        className="create-slot-btn"
+        onClick={() => navigate("/teacher/availability")}
+      >
+        ➕ Create Slots
+      </button>
 
-          {i.status === "pending" && (
-            <button onClick={() => confirmInterview(i._id)}>
-              Confirm
-            </button>
-          )}
+      <div className="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Email</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Meeting Link</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-          {i.status === "confirmed" && (
-            <button onClick={() => completeInterview(i._id)}>
-              Complete
-            </button>
-          )}
+          <tbody>
+            {interviews.map((interview) => (
+              <tr key={interview._id}>
+                <td>{interview.studentId?.name}</td>
+                <td>{interview.studentId?.email}</td>
+                <td>{interview.date}</td>
+                <td>{interview.startTime}</td>
 
-          {i.status === "completed" && (
-            <Link to={`/teacher/feedback/${i._id}`}>
-              Give Feedback
-            </Link>
-          )}
-        </div>
-      ))}
+                {/* Status */}
+                <td>
+                  {interview.status === "pending" && (
+                    <select
+                      onChange={(e) =>
+                        updateStatus(interview._id, e.target.value)
+                      }
+                    >
+                      <option>Pending</option>
+                      <option value="confirmed">Confirm</option>
+                    </select>
+                  )}
+
+                  {interview.status === "confirmed" && (
+                    <select
+                      onChange={(e) =>
+                        updateStatus(interview._id, e.target.value)
+                      }
+                    >
+                      <option>Confirmed</option>
+                      <option value="completed">Complete</option>
+                    </select>
+                  )}
+
+                  {["completed", "cancelled"].includes(interview.status) && (
+                    <span className={`status ${interview.status}`}>
+                      {interview.status}
+                    </span>
+                  )}
+                </td>
+
+                {/* Meeting Link */}
+                <td>
+                  {interview.status === "confirmed" && (
+                    <>
+                      <input
+                        type="text"
+                        placeholder="Paste Zoom / Meet link"
+                        value={meetingLinks[interview._id] || ""}
+                        onChange={(e) =>
+                          setMeetingLinks((prev) => ({
+                            ...prev,
+                            [interview._id]: e.target.value,
+                          }))
+                        }
+                      />
+                      <button
+                        className="save-link-btn"
+                        disabled={savingId === interview._id}
+                        onClick={() => saveMeetingLink(interview._id)}
+                      >
+                        {savingId === interview._id
+                          ? "Saving..."
+                          : "Save"}
+                      </button>
+                    </>
+                  )}
+
+                  {interview.meetingLink &&
+                    interview.status !== "confirmed" && (
+                      <a
+                        href={interview.meetingLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="meeting-link"
+                      >
+                        Open Meeting
+                      </a>
+                    )}
+                </td>
+
+                {/* Actions */}
+                <td>
+                  {!["completed", "cancelled"].includes(
+                    interview.status
+                  ) && (
+                    <button
+                      className="cancel-btn"
+                      onClick={() =>
+                        cancelInterview(interview._id)
+                      }
+                    >
+                      Cancel
+                    </button>
+                  )}
+
+                  {interview.status === "completed" && (
+                    <button
+                      className="feedback-btn"
+                      onClick={() =>
+                        navigate(
+                          `/teacher/feedback/${interview._id}`
+                        )
+                      }
+                    >
+                      Give Feedback
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
-}
+};
+
+export default TeacherInterviews;
