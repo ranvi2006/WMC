@@ -96,6 +96,12 @@ const TeacherInterviews = () => {
       >
         ➕ Create Slots
       </button>
+      <button style={{marginLeft: "10px",backgroundColor: "#007bff"}}
+        className="create-slot-btn"
+        onClick={() => navigate("/teacher/reschedule-requests")}
+      >
+      show reschedule requests
+      </button>
 
       <div className="table-wrapper">
         <table>

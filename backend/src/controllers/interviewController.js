@@ -55,6 +55,7 @@ const getMyInterviews = async (req, res) => {
 
 // GET /api/interviews/teacher
 const getTeacherInterviews = async (req, res) => {
+  // console.log("Fetching interviews for teacher ID:", req.user);
   const interviews = await Interview.find({
     teacherId: req.user.id,
   })
@@ -245,6 +246,17 @@ const addInterviewMeetingLink = async (req, res) => {
   }
 };
 
+ const getInterviewById = async (req, res) => {
+  const interview = await Interview.findById(req.params.id)
+    .populate("teacherId", "name email");
+
+  if (!interview) {
+    return res.status(404).json({ message: "Interview not found" });
+  }
+
+  res.json({ success: true, interview });
+};
+
 
 module.exports = {
   bookInterview,
@@ -252,5 +264,6 @@ module.exports = {
   getTeacherInterviews,
   cancelInterview,
   updateInterviewStatus,
-  addInterviewMeetingLink
+  addInterviewMeetingLink,
+  getInterviewById
 };

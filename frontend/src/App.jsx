@@ -27,6 +27,7 @@ import MyCourses from "./pages/MyCourses";
 import BookInterview from "./pages/student/BookInterview";
 import MyInterviews from "./pages/student/MyInterviews";
 import ShowFeedback from "./pages/student/ShowFeedback";
+import Reschedule from "./pages/student/Reschedule";
 
 /* =======================
    TEACHER PAGES
@@ -39,6 +40,8 @@ import UploadRoadmap from "./pages/UploadRoadmap";
 import Availability from "./pages/teacher/Availability";
 import TeacherInterviews from "./pages/teacher/TeacherInterviews";
 import Feedback from "./pages/teacher/Feedback";
+import RescheduleRequests from "./pages/teacher/RescheduleRequests";
+
 
 /* =======================
    ADMIN PAGES
@@ -132,10 +135,10 @@ function App() {
           }
         />
          <Route
-          path="/student/:interviewId/reschedule"
+          path="/student/:id/reschedule"
           element={
             <ProtectedRoute role="student">
-              <><h1>Reschedule Interview</h1></>
+              <Reschedule/>
             </ProtectedRoute>
           }
         />
@@ -216,6 +219,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/teacher/reschedule-requests"
+          element={
+            <ProtectedRoute roles={["teacher"]}>
+              <RescheduleRequests />
+            </ProtectedRoute>
+          }
+        />
+        
 
         {/* =======================
            ADMIN ROUTES

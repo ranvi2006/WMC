@@ -59,6 +59,10 @@ const interviewSchema = new mongoose.Schema(
       enum: ["student", "teacher", "admin"],
       default: null,
     },
+  rescheduleCount:{
+  type: Number,
+  default: 0,
+},
   },
   { timestamps: true }
 );

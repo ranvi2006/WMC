@@ -1,0 +1,142 @@
+.reschedule-requests-page {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* HEADER */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.page-header h2 {
+  font-size: 26px;
+  margin: 0;
+}
+
+.count-badge {
+  background-color: #6366f1;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  color: #777;
+  margin-top: 50px;
+}
+
+/* LIST */
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD */
+.request-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* INFO */
+.request-info h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.request-info .email {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.details p {
+  font-size: 14px;
+  margin: 2px 0;
+}
+
+.reason {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #374151;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* BUTTONS */
+.approve-btn {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.approve-btn:hover {
+  background-color: #16a34a;
+}
+
+.reject-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.reject-btn:hover {
+  background-color: #dc2626;
+}
+.approve-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 10px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-content h3 {
+  margin: 0 0 10px;
+}
+
+.modal-content input {
+  padding: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}

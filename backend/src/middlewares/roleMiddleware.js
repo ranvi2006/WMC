@@ -1,6 +1,6 @@
 exports.allowRoles = (...roles) => {
   return (req, res, next) => {
-    // console.log("Done");
+ 
     if (!req.user) {
       return res.status(401).json({
         success: false,
@@ -17,6 +17,7 @@ exports.allowRoles = (...roles) => {
         message: "Access denied"
       });
     }
+    
     next(); // ✅ THIS is the only place next() should be called
   };
 };

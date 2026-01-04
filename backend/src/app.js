@@ -19,6 +19,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const interviewRoutes = require("./routes/interviewRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const rescheduleRoutes = require("./routes/rescheduleRoutes");
 
 const app = express();
 
@@ -53,6 +54,9 @@ app.use("/api/enrollments", enrollmentRoutes);
 
 // Roadmap Routes
 app.use("/api/roadmaps", roadmapRoutes);
+
+app.use("/api/reschedule", rescheduleRoutes);
+
 
 // =======================
 // 🚀 PHASE 3 ROUTES
