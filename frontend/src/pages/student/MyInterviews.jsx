@@ -3,38 +3,6 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./MyInterview.css";
 
-/* =========================
-   HELPERS
-========================= */
-
-const getCountdown = (date, startTime) => {
-  const interviewTime = new Date(`${date}T${startTime}:00`);
-  const now = new Date();
-
-  const diff = interviewTime - now;
-  if (diff <= 0) return null;
-
-  const totalMinutes = Math.floor(diff / (1000 * 60));
-  const days = Math.floor(totalMinutes / (60 * 24));
-  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
-  const minutes = totalMinutes % 60;
-
-  let result = "";
-  if (days > 0) result += `${days}d `;
-  if (hours > 0 || days > 0) result += `${hours}h `;
-  result += `${minutes}m`;
-
-  return result.trim();
-};
-
-const canJoinInterview = (date, startTime) => {
-  const interviewTime = new Date(`${date}T${startTime}:00`);
-  const now = new Date();
-  const diffMinutes = (interviewTime - now) / (1000 * 60);
-
-  return diffMinutes <= 5 && diffMinutes >= 0;
-};
-
 export default function MyInterviews() {
   const [interviews, setInterviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,6 +32,9 @@ export default function MyInterviews() {
     }
   };
 
+  /* =========================
+     FETCH INTERVIEWS
+  ========================= */
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
@@ -145,12 +116,6 @@ export default function MyInterviews() {
               meetingLink,
             } = interview;
 
-            const countdown = getCountdown(date, startTime);
-            const joinAllowed =
-              meetingLink &&
-              (status === "pending" || status === "confirmed") &&
-              canJoinInterview(date, startTime);
-
             return (
               <div className="interview-card" key={_id}>
                 {/* HEADER */}
@@ -170,13 +135,6 @@ export default function MyInterviews() {
                   <p><strong>Duration:</strong> {duration} mins</p>
                 </div>
 
-                {/* COUNTDOWN */}
-                {countdown && status !== "completed" && status !== "cancelled" && (
-                  <p className="countdown">
-                    ⏳ Starts in <strong>{countdown}</strong>
-                  </p>
-                )}
-
                 {/* ACTIONS */}
                 <div className="actions">
                   {status === "completed" && (
@@ -191,21 +149,20 @@ export default function MyInterviews() {
                   )}
 
                   {status === "cancelled" && (
-                    <>
-                      <button
-                        className="reschedule-btn"
-                        onClick={() =>
-                          navigate(`/student/${_id}/reschedule`)
-                        }
-                      >
-                        Reschedule Interview
-                      </button>
-                    </>
+                    <button
+                      className="reschedule-btn"
+                      onClick={() =>
+                        navigate(`/student/${_id}/reschedule`)
+                      }
+                    >
+                      Reschedule Interview
+                    </button>
                   )}
 
                   {(status === "pending" || status === "confirmed") && (
                     <>
-                      {joinAllowed ? (
+                      {/* ✅ SHOW JOIN ONLY IF LINK EXISTS */}
+                      {meetingLink && (
                         <a
                           href={meetingLink}
                           target="_blank"
@@ -214,13 +171,8 @@ export default function MyInterviews() {
                         >
                           Join Interview
                         </a>
-                      ) : (
-                        <button className="join-btn disabled" disabled>
-                          Join available 5 minutes before start
-                        </button>
                       )}
 
-                      {/* ❌ CANCEL BUTTON */}
                       <button
                         className="cancel-btn"
                         onClick={() => cancelInterview(_id)}
