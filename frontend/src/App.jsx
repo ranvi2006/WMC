@@ -131,6 +131,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+         <Route
+          path="/student/:interviewId/reschedule"
+          element={
+            <ProtectedRoute role="student">
+              <><h1>Reschedule Interview</h1></>
+            </ProtectedRoute>
+          }
+        />
+
+        
 
         {/* =======================
            TEACHER ROUTES

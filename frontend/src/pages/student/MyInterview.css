@@ -185,5 +185,45 @@
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: white;
 }
+.status.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.cancelled-text {
+  color: #991b1b;
+  font-weight: 600;
+}
+.reschedule-btn {
+  margin-top: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.reschedule-btn:hover {
+  opacity: 0.9;
+}
+.cancel-btn {
+  margin-top: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+}
+
+.cancel-btn:hover {
+  opacity: 0.9;
+}
+
+
+
 
 

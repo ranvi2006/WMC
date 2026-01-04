@@ -57,6 +57,7 @@ const interviewSchema = new mongoose.Schema(
     cancelledBy: {
       type: String,
       enum: ["student", "teacher", "admin"],
+      default: null,
     },
   },
   { timestamps: true }

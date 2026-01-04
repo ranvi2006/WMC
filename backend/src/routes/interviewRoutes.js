@@ -25,7 +25,7 @@ router.delete(
 router.patch(
   "/:id/status",
   isAuthenticated,
-  allowRoles("teacher", "admin"),
+  allowRoles("teacher", "admin","student"),
   updateInterviewStatus
 );
 router.patch(

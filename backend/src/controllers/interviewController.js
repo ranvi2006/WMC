@@ -104,48 +104,77 @@ const cancelInterview = async (req, res) => {
 };
 
 const updateInterviewStatus = async (req, res) => {
-  const { status } = req.body;
-  const interview = await Interview.findById(req.params.id);
+  try {
+    const { status } = req.body;
 
-  if (!interview) {
-    return res.status(404).json({ message: "Interview not found" });
-  }
+    const interview = await Interview.findById(req.params.id);
+    if (!interview) {
+      return res.status(404).json({
+        success: false,
+        message: "Interview not found",
+      });
+    }
 
-  // ❌ No updates after cancel or complete
-  if (["cancelled", "completed"].includes(interview.status)) {
-    return res.status(400).json({
-      message: `Cannot update status after interview is ${interview.status}`,
+    // ❌ No updates after cancelled or completed
+    if (["cancelled", "completed"].includes(interview.status)) {
+      return res.status(400).json({
+        success: false,
+        message: `Cannot update status after interview is ${interview.status}`,
+      });
+    }
+
+    // ❌ Only assigned teacher or admin
+    if (
+      req.user.role === "teacher" &&
+      interview.teacherId.toString() !== req.user.id
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "Not allowed",
+      });
+    }
+
+    // ❌ Invalid transitions
+    if (interview.status === "pending") {
+      if (!["confirmed", "cancelled"].includes(status)) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Pending interview can only be confirmed or cancelled",
+        });
+      }
+    }
+
+    if (interview.status === "confirmed") {
+      if (!["completed", "cancelled"].includes(status)) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Confirmed interview can only be completed or cancelled",
+        });
+      }
+    }
+
+    // ✅ Handle cancellation metadata
+    if (status === "cancelled") {
+      interview.cancelledBy = req.user.role; // student | teacher | admin
+    }
+
+    // ✅ Update status
+    interview.status = status;
+    await interview.save();
+
+    return res.json({
+      success: true,
+      interview,
+    });
+  } catch (error) {
+    console.error("Update interview status error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
     });
   }
-
-  // ❌ Only teacher/admin can update
-  if (
-    req.user.role === "teacher" &&
-    interview.teacherId.toString() !== req.user.id
-  ) {
-    return res.status(403).json({ message: "Not allowed" });
-  }
-
-  // ❌ Invalid transitions
-  if (interview.status === "pending" && status !== "confirmed") {
-    return res.status(400).json({
-      message: "Pending interview can only be confirmed",
-    });
-  }
-
-  if (interview.status === "confirmed" && status !== "completed") {
-    return res.status(400).json({
-      message: "Confirmed interview can only be completed",
-    });
-  }
-
-  interview.status = status;
-  await interview.save();
-
-  res.json({
-    success: true,
-    interview,
-  });
 };
 const addInterviewMeetingLink = async (req, res) => {
   try {

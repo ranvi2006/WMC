@@ -15,20 +15,17 @@ const getCountdown = (date, startTime) => {
   if (diff <= 0) return null;
 
   const totalMinutes = Math.floor(diff / (1000 * 60));
-
   const days = Math.floor(totalMinutes / (60 * 24));
   const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
   const minutes = totalMinutes % 60;
 
   let result = "";
-
   if (days > 0) result += `${days}d `;
   if (hours > 0 || days > 0) result += `${hours}h `;
   result += `${minutes}m`;
 
   return result.trim();
 };
-
 
 const canJoinInterview = (date, startTime) => {
   const interviewTime = new Date(`${date}T${startTime}:00`);
@@ -44,6 +41,29 @@ export default function MyInterviews() {
   const [activeTab, setActiveTab] = useState(null);
   const navigate = useNavigate();
 
+  /* =========================
+     CANCEL INTERVIEW
+  ========================= */
+  const cancelInterview = async (id) => {
+    if (!window.confirm("Cancel this interview?")) return;
+
+    try {
+      await api.patch(`/api/interviews/${id}/status`, {
+        status: "cancelled",
+      });
+
+      setInterviews((prev) =>
+        prev.map((i) =>
+          i._id === id ? { ...i, status: "cancelled" } : i
+        )
+      );
+
+      setActiveTab("cancelled");
+    } catch (err) {
+      alert(err.response?.data?.message || "Cancel failed");
+    }
+  };
+
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
@@ -51,10 +71,10 @@ export default function MyInterviews() {
         const data = res.data.interviews || [];
         setInterviews(data);
 
-        // 🔹 Smart default tab
         if (data.some(i => i.status === "pending")) setActiveTab("pending");
         else if (data.some(i => i.status === "confirmed")) setActiveTab("confirmed");
         else if (data.some(i => i.status === "completed")) setActiveTab("completed");
+        else if (data.some(i => i.status === "cancelled")) setActiveTab("cancelled");
         else setActiveTab(null);
       } catch (err) {
         console.error("Failed to load interviews", err);
@@ -66,11 +86,8 @@ export default function MyInterviews() {
     fetchInterviews();
   }, []);
 
-  if (loading) {
-    return <p className="loading">Loading interviews...</p>;
-  }
+  if (loading) return <p className="loading">Loading interviews...</p>;
 
-  /* 🔹 Global empty state */
   if (!activeTab) {
     return (
       <div className="my-interviews-page empty-state">
@@ -96,7 +113,7 @@ export default function MyInterviews() {
 
       {/* 🔹 TABS */}
       <div className="tabs">
-        {["pending", "confirmed", "completed"].map((tab) => {
+        {["pending", "confirmed", "completed", "cancelled"].map((tab) => {
           const hasData = interviews.some(i => i.status === tab);
           if (!hasData) return null;
 
@@ -154,7 +171,7 @@ export default function MyInterviews() {
                 </div>
 
                 {/* COUNTDOWN */}
-                {countdown && status !== "completed" && (
+                {countdown && status !== "completed" && status !== "cancelled" && (
                   <p className="countdown">
                     ⏳ Starts in <strong>{countdown}</strong>
                   </p>
@@ -173,6 +190,19 @@ export default function MyInterviews() {
                     </button>
                   )}
 
+                  {status === "cancelled" && (
+                    <>
+                      <button
+                        className="reschedule-btn"
+                        onClick={() =>
+                          navigate(`/student/${_id}/reschedule`)
+                        }
+                      >
+                        Reschedule Interview
+                      </button>
+                    </>
+                  )}
+
                   {(status === "pending" || status === "confirmed") && (
                     <>
                       {joinAllowed ? (
@@ -189,6 +219,14 @@ export default function MyInterviews() {
                           Join available 5 minutes before start
                         </button>
                       )}
+
+                      {/* ❌ CANCEL BUTTON */}
+                      <button
+                        className="cancel-btn"
+                        onClick={() => cancelInterview(_id)}
+                      >
+                        Cancel Interview
+                      </button>
                     </>
                   )}
                 </div>
