@@ -10,15 +10,25 @@ import "./MyInterview.css";
 const getCountdown = (date, startTime) => {
   const interviewTime = new Date(`${date}T${startTime}:00`);
   const now = new Date();
-  const diff = interviewTime - now;
 
+  const diff = interviewTime - now;
   if (diff <= 0) return null;
 
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const totalMinutes = Math.floor(diff / (1000 * 60));
 
-  return `${hours}h ${minutes}m`;
+  const days = Math.floor(totalMinutes / (60 * 24));
+  const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+  const minutes = totalMinutes % 60;
+
+  let result = "";
+
+  if (days > 0) result += `${days}d `;
+  if (hours > 0 || days > 0) result += `${hours}h `;
+  result += `${minutes}m`;
+
+  return result.trim();
 };
+
 
 const canJoinInterview = (date, startTime) => {
   const interviewTime = new Date(`${date}T${startTime}:00`);
@@ -41,15 +51,11 @@ export default function MyInterviews() {
         const data = res.data.interviews || [];
         setInterviews(data);
 
-        // 🔹 Decide default tab intelligently
-        const hasPending = data.some(i => i.status === "pending");
-        const hasConfirmed = data.some(i => i.status === "confirmed");
-        const hasCompleted = data.some(i => i.status === "completed");
-
-        if (hasPending) setActiveTab("pending");
-        else if (hasConfirmed) setActiveTab("confirmed");
-        else if (hasCompleted) setActiveTab("completed");
-        else setActiveTab(null); // no interviews at all
+        // 🔹 Smart default tab
+        if (data.some(i => i.status === "pending")) setActiveTab("pending");
+        else if (data.some(i => i.status === "confirmed")) setActiveTab("confirmed");
+        else if (data.some(i => i.status === "completed")) setActiveTab("completed");
+        else setActiveTab(null);
       } catch (err) {
         console.error("Failed to load interviews", err);
       } finally {
@@ -64,19 +70,15 @@ export default function MyInterviews() {
     return <p className="loading">Loading interviews...</p>;
   }
 
-  // 🔹 Global empty state
+  /* 🔹 Global empty state */
   if (!activeTab) {
     return (
       <div className="my-interviews-page empty-state">
         <h2>You have no interviews yet</h2>
-        <p>
-          Book your first interview to get started.
-        </p>
+        <p>Book your first interview to get started.</p>
         <button
           className="book-now-btn"
-          onClick={() =>
-            navigate("/student/book-interview")
-          }
+          onClick={() => navigate("/student/book-interview")}
         >
           Book Interview
         </button>
@@ -84,7 +86,6 @@ export default function MyInterviews() {
     );
   }
 
-  // 🔹 Filter by active tab
   const filteredInterviews = interviews.filter(
     (i) => i.status === activeTab
   );
@@ -96,18 +97,13 @@ export default function MyInterviews() {
       {/* 🔹 TABS */}
       <div className="tabs">
         {["pending", "confirmed", "completed"].map((tab) => {
-          const hasData = interviews.some(
-            (i) => i.status === tab
-          );
-
+          const hasData = interviews.some(i => i.status === tab);
           if (!hasData) return null;
 
           return (
             <button
               key={tab}
-              className={`tab-btn ${
-                activeTab === tab ? "active" : ""
-              }`}
+              className={`tab-btn ${activeTab === tab ? "active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
               {tab.toUpperCase()}
@@ -118,9 +114,7 @@ export default function MyInterviews() {
 
       {/* 🔹 LIST */}
       {filteredInterviews.length === 0 ? (
-        <p className="empty">
-          No {activeTab} interviews
-        </p>
+        <p className="empty">No {activeTab} interviews</p>
       ) : (
         <div className="interview-list">
           {filteredInterviews.map((interview) => {
@@ -137,8 +131,7 @@ export default function MyInterviews() {
             const countdown = getCountdown(date, startTime);
             const joinAllowed =
               meetingLink &&
-              (status === "pending" ||
-                status === "confirmed") &&
+              (status === "pending" || status === "confirmed") &&
               canJoinInterview(date, startTime);
 
             return (
@@ -163,8 +156,7 @@ export default function MyInterviews() {
                 {/* COUNTDOWN */}
                 {countdown && status !== "completed" && (
                   <p className="countdown">
-                    ⏳ Starts in{" "}
-                    <strong>{countdown}</strong>
+                    ⏳ Starts in <strong>{countdown}</strong>
                   </p>
                 )}
 
@@ -174,17 +166,14 @@ export default function MyInterviews() {
                     <button
                       className="feedback-btn"
                       onClick={() =>
-                        navigate(
-                          `/student/feedback/${_id}`
-                        )
+                        navigate(`/student/feedback/${_id}`)
                       }
                     >
-                      Give Feedback
+                      View Feedback
                     </button>
                   )}
 
-                  {(status === "pending" ||
-                    status === "confirmed") && (
+                  {(status === "pending" || status === "confirmed") && (
                     <>
                       {joinAllowed ? (
                         <a
@@ -196,10 +185,7 @@ export default function MyInterviews() {
                           Join Interview
                         </a>
                       ) : (
-                        <button
-                          className="join-btn disabled"
-                          disabled
-                        >
+                        <button className="join-btn disabled" disabled>
                           Join available 5 minutes before start
                         </button>
                       )}

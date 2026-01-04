@@ -1,58 +1,119 @@
-import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import "./Feedback.css";
 
-export default function Feedback() {
+const Feedback = () => {
   const { interviewId } = useParams();
+  const navigate = useNavigate();
 
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(0);
   const [strengths, setStrengths] = useState("");
   const [improvements, setImprovements] = useState("");
   const [recommendation, setRecommendation] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const submitFeedback = async () => {
+  // ⭐ Submit feedback
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!rating || !strengths || !improvements) {
+      alert("Please fill all required fields");
+      return;
+    }
+
     try {
-      await api.post("/feedback", {
+      setLoading(true);
+
+      await api.post("/api/feedback", {
         interviewId,
         rating,
         strengths,
         improvements,
         recommendation,
       });
-      alert("Feedback submitted");
+
+      alert("Feedback submitted successfully");
+      navigate("/teacher/interviews");
     } catch (err) {
-      alert(err.response?.data?.message || "Error submitting feedback");
+      alert(err.response?.data?.message || "Failed to submit feedback");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h2>Give Feedback</h2>
+    <div className="feedback-page">
+      <h2>Interview Feedback</h2>
 
-      <input
-        type="number"
-        min="1"
-        max="5"
-        value={rating}
-        onChange={(e) => setRating(e.target.value)}
-      />
+      <form className="feedback-form" onSubmit={handleSubmit}>
+        {/* ⭐ RATING */}
+        <div className="form-group">
+          <label>Rating</label>
+          <div className="rating-stars">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className={
+                  rating >= star ? "star active" : "star"
+                }
+                onClick={() => setRating(star)}
+              >
+                ★
+              </span>
+            ))}
+          </div>
+        </div>
 
-      <textarea
-        placeholder="Strengths"
-        onChange={(e) => setStrengths(e.target.value)}
-      />
+        {/* 💪 STRENGTHS */}
+        <div className="form-group">
+          <label>Strengths</label>
+          <textarea
+            placeholder="What did the student do well?"
+            value={strengths}
+            onChange={(e) =>
+              setStrengths(e.target.value)
+            }
+            required
+          />
+        </div>
 
-      <textarea
-        placeholder="Improvements"
-        onChange={(e) => setImprovements(e.target.value)}
-      />
+        {/* 🔧 IMPROVEMENTS */}
+        <div className="form-group">
+          <label>Areas for Improvement</label>
+          <textarea
+            placeholder="Where can the student improve?"
+            value={improvements}
+            onChange={(e) =>
+              setImprovements(e.target.value)
+            }
+            required
+          />
+        </div>
 
-      <textarea
-        placeholder="Recommendation"
-        onChange={(e) => setRecommendation(e.target.value)}
-      />
+        {/* 💡 RECOMMENDATION */}
+        <div className="form-group">
+          <label>Recommendation (Optional)</label>
+          <textarea
+            placeholder="Any advice or next steps?"
+            value={recommendation}
+            onChange={(e) =>
+              setRecommendation(e.target.value)
+            }
+          />
+        </div>
 
-      <button onClick={submitFeedback}>Submit Feedback</button>
+        {/* SUBMIT */}
+        <button
+          type="submit"
+          className="submit-btn"
+          disabled={loading}
+        >
+          {loading ? "Submitting..." : "Submit Feedback"}
+        </button>
+      </form>
     </div>
   );
-}
+};
+
+export default Feedback;

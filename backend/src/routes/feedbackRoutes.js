@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { giveFeedback } = require("../controllers/feedbackController");
+const { giveFeedback,getFeedbackByInterview } = require("../controllers/feedbackController");
 const { isAuthenticated } = require("../middlewares/authMiddleware");
 const { allowRoles } = require("../middlewares/roleMiddleware");
 
@@ -11,5 +11,12 @@ router.post(
   allowRoles("teacher"),
   giveFeedback
 );
+router.get(
+  "/:interviewId",
+  isAuthenticated,
+  allowRoles("student", "teacher", "admin"),
+  getFeedbackByInterview
+);
+
 
 module.exports = router;

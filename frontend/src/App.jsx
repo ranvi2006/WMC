@@ -26,6 +26,7 @@ import StudentDashboard from "./pages/StudentDashboard";
 import MyCourses from "./pages/MyCourses";
 import BookInterview from "./pages/student/BookInterview";
 import MyInterviews from "./pages/student/MyInterviews";
+import ShowFeedback from "./pages/student/ShowFeedback";
 
 /* =======================
    TEACHER PAGES
@@ -119,6 +120,14 @@ function App() {
           element={
             <ProtectedRoute roles={["student"]}>
               <MyInterviews />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/student/feedback/:interviewId"
+          element={
+            <ProtectedRoute role="student">
+              <ShowFeedback />
             </ProtectedRoute>
           }
         />
