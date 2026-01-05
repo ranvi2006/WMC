@@ -1,6 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+import { useEffect } from "react";
+
+/* =======================
+   AUTH
+======================= */
+
+import api from "./utils/axios";
+import { loginSuccess, logout } from "./store/slices/authSlice";
 
 /* =======================
    NAVBARS
@@ -43,7 +51,6 @@ import TeacherInterviews from "./pages/teacher/TeacherInterviews";
 import Feedback from "./pages/teacher/Feedback";
 import RescheduleRequests from "./pages/teacher/RescheduleRequests";
 
-
 /* =======================
    ADMIN PAGES
 ======================= */
@@ -53,9 +60,6 @@ import AdminCreateCourse from "./pages/AdminCreateCourse";
 import AdminInterviews from "./pages/admin/AdminInterviews";
 import CreateSlots from "./pages/admin/CreateSlots";
 import SystemMonitoring from "./pages/admin/SystemMonitoring";
-
-
-// Error Logs
 import ErrorLogs from "./pages/admin/ErrorLogs";
 
 /* =======================
@@ -64,11 +68,16 @@ import ErrorLogs from "./pages/admin/ErrorLogs";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+  /* =======================
+     REHYDRATE AUTH ON REFRESH
+  ======================= */
+ 
 
   return (
     <Router>
-
       {/* =======================
          ROLE BASED NAVBAR
       ======================= */}
@@ -83,7 +92,6 @@ function App() {
       ) : null}
 
       <Routes>
-
         {/* =======================
            PUBLIC ROUTES
         ======================= */}
@@ -91,10 +99,12 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:id" element={<CourseDetails />} />
-        <Route path="/courses/:courseId/showroadmap" element={<ViewRoadmap />} />
+        <Route
+          path="/courses/:courseId/showroadmap"
+          element={<ViewRoadmap />}
+        />
 
         {/* =======================
            STUDENT ROUTES
@@ -134,24 +144,24 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/student/feedback/:interviewId"
           element={
-            <ProtectedRoute role="student">
+            <ProtectedRoute roles={["student"]}>
               <ShowFeedback />
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/student/:id/reschedule"
           element={
-            <ProtectedRoute role="student">
+            <ProtectedRoute roles={["student"]}>
               <Reschedule />
             </ProtectedRoute>
           }
         />
-
-
 
         {/* =======================
            TEACHER ROUTES
@@ -227,6 +237,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/teacher/reschedule-requests"
           element={
@@ -235,7 +246,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
 
         {/* =======================
            ADMIN ROUTES
@@ -266,6 +276,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/admin/interviews"
           element={
@@ -278,7 +289,7 @@ function App() {
         <Route
           path="/admin/create-slots"
           element={
-            <ProtectedRoute role="admin">
+            <ProtectedRoute roles={["admin"]}>
               <CreateSlots />
             </ProtectedRoute>
           }
@@ -287,20 +298,20 @@ function App() {
         <Route
           path="/admin/monitoring"
           element={
-            <ProtectedRoute role="admin">
+            <ProtectedRoute roles={["admin"]}>
               <SystemMonitoring />
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/admin/errors"
           element={
-            <ProtectedRoute role="admin">
+            <ProtectedRoute roles={["admin"]}>
               <ErrorLogs />
             </ProtectedRoute>
           }
         />
-
       </Routes>
     </Router>
   );
