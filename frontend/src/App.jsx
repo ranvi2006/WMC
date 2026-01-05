@@ -50,6 +50,7 @@ import AdminEditCourses from "./pages/AdminEditCourses";
 import AdminSingleEditCourse from "./pages/AdminSingleEditCourse";
 import AdminCreateCourse from "./pages/AdminCreateCourse";
 import AdminInterviews from "./pages/admin/AdminInterviews";
+import CreateSlots from "./pages/admin/CreateSlots";
 
 /* =======================
    PROTECTED ROUTE
@@ -267,6 +268,15 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+  path="/admin/create-slots"
+  element={
+    <ProtectedRoute role="admin">
+      <CreateSlots />
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
     </Router>

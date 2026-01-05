@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import "./AdminInterviews.css";
 
 export default function AdminInterviews() {
+  const navigate = useNavigate();
+
   const [interviews, setInterviews] = useState([]);
   const [filter, setFilter] = useState("all");
   const [selectedInterview, setSelectedInterview] = useState(null);
@@ -112,7 +115,16 @@ export default function AdminInterviews() {
   ======================= */
   return (
     <div className="admin-interviews-page">
-      <h2>All Interviews</h2>
+      <div className="admin-header">
+        <h2>All Interviews</h2>
+
+        <button
+          className="create-slots-btn"
+          onClick={() => navigate("/admin/create-slots")}
+        >
+          + Create Interview Slots
+        </button>
+      </div>
 
       <select
         value={filter}

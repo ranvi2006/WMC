@@ -1,6 +1,8 @@
 const dotenv = require("dotenv");
 dotenv.config();
-
+const connectDB = require('./init/db');
+// Connect to Database
+connectDB();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -76,6 +78,12 @@ app.use("/api/feedback", feedbackRoutes);
 
 // Admin (interviews, payments, analytics later)
 app.use("/api/admin", adminRoutes);
+
+
+// auto create folder for uploads if not exists
+// start cron jobs
+// require("./cron");
+
 
 // =======================
 // 404 Handler (MUST BE LAST before error handler)
