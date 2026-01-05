@@ -1,64 +1,123 @@
+// =======================
+// ENV & DB SETUP
+// =======================
 const dotenv = require("dotenv");
 dotenv.config();
-const connectDB = require('./init/db');
-// Connect to Database
+
+const connectDB = require("./init/db");
 connectDB();
+
+// =======================
+// CORE IMPORTS
+// =======================
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const path = require("path");
 
+// =======================
+// UTILITIES & MIDDLEWARES
+// =======================
+const logError = require("./utils/errorLogger");
+const { allowRoles } = require("./middlewares/roleMiddleware");
+const { isAuthenticated } = require("./middlewares/authMiddleware");
+
+// =======================
+// CRON JOBS (RUN ON STARTUP)
+// =======================
+require("../src/cron/index");
+
+// =======================
+// CONTROLLERS
+// =======================
 const { sendEmail } = require("./controllers/sendEmail");
 
-// Phase 1 & 2 Routes
+// =======================
+// ROUTES
+// =======================
+
+// Phase 1 & 2
 const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const enrollmentRoutes = require("./routes/enrollmentRoutes");
 const roadmapRoutes = require("./routes/roadmapRoutes");
 
-// ✅ Phase 3 Routes
+// Phase 3
 const availabilityRoutes = require("./routes/availabilityRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const interviewRoutes = require("./routes/interviewRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const rescheduleRoutes = require("./routes/rescheduleRoutes");
+const monitoringRoutes = require("./routes/monitoringRoutes");
 
+// Phase 4
+const errorRoutes = require("./routes/errorRoutes");
+
+// =======================
+// APP INIT
+// =======================
 const app = express();
 
 // =======================
-// Middleware
+// SECURITY & GLOBAL MIDDLEWARE
 // =======================
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "*",
+    credentials: true,
+  })
+);
+
+app.use(helmet());
+app.use(morgan("dev"));
 
 // =======================
-// Base Route
+// BASE ROUTE
 // =======================
 app.get("/", (req, res) => {
   res.send("Education App API is running 🚀");
 });
 
+
+// throw new Error("Model verification test");
+// app.get ("/api/test-error",isAuthenticated,allowRoles("admin"), (req, res) => {
+//   throw new Error("Model verification test");  
+// });  
+
+
 // =======================
-// Routes
+// EMAIL (ADMIN ONLY)
+// =======================
+app.post(
+  "/api/send-email",
+  isAuthenticated,
+  allowRoles("admin"),
+  sendEmail
+);
+
+// =======================
+// API ROUTES
 // =======================
 
-// Email Route
-app.post("/api/send-email", sendEmail);
-
-// Auth Routes
+// Auth
 app.use("/api/auth", authRoutes);
 
-// Course Routes
+// Courses
 app.use("/api/courses", courseRoutes);
 
-// Enrollment Routes
+// Enrollments
 app.use("/api/enrollments", enrollmentRoutes);
 
-// Roadmap Routes
+// Roadmaps
 app.use("/api/roadmaps", roadmapRoutes);
 
+// Reschedule
 app.use("/api/reschedule", rescheduleRoutes);
-
 
 // =======================
 // 🚀 PHASE 3 ROUTES
@@ -70,25 +129,25 @@ app.use("/api/availability", availabilityRoutes);
 // Payments
 app.use("/api/payments", paymentRoutes);
 
-// Interviews (student + teacher + admin)
+// Interviews
 app.use("/api/interviews", interviewRoutes);
 
 // Feedback
 app.use("/api/feedback", feedbackRoutes);
 
-// Admin (interviews, payments, analytics later)
+// Admin
 app.use("/api/admin", adminRoutes);
 
+// Monitoring
+app.use("/api/monitoring", monitoringRoutes);
 
-// auto create folder for uploads if not exists
-// start cron jobs
-// require("./cron");
-
+// Admin Error Logs
+app.use("/api/admin/errors", errorRoutes);
 
 // =======================
-// 404 Handler (MUST BE LAST before error handler)
+// 404 HANDLER (MUST BE LAST)
 // =======================
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).json({
     success: false,
     message: `Route ${req.originalUrl} not found`,
@@ -96,14 +155,21 @@ app.use((req, res, next) => {
 });
 
 // =======================
-// GLOBAL ERROR HANDLER (MUST BE VERY LAST)
+// GLOBAL ERROR HANDLER
 // =======================
 app.use((err, req, res, next) => {
-  console.error("Global error handler:", err);
-  res.status(500).json({
+  console.error("🔥 Global Error:", err.message);
+
+  // Log error without blocking response
+  logError(err, req).catch(console.error);
+
+  res.status(err.statusCode || 500).json({
     success: false,
     message: err.message || "Internal Server Error",
   });
 });
 
+// =======================
+// EXPORT APP
+// =======================
 module.exports = app;

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
 /* =======================
    NAVBARS
 ======================= */
@@ -51,6 +52,11 @@ import AdminSingleEditCourse from "./pages/AdminSingleEditCourse";
 import AdminCreateCourse from "./pages/AdminCreateCourse";
 import AdminInterviews from "./pages/admin/AdminInterviews";
 import CreateSlots from "./pages/admin/CreateSlots";
+import SystemMonitoring from "./pages/admin/SystemMonitoring";
+
+
+// Error Logs
+import ErrorLogs from "./pages/admin/ErrorLogs";
 
 /* =======================
    PROTECTED ROUTE
@@ -128,7 +134,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/student/feedback/:interviewId"
           element={
             <ProtectedRoute role="student">
@@ -136,16 +142,16 @@ function App() {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/student/:id/reschedule"
           element={
             <ProtectedRoute role="student">
-              <Reschedule/>
+              <Reschedule />
             </ProtectedRoute>
           }
         />
 
-        
+
 
         {/* =======================
            TEACHER ROUTES
@@ -229,7 +235,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+
 
         {/* =======================
            ADMIN ROUTES
@@ -270,13 +276,30 @@ function App() {
         />
 
         <Route
-  path="/admin/create-slots"
-  element={
-    <ProtectedRoute role="admin">
-      <CreateSlots />
-    </ProtectedRoute>
-  }
-/>
+          path="/admin/create-slots"
+          element={
+            <ProtectedRoute role="admin">
+              <CreateSlots />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/monitoring"
+          element={
+            <ProtectedRoute role="admin">
+              <SystemMonitoring />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/errors"
+          element={
+            <ProtectedRoute role="admin">
+              <ErrorLogs />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </Router>
