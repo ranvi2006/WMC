@@ -24,14 +24,19 @@ const AdminNavbar = () => {
   };
 
   const handleLogout = () => {
+    // Close dropdown first
+    setIsDropdownOpen(false);
+    setIsMobileOpen(false);
+    
     // 1️⃣ Clear redux auth state
     dispatch(logout());
 
-    // 2️⃣ Remove token (if not already done in slice)
+    // 2️⃣ Remove token and user (safety)
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
-    // 3️⃣ Redirect to home (replace history)
-    navigate("/home", { replace: true });
+    // 3️⃣ Force navigation to home
+    window.location.href = "/home";
   };
 
   /* ================= CLICK OUTSIDE ================= */

@@ -24,9 +24,17 @@ const UserNavbar = () => {
   };
 
   const handleLogout = () => {
+    // Close dropdown first
+    setIsDropdownOpen(false);
+    setIsMobileOpen(false);
+    
+    // Clear auth state
     dispatch(logout());
     localStorage.removeItem("token");
-    navigate("/home", { replace: true });
+    localStorage.removeItem("user");
+    
+    // Force navigation to home
+    window.location.href = "/home";
   };
 
   /* ================= CLICK OUTSIDE ================= */

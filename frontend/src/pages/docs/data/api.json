@@ -1,0 +1,327 @@
+{
+  "id": "api",
+  "title": "API Documentation",
+  "sections": [
+    {
+      "id": "course-controller",
+      "title": "Course Controller API",
+      "content": [
+        {
+          "type": "text",
+          "value": "The Course Controller provides comprehensive endpoints for managing courses in the We Make Coder platform. This module handles course creation, updates, retrieval, and deletion operations with proper authentication and authorization."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Overview"
+        },
+        {
+          "type": "text",
+          "value": "The Course Controller is built using Express.js and Mongoose, following RESTful API principles. It implements role-based access control (RBAC) to ensure only authorized users (admins and instructors) can create and modify courses."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Express.js for HTTP request handling",
+            "Mongoose for MongoDB database operations",
+            "JWT-based authentication middleware",
+            "Role-based authorization (admin, instructor)",
+            "Automatic slug generation for SEO-friendly URLs",
+            "Comprehensive error handling"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "create-course",
+      "title": "Create Course Endpoint",
+      "content": [
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "POST /api/courses"
+        },
+        {
+          "type": "text",
+          "value": "Creates a new course in the system. This endpoint requires authentication and appropriate role permissions (admin or instructor)."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Authentication & Authorization"
+        },
+        {
+          "type": "text",
+          "value": "This endpoint is protected by authentication middleware. Only authenticated users with 'admin' or 'instructor' roles can create courses. The authenticated user's ID is automatically assigned as the course creator."
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "// Middleware chain\nrouter.post(\n  '/',\n  isAuthenticated,        // Verifies JWT token\n  allowRoles('admin', 'instructor'),  // Checks user role\n  createCourse            // Controller function\n);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Request Body Schema"
+        },
+        {
+          "type": "text",
+          "value": "The request body should contain course information in JSON format. All fields from the Course model can be included, and they will be spread into the course document."
+        },
+        {
+          "type": "code",
+          "language": "json",
+          "value": "{\n  \"title\": \"Complete Web Development Bootcamp\",\n  \"description\": \"Learn full-stack web development from scratch\",\n  \"category\": \"Web Development\",\n  \"level\": \"beginner\",\n  \"language\": \"English\",\n  \"price\": 2999,\n  \"status\": \"published\",\n  \"tags\": [\"javascript\", \"react\", \"nodejs\"],\n  \"thumbnail\": \"https://example.com/thumbnail.jpg\",\n  \"isFeatured\": true\n}"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Field Definitions"
+        },
+        {
+          "type": "text",
+          "value": "Understanding each field in the course creation process:"
+        },
+        {
+          "type": "list",
+          "value": [
+            "title (required): The course name/title. Must be unique. Used to generate SEO-friendly slug.",
+            "description (required): Detailed course description explaining what students will learn.",
+            "category: Course category (e.g., 'Web Development', 'Data Science', 'Mobile Development').",
+            "level: Difficulty level - 'beginner', 'intermediate', or 'advanced'. Defaults to 'beginner'.",
+            "language: Course language. Defaults to 'English'.",
+            "price: Course price in your currency (e.g., ₹2999). Converted to Number type.",
+            "status: Course status - 'draft', 'published', or 'archived'. Defaults to 'draft'.",
+            "tags: Array of strings for course tags/keywords for better discoverability.",
+            "thumbnail: URL to course thumbnail image.",
+            "isFeatured: Boolean flag to feature the course on homepage. Defaults to false."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Automatic Field Processing"
+        },
+        {
+          "type": "text",
+          "value": "The createCourse function automatically processes certain fields:"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "const course = await Course.create({\n  ...req.body,                    // Spread all request body fields\n  slug: slugify(req.body.title, {  // Auto-generate URL-friendly slug\n    lower: true,\n    strict: true\n  }),\n  price: Number(req.body.price),   // Convert price to number\n  createdBy: req.user.id,          // Set creator from authenticated user\n  publishedAt: req.body.status === 'published' \n    ? new Date()                   // Set publish date if published\n    : null\n});"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Slug Generation Theory"
+        },
+        {
+          "type": "text",
+          "value": "A slug is a URL-friendly version of a string. It converts 'Complete Web Development Bootcamp' to 'complete-web-development-bootcamp'. This is crucial for SEO and user-friendly URLs."
+        },
+        {
+          "type": "text",
+          "value": "The slugify function:"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Converts to lowercase: 'JavaScript' → 'javascript'",
+            "Replaces spaces with hyphens: 'Web Development' → 'web-development'",
+            "Removes special characters: 'C++ Basics' → 'c-basics'",
+            "Ensures uniqueness: If duplicate exists, MongoDB will throw error (code 11000)"
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "// Example slug generation\nconst title = \"Complete Web Development Bootcamp\";\nconst slug = slugify(title, { lower: true, strict: true });\n// Result: \"complete-web-development-bootcamp\"\n\n// Used in URL: /courses/complete-web-development-bootcamp"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "User Context (req.user)"
+        },
+        {
+          "type": "text",
+          "value": "The req.user object is populated by the authentication middleware (authMiddleware.js) after verifying the JWT token. It contains:"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "req.user = {\n  id: \"507f1f77bcf86cd799439011\",  // MongoDB ObjectId as string\n  role: \"instructor\",              // User role (lowercase)\n  email: \"instructor@example.com\",\n  name: \"John Doe\"\n}"
+        },
+        {
+          "type": "text",
+          "value": "The createdBy field stores the creator's MongoDB ObjectId, establishing a reference to the User collection. This enables:"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Course ownership tracking",
+            "Populating creator information in queries",
+            "Authorization checks (only creator or admin can edit)",
+            "Analytics and reporting by instructor"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Success Response"
+        },
+        {
+          "type": "text",
+          "value": "On successful course creation, the API returns a 201 status code with the created course object:"
+        },
+        {
+          "type": "code",
+          "language": "json",
+          "value": "{\n  \"success\": true,\n  \"message\": \"Course created successfully\",\n  \"data\": {\n    \"_id\": \"507f1f77bcf86cd799439011\",\n    \"title\": \"Complete Web Development Bootcamp\",\n    \"slug\": \"complete-web-development-bootcamp\",\n    \"description\": \"Learn full-stack web development from scratch\",\n    \"category\": \"Web Development\",\n    \"level\": \"beginner\",\n    \"language\": \"English\",\n    \"price\": 2999,\n    \"status\": \"published\",\n    \"createdBy\": \"507f191e810c19729de860ea\",\n    \"publishedAt\": \"2024-01-15T10:30:00.000Z\",\n    \"totalEnrollments\": 0,\n    \"averageRating\": 0,\n    \"isFeatured\": true,\n    \"tags\": [\"javascript\", \"react\", \"nodejs\"],\n    \"createdAt\": \"2024-01-15T10:30:00.000Z\",\n    \"updatedAt\": \"2024-01-15T10:30:00.000Z\"\n  }\n}"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Error Handling"
+        },
+        {
+          "type": "text",
+          "value": "The function implements comprehensive error handling for various scenarios:"
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "value": "Duplicate Title Error (MongoDB Error Code 11000)"
+        },
+        {
+          "type": "text",
+          "value": "MongoDB throws error code 11000 when attempting to create a document that violates a unique index constraint. In this case, it occurs when a course with the same title (and thus slug) already exists."
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "// Error handling logic\nif (error.code === 11000) {\n  return res.status(500).json({\n    success: false,\n    message: \"Course with this title already exists\"\n  });\n}"
+        },
+        {
+          "type": "text",
+          "value": "Response (409 Conflict would be more appropriate, but 500 is used):"
+        },
+        {
+          "type": "code",
+          "language": "json",
+          "value": "{\n  \"success\": false,\n  \"message\": \"Course with this title already exists\"\n}"
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "value": "Validation Errors"
+        },
+        {
+          "type": "text",
+          "value": "Mongoose validates required fields and enum values. If validation fails, the error message contains details:"
+        },
+        {
+          "type": "code",
+          "language": "json",
+          "value": "{\n  \"success\": false,\n  \"message\": \"Course validation failed: title: Path `title` is required.\"\n}"
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "value": "Server Errors"
+        },
+        {
+          "type": "text",
+          "value": "Any other unexpected errors return a generic server error message:"
+        },
+        {
+          "type": "code",
+          "language": "json",
+          "value": "{\n  \"success\": false,\n  \"message\": \"Internal server error message\"\n}"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Complete Function Implementation"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "exports.createCourse = async (req, res) => {\n  try {\n    // Create course with automatic field processing\n    const course = await Course.create({\n      ...req.body,                    // Spread all request fields\n      slug: slugify(req.body.title, {  // Generate URL-friendly slug\n        lower: true,                   // Convert to lowercase\n        strict: true                   // Remove special characters\n      }),\n      price: Number(req.body.price),   // Ensure price is a number\n      createdBy: req.user.id,          // Set creator from auth token\n      publishedAt: req.body.status === 'published' \n        ? new Date()                   // Set publish timestamp if published\n        : null\n    });\n\n    // Return success response with created course\n    res.status(201).json({\n      success: true,\n      message: \"Course created successfully\",\n      data: course\n    });\n  } catch (error) {\n    // Log error for debugging\n    console.error(error);\n    \n    // Handle duplicate title error\n    res.status(500).json({\n      success: false,\n      message: error.code === 11000\n        ? \"Course with this title already exists\"\n        : error.message\n    });\n  }\n};"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Frontend Integration Example"
+        },
+        {
+          "type": "text",
+          "value": "Here's how to call this API from a React frontend:"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "// React component example\nconst CreateCourse = () => {\n  const [formData, setFormData] = useState({\n    title: '',\n    description: '',\n    category: '',\n    level: 'beginner',\n    price: 0,\n    status: 'draft'\n  });\n\n  const handleSubmit = async (e) => {\n    e.preventDefault();\n    \n    try {\n      const token = localStorage.getItem('token');\n      \n      const response = await fetch('/api/courses', {\n        method: 'POST',\n        headers: {\n          'Content-Type': 'application/json',\n          'Authorization': `Bearer ${token}`\n        },\n        body: JSON.stringify(formData)\n      });\n      \n      const result = await response.json();\n      \n      if (result.success) {\n        console.log('Course created:', result.data);\n        // Redirect or show success message\n      } else {\n        console.error('Error:', result.message);\n      }\n    } catch (error) {\n      console.error('Network error:', error);\n    }\n  };\n\n  return (\n    <form onSubmit={handleSubmit}>\n      {/* Form fields */}\n    </form>\n  );\n};"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Best Practices"
+        },
+        {
+          "type": "text",
+          "value": "When implementing course creation, follow these best practices:"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Always validate input on both client and server side",
+            "Sanitize user input to prevent XSS attacks",
+            "Use proper HTTP status codes (201 for creation, 400 for bad request, 409 for conflicts)",
+            "Implement rate limiting to prevent abuse",
+            "Add image upload validation for thumbnails",
+            "Consider adding course preview functionality before publishing",
+            "Implement soft delete (archiving) instead of hard delete",
+            "Add audit logging for course creation events",
+            "Validate price is a positive number",
+            "Ensure slug uniqueness is handled gracefully"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Database Schema Reference"
+        },
+        {
+          "type": "text",
+          "value": "The Course model schema defines the structure:"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "value": "const courseSchema = new mongoose.Schema({\n  title: { type: String, required: true, trim: true, index: true },\n  slug: { type: String, unique: true, lowercase: true },\n  description: { type: String, required: true },\n  thumbnail: { type: String },\n  level: { \n    type: String, \n    enum: ['beginner', 'intermediate', 'advanced'], \n    default: 'beginner' \n  },\n  category: { type: String, index: true },\n  language: { type: String, default: 'English' },\n  price: { type: Number, default: 0 },\n  createdBy: { \n    type: mongoose.Schema.Types.ObjectId, \n    ref: 'User', \n    required: true \n  },\n  status: { \n    type: String, \n    enum: ['draft', 'published', 'archived'], \n    default: 'draft' \n  },\n  totalEnrollments: { type: Number, default: 0 },\n  averageRating: { type: Number, default: 0 },\n  isFeatured: { type: Boolean, default: false },\n  tags: [String],\n  publishedAt: Date\n}, { timestamps: true });"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "Related Endpoints"
+        },
+        {
+          "type": "text",
+          "value": "Other course-related endpoints in the controller:"
+        },
+        {
+          "type": "list",
+          "value": [
+            "PUT /api/courses/:id - Update course (requires ownership or admin role)",
+            "DELETE /api/courses/:id - Archive course (soft delete)",
+            "GET /api/courses - Get all published courses (public)",
+            "GET /api/courses/:id - Get single course details (public)",
+            "GET /api/courses/my/courses - Get instructor's courses (protected)"
+          ]
+        }
+      ]
+    }
+  ]
+}
+

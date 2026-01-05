@@ -6,9 +6,12 @@ export default function DocRenderer({ content }) {
         switch (block.type) {
           case "text":
             return <p key={i}>{block.value}</p>;
+          case "heading":
+            const HeadingTag = `h${block.level || 2}`;
+            return <HeadingTag key={i}>{block.value}</HeadingTag>;
           case "code":
             return (
-              <pre key={i}>
+              <pre key={i} data-language={block.language || "javascript"}>
                 <code>{block.value}</code>
               </pre>
             );
