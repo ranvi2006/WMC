@@ -1,0 +1,209 @@
+{
+  "id": "html",
+  "title": "HTML",
+  "sections": [
+    {
+      "id": "html-basics",
+      "title": "HTML Basics",
+      "content": [
+        { "type": "text", "value": "HTML is the standard markup language used to create web pages." },
+        {
+          "type": "list",
+          "value": [
+            "<!DOCTYPE html>",
+            "<html>",
+            "<head>",
+            "<title>",
+            "<meta>",
+            "<link>",
+            "<style>",
+            "<script>",
+            "<body>"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text-elements",
+      "title": "Text & Formatting Elements",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "<h1>",
+            "<h2>",
+            "<h3>",
+            "<h4>",
+            "<h5>",
+            "<h6>",
+            "<p>",
+            "<br>",
+            "<hr>",
+            "<strong>",
+            "<em>",
+            "<b>",
+            "<i>",
+            "<u>",
+            "<small>",
+            "<mark>",
+            "<span>",
+            "<pre>",
+            "<code>"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "links-media",
+      "title": "Links & Media",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "<a>",
+            "<img>",
+            "<audio>",
+            "<video>",
+            "<source>",
+            "<track>",
+            "<iframe>",
+            "<embed>",
+            "<object>"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lists",
+      "title": "Lists",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "<ul>",
+            "<ol>",
+            "<li>",
+            "<dl>",
+            "<dt>",
+            "<dd>"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tables",
+      "title": "Tables",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "<table>",
+            "<caption>",
+            "<thead>",
+            "<tbody>",
+            "<tfoot>",
+            "<tr>",
+            "<th>",
+            "<td>",
+            "colspan",
+            "rowspan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forms",
+      "title": "Forms",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "<form>",
+            "<input>",
+            "<textarea>",
+            "<button>",
+            "<label>",
+            "<select>",
+            "<option>",
+            "<optgroup>",
+            "<fieldset>",
+            "<legend>"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "semantic-elements",
+      "title": "Semantic HTML",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "<header>",
+            "<nav>",
+            "<main>",
+            "<section>",
+            "<article>",
+            "<aside>",
+            "<footer>",
+            "<figure>",
+            "<figcaption>",
+            "<time>"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "html-attributes",
+      "title": "HTML Attributes",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "id",
+            "class",
+            "style",
+            "title",
+            "src",
+            "href",
+            "alt",
+            "type",
+            "name",
+            "value",
+            "placeholder",
+            "required",
+            "readonly",
+            "disabled",
+            "checked",
+            "selected",
+            "action",
+            "method",
+            "target",
+            "rel"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "global-concepts",
+      "title": "Important HTML Concepts",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Block vs Inline Elements",
+            "Semantic HTML",
+            "Accessibility (ARIA)",
+            "SEO Basics",
+            "Responsive Design",
+            "HTML5",
+            "Data Attributes (data-*)",
+            "Forms Validation",
+            "Media Embedding",
+            "DOM Structure"
+          ]
+        }
+      ]
+    }
+  ]
+}

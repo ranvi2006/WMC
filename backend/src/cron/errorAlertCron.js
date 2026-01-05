@@ -23,7 +23,7 @@ cron.schedule("*/5 * * * *", async () => {
     ) {
       return;
     }
-    console.log(`${errorCount} >= ${ERROR_THRESHOLD}`);
+    // console.log(`${errorCount} >= ${ERROR_THRESHOLD}`);
     if (errorCount >= ERROR_THRESHOLD) {
        
 console.log("email sent");

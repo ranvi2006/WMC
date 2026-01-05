@@ -1,0 +1,134 @@
+{
+  "id": "fullstack",
+  "title": "Full Stack Development",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "Full Stack Overview",
+      "content": [
+        {
+          "type": "text",
+          "value": "Full Stack Development means working with both frontend and backend technologies."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Frontend (UI)",
+            "Backend (Server)",
+            "Database",
+            "Authentication",
+            "Deployment"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "frontend",
+      "title": "Frontend Development",
+      "content": [
+        {
+          "type": "text",
+          "value": "Frontend is the client-side part of an application."
+        },
+        {
+          "type": "list",
+          "value": [
+            "HTML – structure",
+            "CSS – styling",
+            "JavaScript – logic",
+            "React – component-based UI"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "function App() {\n  return <h1>Hello Frontend</h1>;\n}"
+        }
+      ]
+    },
+
+    {
+      "id": "backend",
+      "title": "Backend Development",
+      "content": [
+        {
+          "type": "text",
+          "value": "Backend handles business logic, APIs, and authentication."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Node.js",
+            "Express.js",
+            "REST APIs",
+            "Authentication (JWT)"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "app.get('/api/users', (req, res) => {\n  res.json({ users: [] });\n});"
+        }
+      ]
+    },
+
+    {
+      "id": "database",
+      "title": "Database",
+      "content": [
+        {
+          "type": "text",
+          "value": "Databases store application data."
+        },
+        {
+          "type": "list",
+          "value": [
+            "MongoDB (NoSQL)",
+            "PostgreSQL",
+            "MySQL",
+            "ORMs (Mongoose, Prisma)"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "auth",
+      "title": "Authentication & Security",
+      "content": [
+        {
+          "type": "text",
+          "value": "Authentication verifies user identity."
+        },
+        {
+          "type": "list",
+          "value": [
+            "JWT Tokens",
+            "Sessions & Cookies",
+            "OAuth",
+            "Password Hashing (bcrypt)"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "deployment",
+      "title": "Deployment",
+      "content": [
+        {
+          "type": "text",
+          "value": "Deployment makes your app available to users."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Vercel",
+            "Netlify",
+            "Render",
+            "Docker"
+          ]
+        }
+      ]
+    }
+  ]
+}

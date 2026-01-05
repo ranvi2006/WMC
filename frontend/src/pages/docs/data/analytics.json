@@ -1,0 +1,305 @@
+{
+  "id": "analytics",
+  "title": "Data Analytics",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "What is Data Analytics?",
+      "content": [
+        {
+          "type": "text",
+          "value": "Data Analytics is the process of examining, cleaning, transforming, and modeling data to discover useful information, draw conclusions, and support decision-making."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Focuses on insights and reporting",
+            "Used by businesses for decision-making",
+            "Less model-heavy than Data Science"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "types",
+      "title": "Types of Data Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Descriptive Analytics – What happened?",
+            "Diagnostic Analytics – Why did it happen?",
+            "Predictive Analytics – What will happen?",
+            "Prescriptive Analytics – What should be done?"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "lifecycle",
+      "title": "Data Analytics Lifecycle",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Business Requirement Gathering",
+            "Data Collection",
+            "Data Cleaning",
+            "Data Transformation",
+            "Analysis",
+            "Visualization",
+            "Reporting",
+            "Decision Making"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "excel",
+      "title": "Excel for Data Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Data cleaning with filters",
+            "Pivot Tables",
+            "VLOOKUP / XLOOKUP",
+            "IF, COUNT, SUM functions",
+            "Charts and dashboards"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "sql",
+      "title": "SQL for Data Analytics",
+      "content": [
+        {
+          "type": "text",
+          "value": "SQL is the most important skill for data analysts, used to query and analyze relational databases."
+        },
+        {
+          "type": "list",
+          "value": [
+            "SELECT, WHERE, ORDER BY",
+            "GROUP BY & HAVING",
+            "JOINs (INNER, LEFT, RIGHT)",
+            "Subqueries",
+            "Window Functions"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "SELECT department, COUNT(*)\nFROM employees\nGROUP BY department;"
+        }
+      ]
+    },
+
+    {
+      "id": "python",
+      "title": "Python for Data Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Pandas for data analysis",
+            "NumPy for numerical operations",
+            "Matplotlib & Seaborn for visualization",
+            "Data cleaning and transformation"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "import pandas as pd\n\ndf = pd.read_csv('sales.csv')\nprint(df.describe())"
+        }
+      ]
+    },
+
+    {
+      "id": "statistics",
+      "title": "Statistics for Data Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Mean, Median, Mode",
+            "Variance and Standard Deviation",
+            "Probability",
+            "Correlation",
+            "Hypothesis Testing"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "eda",
+      "title": "Exploratory Data Analysis (EDA)",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Understanding data distribution",
+            "Detecting outliers",
+            "Finding patterns and trends",
+            "Correlation analysis"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "visualization",
+      "title": "Data Visualization",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Bar charts",
+            "Line charts",
+            "Pie charts",
+            "Histograms",
+            "Dashboards"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "bi-tools",
+      "title": "BI & Visualization Tools",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Power BI",
+            "Tableau",
+            "Looker",
+            "Google Data Studio"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "business",
+      "title": "Business Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "KPIs and Metrics",
+            "Customer Analysis",
+            "Sales Analysis",
+            "Marketing Analytics",
+            "Financial Analytics"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "case-studies",
+      "title": "Analytics Case Studies",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Sales performance analysis",
+            "Customer churn analysis",
+            "Website traffic analysis",
+            "Marketing campaign analysis"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "data-quality",
+      "title": "Data Quality & Governance",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Accuracy",
+            "Completeness",
+            "Consistency",
+            "Timeliness",
+            "Data validation"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "automation",
+      "title": "Automation in Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Scheduled reports",
+            "Automated dashboards",
+            "ETL pipelines",
+            "Python scripts for automation"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "ethics",
+      "title": "Ethics in Data Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Data privacy",
+            "Responsible reporting",
+            "Bias in data",
+            "Compliance (GDPR)"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "careers",
+      "title": "Careers in Data Analytics",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Data Analyst",
+            "Business Analyst",
+            "Reporting Analyst",
+            "BI Analyst",
+            "Product Analyst"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "roadmap",
+      "title": "Data Analytics Roadmap",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Excel → SQL",
+            "Statistics fundamentals",
+            "Python for analytics",
+            "Visualization tools",
+            "Business problem solving",
+            "Real-world projects"
+          ]
+        }
+      ]
+    }
+  ]
+}

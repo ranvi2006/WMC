@@ -1,0 +1,291 @@
+{
+  "id": "datascience",
+  "title": "Data Science",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "What is Data Science?",
+      "content": [
+        {
+          "type": "text",
+          "value": "Data Science is an interdisciplinary field that uses scientific methods, statistics, algorithms, and systems to extract knowledge and insights from structured and unstructured data."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Combines statistics, computer science, and domain knowledge",
+            "Used for decision making and prediction",
+            "Drives AI and machine learning systems"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "lifecycle",
+      "title": "Data Science Lifecycle",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Business Understanding",
+            "Data Collection",
+            "Data Cleaning",
+            "Exploratory Data Analysis (EDA)",
+            "Feature Engineering",
+            "Model Building",
+            "Evaluation",
+            "Deployment",
+            "Monitoring & Maintenance"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "math",
+      "title": "Mathematics for Data Science",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Linear Algebra (vectors, matrices, eigenvalues)",
+            "Probability (random variables, distributions)",
+            "Statistics (mean, median, variance, hypothesis testing)",
+            "Calculus (derivatives, gradients for optimization)"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "python",
+      "title": "Python for Data Science",
+      "content": [
+        {
+          "type": "text",
+          "value": "Python is the most widely used programming language in data science due to its simplicity and rich ecosystem."
+        },
+        {
+          "type": "list",
+          "value": [
+            "NumPy – numerical computing",
+            "Pandas – data manipulation",
+            "Matplotlib & Seaborn – data visualization",
+            "Scikit-learn – machine learning"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "import pandas as pd\n\ndf = pd.read_csv('data.csv')\nprint(df.head())"
+        }
+      ]
+    },
+
+    {
+      "id": "data-cleaning",
+      "title": "Data Cleaning & Preprocessing",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Handling missing values",
+            "Removing duplicates",
+            "Outlier detection",
+            "Data normalization and scaling",
+            "Encoding categorical variables"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "df.fillna(df.mean(), inplace=True)"
+        }
+      ]
+    },
+
+    {
+      "id": "eda",
+      "title": "Exploratory Data Analysis (EDA)",
+      "content": [
+        {
+          "type": "text",
+          "value": "EDA is used to understand data patterns, trends, and anomalies before modeling."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Univariate analysis",
+            "Bivariate analysis",
+            "Correlation analysis",
+            "Visualization using charts and plots"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "ml",
+      "title": "Machine Learning",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Supervised Learning",
+            "Unsupervised Learning",
+            "Semi-supervised Learning",
+            "Reinforcement Learning"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "supervised",
+      "title": "Supervised Learning Algorithms",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Linear Regression",
+            "Logistic Regression",
+            "Decision Trees",
+            "Random Forest",
+            "Support Vector Machines (SVM)",
+            "K-Nearest Neighbors (KNN)"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "unsupervised",
+      "title": "Unsupervised Learning Algorithms",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "K-Means Clustering",
+            "Hierarchical Clustering",
+            "DBSCAN",
+            "Principal Component Analysis (PCA)"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "model-evaluation",
+      "title": "Model Evaluation",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Train-test split",
+            "Cross-validation",
+            "Accuracy, Precision, Recall",
+            "F1 Score",
+            "ROC-AUC"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "deep-learning",
+      "title": "Deep Learning",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Artificial Neural Networks (ANN)",
+            "Convolutional Neural Networks (CNN)",
+            "Recurrent Neural Networks (RNN)",
+            "LSTM and GRU"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "tools",
+      "title": "Data Science Tools",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Jupyter Notebook",
+            "Google Colab",
+            "VS Code",
+            "Git & GitHub",
+            "Docker"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "big-data",
+      "title": "Big Data Technologies",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Hadoop",
+            "Apache Spark",
+            "Hive",
+            "Kafka"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "deployment",
+      "title": "Model Deployment",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "REST APIs using Flask/FastAPI",
+            "Docker containers",
+            "Cloud deployment (AWS, GCP, Azure)",
+            "CI/CD pipelines"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "ethics",
+      "title": "Ethics in Data Science",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Data privacy",
+            "Bias and fairness",
+            "Explainability",
+            "Responsible AI"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "careers",
+      "title": "Careers in Data Science",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Data Analyst",
+            "Data Scientist",
+            "Machine Learning Engineer",
+            "AI Engineer",
+            "Business Analyst"
+          ]
+        }
+      ]
+    }
+  ]
+}

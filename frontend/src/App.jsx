@@ -27,6 +27,7 @@ import Register from "./pages/Register";
 import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetails";
 import ViewRoadmap from "./pages/ViewRoadmap";
+import Documentation from "./pages/docs/Documentation";
 
 /* =======================
    STUDENT PAGES
@@ -101,6 +102,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:id" element={<CourseDetails />} />
+        <Route path="/docs/*" element={<Documentation />} />
         <Route
           path="/courses/:courseId/showroadmap"
           element={<ViewRoadmap />}

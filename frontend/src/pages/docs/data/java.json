@@ -1,0 +1,255 @@
+{
+  "id": "java",
+  "title": "Java",
+  "sections": [
+    {
+      "id": "java-basics",
+      "title": "Java Basics",
+      "content": [
+        {
+          "type": "text",
+          "value": "Java is a high-level, object-oriented, platform-independent programming language."
+        },
+        {
+          "type": "list",
+          "value": [
+            "JDK",
+            "JRE",
+            "JVM",
+            "Platform Independent",
+            "Bytecode",
+            "Write Once Run Anywhere (WORA)"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello Java\");\n  }\n}"
+        }
+      ]
+    },
+    {
+      "id": "data-types",
+      "title": "Data Types & Variables",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "byte",
+            "short",
+            "int",
+            "long",
+            "float",
+            "double",
+            "char",
+            "boolean",
+            "String",
+            "final keyword"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operators",
+      "title": "Operators",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Arithmetic Operators",
+            "Relational Operators",
+            "Logical Operators",
+            "Assignment Operators",
+            "Unary Operators",
+            "Bitwise Operators",
+            "Ternary Operator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "control-statements",
+      "title": "Control Statements",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "if",
+            "if-else",
+            "switch",
+            "for loop",
+            "while loop",
+            "do-while loop",
+            "break",
+            "continue",
+            "return"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oop",
+      "title": "Object-Oriented Programming (OOP)",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Class",
+            "Object",
+            "Encapsulation",
+            "Inheritance",
+            "Polymorphism",
+            "Abstraction",
+            "Constructor",
+            "this keyword",
+            "super keyword"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "methods",
+      "title": "Methods",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Method Declaration",
+            "Method Overloading",
+            "Method Overriding",
+            "Static Methods",
+            "Return Types",
+            "Parameters"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrays-strings",
+      "title": "Arrays & Strings",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Single Dimensional Array",
+            "Multi Dimensional Array",
+            "String",
+            "StringBuilder",
+            "StringBuffer",
+            "Immutable Strings"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exception-handling",
+      "title": "Exception Handling",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "try",
+            "catch",
+            "finally",
+            "throw",
+            "throws",
+            "Checked Exceptions",
+            "Unchecked Exceptions",
+            "Custom Exceptions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collections",
+      "title": "Collections Framework",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "List",
+            "ArrayList",
+            "LinkedList",
+            "Set",
+            "HashSet",
+            "TreeSet",
+            "Map",
+            "HashMap",
+            "TreeMap",
+            "Iterator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "multithreading",
+      "title": "Multithreading",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Thread",
+            "Runnable",
+            "Thread Lifecycle",
+            "Synchronization",
+            "Inter-thread Communication",
+            "Deadlock"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "file-io",
+      "title": "File Handling & I/O",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "File",
+            "FileInputStream",
+            "FileOutputStream",
+            "BufferedReader",
+            "BufferedWriter",
+            "Scanner",
+            "Serialization",
+            "Deserialization"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "java-8",
+      "title": "Java 8 Features",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "Lambda Expressions",
+            "Functional Interface",
+            "Streams API",
+            "Optional Class",
+            "Method References",
+            "Default Methods"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "advanced-java",
+      "title": "Advanced Java Concepts",
+      "content": [
+        {
+          "type": "list",
+          "value": [
+            "JDBC",
+            "Servlets",
+            "JSP",
+            "Annotations",
+            "Reflection API",
+            "Garbage Collection",
+            "Memory Management"
+          ]
+        }
+      ]
+    }
+  ]
+}

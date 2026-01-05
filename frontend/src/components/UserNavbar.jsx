@@ -15,22 +15,17 @@ const UserNavbar = () => {
   /* ================= HANDLERS ================= */
 
   const toggleMobileMenu = () => {
-    setIsMobileOpen(prev => !prev);
+    setIsMobileOpen((prev) => !prev);
     setIsDropdownOpen(false);
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(prev => !prev);
+    setIsDropdownOpen((prev) => !prev);
   };
 
   const handleLogout = () => {
-    // 1️⃣ Clear redux auth state
     dispatch(logout());
-
-    // 2️⃣ Remove token (if not already done in slice)
     localStorage.removeItem("token");
-
-    // 3️⃣ Redirect to home (replace history)
     navigate("/home", { replace: true });
   };
 
@@ -70,6 +65,7 @@ const UserNavbar = () => {
           className={`hamburger ${isMobileOpen ? "open" : ""}`}
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
+          type="button"
         >
           <span className="hamburger-line"></span>
           <span className="hamburger-line"></span>
@@ -78,28 +74,28 @@ const UserNavbar = () => {
 
         {/* Menu */}
         <ul className={`user-navbar-menu ${isMobileOpen ? "active" : ""}`}>
+
           <li>
             <Link to="/student/dashboard" className="nav-link" onClick={toggleMobileMenu}>
               Dashboard
             </Link>
           </li>
+
           <li>
             <Link to="/courses" className="nav-link" onClick={toggleMobileMenu}>
               Courses
             </Link>
           </li>
+
           <li>
-            <Link
-              to="/student/interviews"
-              className="nav-link"
-              onClick={toggleMobileMenu}
-            >
+            <Link to="/student/interviews" className="nav-link" onClick={toggleMobileMenu}>
               My Interviews
             </Link>
           </li>
+
           <li>
-            <Link to="/student/analytics" className="nav-link" onClick={toggleMobileMenu}>
-              Analytics
+            <Link to="/docs" className="nav-link" onClick={toggleMobileMenu}>
+              Documentation
             </Link>
           </li>
 
@@ -112,6 +108,7 @@ const UserNavbar = () => {
               Book Interview (₹9)
             </Link>
           </li>
+
         </ul>
 
         {/* Profile */}
@@ -131,7 +128,6 @@ const UserNavbar = () => {
             <Link to="/settings" className="dropdown-item">Settings</Link>
             <Link to="/help" className="dropdown-item">Help</Link>
 
-            {/* Logout */}
             <button
               className="dropdown-item logout"
               onClick={handleLogout}
