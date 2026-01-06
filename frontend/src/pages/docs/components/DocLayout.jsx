@@ -1,12 +1,33 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./sidebar";
-import SearchBar from "./searchbar";
+import { useState } from "react";
+import Sidebar from "./Sidebar";
+import SearchBar from "./SearchBar";
+import "../Documentation.css";
+
 export default function DocLayout() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar />
-      <main style={{ flex: 1, padding: "20px" }}>
+    <div className="doc-layout">
+      
+      {/* MOBILE HEADER */}
+      <div className="doc-mobile-header">
+        <button onClick={() => setOpen(true)} className="menu-btn">
+          ☰
+        </button>
+        <span>Documentation</span>
+      </div>
+
+      {/* SIDEBAR */}
+      <aside className={`doc-sidebar ${open ? "open" : ""}`}>
+        <button className="close-btn" onClick={() => setOpen(false)}>
+          ✕
+        </button>
+        <Sidebar onNavigate={() => setOpen(false)} />
+      </aside>
+
+      {/* CONTENT */}
+      <main className="doc-content">
         <SearchBar />
         <Outlet />
       </main>

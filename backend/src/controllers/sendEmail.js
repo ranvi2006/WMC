@@ -1,77 +1,58 @@
 const { Resend } = require("resend");
 const crypto = require("crypto");
-
-function generateOTP() {
-  return crypto.randomInt(100000, 1000000); // 6-digit OTP
-}
+const Otp = require("../models/Otp");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const generateOTP = () =>
+  crypto.randomInt(100000, 1000000).toString();
 
 const sendEmail = async (req, res) => {
   try {
     const { email } = req.body;
+    if (!email)
+      return res.status(400).json({ message: "Email is required" });
+
     const otp = generateOTP();
 
-    if (!email) {
-      return res.status(400).json({ message: "Email is required" });
-    }
+    // 🔥 Save OTP in DB (expires in 10 min)
+    await Otp.deleteMany({ email });
+    await Otp.create({
+      email,
+      otp,
+      expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+    });
 
-   const { data, error } = await resend.emails.send({
-  from: "We Make Corder <onboarding@resend.dev>",
-  to: [email],
-  subject: "Your OTP Code – We Make Corder",
-  html: `
-    <div style="font-family: Arial, sans-serif; background:#f5f7fa; padding:24px;">
-      <div style="max-width:480px; margin:auto; background:#ffffff; border-radius:8px; padding:24px;">
-        
-        <h2 style="color:#0b3c6d; text-align:center;">
-          Verify Your Email
-        </h2>
+    await resend.emails.send({
+      from: "We Make Coder <onboarding@resend.dev>",
+      to: [email],
+      subject: "Your OTP Code – We Make Coder",
+      html: `<h2>Your OTP is ${otp}</h2><p>Valid for 10 minutes</p>`,
+    });
 
-        <p style="color:#333; font-size:14px;">
-          Hello,
-        </p>
-
-        <p style="color:#333; font-size:14px;">
-          Use the OTP below to verify your email address. This code is valid for
-          <strong>10 minutes</strong>.
-        </p>
-
-        <div style="
-          margin:24px 0;
-          text-align:center;
-          font-size:28px;
-          letter-spacing:6px;
-          font-weight:bold;
-          color:#1e88e5;
-        ">
-          ${otp}
-        </div>
-
-        <p style="color:#555; font-size:13px;">
-          If you did not request this, please ignore this email.
-        </p>
-
-        <hr style="border:none; border-top:1px solid #eee; margin:20px 0;" />
-
-        <p style="color:#999; font-size:12px; text-align:center;">
-          © ${new Date().getFullYear()} We Make Corder. All rights reserved.
-        </p>
-      </div>
-    </div>
-  `,
-});
-
-    if (error) {
-      return res.status(500).json({ error });
-    }
-
-    res.json({ success: true, data ,otp});
+    res.json({ success: true, message: "OTP sent" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 };
 
+const verifyOtp = async (req, res) => {
+  const { email, otp } = req.body;
 
-module.exports = { sendEmail }; // ✅ IMPORTANT
+  const record = await Otp.findOne({ email, otp });
+
+  if (!record)
+    return res.status(400).json({ message: "Invalid OTP" });
+
+  if (record.expiresAt < new Date()) {
+    await Otp.deleteOne({ _id: record._id });
+    return res.status(400).json({ message: "OTP expired" });
+  }
+
+  // ✅ OTP valid
+  await Otp.deleteOne({ _id: record._id });
+  res.json({ success: true });
+};
+
+module.exports = { sendEmail, verifyOtp };

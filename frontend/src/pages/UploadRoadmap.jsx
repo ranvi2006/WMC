@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
-import "../styles/UploadRoadmap.css";
 
-const UploadRoadmap = () => {
-  const user=JSON.parse(localStorage.getItem("user"));
-   const navigatePath =
-  user?.role === "admin"
-    ? 'admin'
-    : 'instructor';
-  
+export default function UploadRoadmap() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigatePath =
+    user?.role === "admin" ? "admin" : "instructor";
+
   const { courseId } = useParams();
   const navigate = useNavigate();
 
@@ -18,8 +15,8 @@ const UploadRoadmap = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
- 
 
+  /* ================= SUBMIT ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -32,7 +29,7 @@ const UploadRoadmap = () => {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("courseId", courseId);
-    formData.append("pdf", file); // ✅ MUST be "pdf"
+    formData.append("pdf", file); // MUST be "pdf"
 
     try {
       setLoading(true);
@@ -42,69 +39,144 @@ const UploadRoadmap = () => {
         formData
       );
 
-      // ✅ Success check
       if (res.status === 201 || res.data?.success) {
-        setError("");
         navigate(`/${navigatePath}/courses`);
       } else {
-        setError("Upload completed but unexpected response");
+        setError(
+          "Upload completed but unexpected response"
+        );
       }
-
     } catch (err) {
       console.error("UPLOAD ERROR:", err);
       setError(
-        err.response?.data?.message || "Failed to upload roadmap"
+        err.response?.data?.message ||
+          "Failed to upload roadmap"
       );
     } finally {
       setLoading(false);
     }
   };
 
+  /* ================= UI ================= */
   return (
-    <div className="container upload-roadmap">
-      <h1>Upload Roadmap</h1>
+    <div
+      className="
+        min-h-screen px-4 py-10
+        bg-gray-50
+        dark:bg-gradient-to-br dark:from-[#050510] dark:via-[#0a0a1a] dark:to-[#050510]
+      "
+    >
+      <div className="max-w-xl mx-auto">
 
-      <form className="roadmap-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Roadmap Title *</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
+        {/* TITLE */}
+        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+          Upload Roadmap
+        </h1>
 
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>PDF File *</label>
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={(e) => setFile(e.target.files[0])}
-            required
-          />
-        </div>
-
-        {error && <p className="error">{error}</p>}
-
-        <button
-          className="btn btn-primary"
-          type="submit"
-          disabled={loading}
+        {/* CARD */}
+        <div
+          className="
+            rounded-2xl p-6
+            bg-white dark:bg-gradient-to-br dark:from-[#0f1025] dark:to-[#0a0b1d]
+            border border-gray-200 dark:border-white/10
+            shadow-lg
+          "
         >
-          {loading ? "Uploading..." : "Upload Roadmap"}
-        </button>
-      </form>
+          <form onSubmit={handleSubmit} className="space-y-5">
+
+            {/* TITLE */}
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                Roadmap Title *
+              </label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) =>
+                  setTitle(e.target.value)
+                }
+                className="
+                  w-full rounded-xl px-4 py-3 text-sm
+                  bg-gray-50 dark:bg-[#070814]
+                  border border-gray-300 dark:border-white/10
+                  text-gray-900 dark:text-white
+                  focus:ring-2 focus:ring-purple-600
+                "
+                required
+              />
+            </div>
+
+            {/* DESCRIPTION */}
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                Description
+              </label>
+              <textarea
+                rows={3}
+                value={description}
+                onChange={(e) =>
+                  setDescription(e.target.value)
+                }
+                className="
+                  w-full rounded-xl px-4 py-3 text-sm
+                  bg-gray-50 dark:bg-[#070814]
+                  border border-gray-300 dark:border-white/10
+                  text-gray-900 dark:text-white
+                  focus:ring-2 focus:ring-purple-600
+                  resize-none
+                "
+              />
+            </div>
+
+            {/* FILE */}
+            <div>
+              <label className="block text-sm font-semibold mb-1 text-gray-700 dark:text-gray-300">
+                PDF File *
+              </label>
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={(e) =>
+                  setFile(e.target.files[0])
+                }
+                className="
+                  w-full text-sm
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-xl
+                  file:border-0
+                  file:bg-indigo-600 file:text-white
+                  hover:file:opacity-90
+                  text-gray-700 dark:text-gray-300
+                "
+                required
+              />
+            </div>
+
+            {/* ERROR */}
+            {error && (
+              <p className="text-sm text-red-600 dark:text-red-400">
+                {error}
+              </p>
+            )}
+
+            {/* SUBMIT */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="
+                px-6 py-3 rounded-xl
+                bg-gradient-to-r from-purple-600 to-indigo-600
+                text-white text-sm font-semibold
+                shadow-lg shadow-purple-600/30
+                hover:opacity-90 transition
+                disabled:opacity-50
+              "
+            >
+              {loading ? "Uploading..." : "Upload Roadmap"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default UploadRoadmap;
+}

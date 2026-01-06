@@ -9,17 +9,17 @@ export default function DocPage() {
   if (!doc) return <h2>Topic not found</h2>;
 
   const sections = section
-    ? doc.sections.filter(s => s.id === section)
+    ? doc.sections.filter((s) => s.id === section)
     : doc.sections;
 
   return (
-    <>
-      {sections.map(sec => (
+    <div className="doc-page">
+      {sections.map((sec) => (
         <section key={sec.id}>
           <h2>{sec.title}</h2>
           <DocRenderer content={sec.content} />
         </section>
       ))}
-    </>
+    </div>
   );
 }

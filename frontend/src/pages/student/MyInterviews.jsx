@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import "./MyInterview.css";
 
 export default function MyInterviews() {
   const [interviews, setInterviews] = useState([]);
@@ -9,9 +8,7 @@ export default function MyInterviews() {
   const [activeTab, setActiveTab] = useState(null);
   const navigate = useNavigate();
 
-  /* =========================
-     CANCEL INTERVIEW
-  ========================= */
+  /* ================= CANCEL ================= */
   const cancelInterview = async (id) => {
     if (!window.confirm("Cancel this interview?")) return;
 
@@ -32,9 +29,7 @@ export default function MyInterviews() {
     }
   };
 
-  /* =========================
-     FETCH INTERVIEWS
-  ========================= */
+  /* ================= FETCH ================= */
   useEffect(() => {
     const fetchInterviews = async () => {
       try {
@@ -42,151 +37,244 @@ export default function MyInterviews() {
         const data = res.data.interviews || [];
         setInterviews(data);
 
-        if (data.some(i => i.status === "pending")) setActiveTab("pending");
-        else if (data.some(i => i.status === "confirmed")) setActiveTab("confirmed");
-        else if (data.some(i => i.status === "completed")) setActiveTab("completed");
-        else if (data.some(i => i.status === "cancelled")) setActiveTab("cancelled");
-        else setActiveTab(null);
+        const priority = ["pending", "confirmed", "completed", "cancelled"];
+        const firstTab = priority.find(tab =>
+          data.some(i => i.status === tab)
+        );
+        setActiveTab(firstTab || null);
       } catch (err) {
-        console.error("Failed to load interviews", err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchInterviews();
   }, []);
 
-  if (loading) return <p className="loading">Loading interviews...</p>;
+  /* ================= STATES ================= */
+  if (loading) {
+    return (
+      <div className="py-16 text-center text-sm text-gray-500">
+        Loading interviews…
+      </div>
+    );
+  }
 
   if (!activeTab) {
     return (
-      <div className="my-interviews-page empty-state">
-        <h2>You have no interviews yet</h2>
-        <p>Book your first interview to get started.</p>
+      <div className="min-h-[60vh] flex flex-col items-center justify-center text-center gap-4">
+        <h2 className="text-2xl font-bold">
+          No interviews yet
+        </h2>
+        <p className="text-gray-500 text-sm">
+          Book your first interview to get started
+        </p>
         <button
-          className="book-now-btn"
           onClick={() => navigate("/student/book-interview")}
+          className="
+            px-6 py-3 rounded-xl
+            bg-gradient-to-r from-indigo-600 to-blue-600
+            text-white text-sm font-semibold
+            shadow-lg shadow-indigo-500/30
+            hover:opacity-90 transition
+          "
         >
-          Book Interview
+          Book Interview ₹9
         </button>
       </div>
     );
   }
 
-  const filteredInterviews = interviews.filter(
-    (i) => i.status === activeTab
-  );
+  const filtered = interviews.filter(i => i.status === activeTab);
 
+  const statusColor = {
+    pending: "bg-yellow-500",
+    confirmed: "bg-blue-600",
+    completed: "bg-green-600",
+    cancelled: "bg-red-600",
+  };
+
+  /* ================= UI ================= */
   return (
-    <div className="my-interviews-page">
-      <h2>My Interviews</h2>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 py-10 px-4">
+      <div className="max-w-5xl mx-auto">
 
-      {/* 🔹 TABS */}
-      <div className="tabs">
-        {["pending", "confirmed", "completed", "cancelled"].map((tab) => {
-          const hasData = interviews.some(i => i.status === tab);
-          if (!hasData) return null;
+        {/* HEADER */}
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            My Interviews
+          </h2>
 
-          return (
-            <button
-              key={tab}
-              className={`tab-btn ${activeTab === tab ? "active" : ""}`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab.toUpperCase()}
-            </button>
-          );
-        })}
-      </div>
+          <button
+            onClick={() => navigate("/student/book-interview")}
+            className="
+              hidden sm:inline-flex
+              px-5 py-2 rounded-xl
+              bg-gradient-to-r from-indigo-600 to-blue-600
+              text-white text-sm font-semibold
+              shadow-lg shadow-indigo-500/30
+              hover:opacity-90 transition
+            "
+          >
+            Book Interview ₹9
+          </button>
+        </div>
 
-      {/* 🔹 LIST */}
-      {filteredInterviews.length === 0 ? (
-        <p className="empty">No {activeTab} interviews</p>
-      ) : (
-        <div className="interview-list">
-          {filteredInterviews.map((interview) => {
-            const {
-              _id,
-              teacherId,
-              date,
-              startTime,
-              duration,
-              status,
-              meetingLink,
-            } = interview;
+        {/* TABS */}
+        <div className="flex gap-2 mb-8 flex-wrap">
+          {["pending", "confirmed", "completed", "cancelled"].map(tab => {
+            const hasData = interviews.some(i => i.status === tab);
+            if (!hasData) return null;
 
             return (
-              <div className="interview-card" key={_id}>
-                {/* HEADER */}
-                <div className="interview-header">
-                  <h4>{teacherId?.name}</h4>
-                  <span className={`status ${status}`}>
-                    {status.toUpperCase()}
-                  </span>
-                </div>
-
-                <p className="email">{teacherId?.email}</p>
-
-                {/* DETAILS */}
-                <div className="details">
-                  <p><strong>Date:</strong> {date}</p>
-                  <p><strong>Time:</strong> {startTime}</p>
-                  <p><strong>Duration:</strong> {duration} mins</p>
-                </div>
-
-                {/* ACTIONS */}
-                <div className="actions">
-                  {status === "completed" && (
-                    <button
-                      className="feedback-btn"
-                      onClick={() =>
-                        navigate(`/student/feedback/${_id}`)
-                      }
-                    >
-                      View Feedback
-                    </button>
-                  )}
-
-                  {status === "cancelled" && (
-                    <button
-                      className="reschedule-btn"
-                      onClick={() =>
-                        navigate(`/student/${_id}/reschedule`)
-                      }
-                    >
-                      Reschedule Interview
-                    </button>
-                  )}
-
-                  {(status === "pending" || status === "confirmed") && (
-                    <>
-                      {/* ✅ SHOW JOIN ONLY IF LINK EXISTS */}
-                      {meetingLink && (
-                        <a
-                          href={meetingLink}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="join-btn"
-                        >
-                          Join Interview
-                        </a>
-                      )}
-
-                      <button
-                        className="cancel-btn"
-                        onClick={() => cancelInterview(_id)}
-                      >
-                        Cancel Interview
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`
+                  px-4 py-2 rounded-full
+                  text-xs font-semibold uppercase tracking-wide
+                  transition
+                  ${activeTab === tab
+                    ? "bg-indigo-600 text-white shadow"
+                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"}
+                `}
+              >
+                {tab}
+              </button>
             );
           })}
         </div>
-      )}
+
+        {/* LIST */}
+        {filtered.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-sm text-gray-500">
+              No {activeTab} interviews
+            </p>
+          </div>
+        ) : (
+          <div className="grid gap-5">
+            {filtered.map(interview => {
+              const {
+                _id,
+                teacherId,
+                date,
+                startTime,
+                duration,
+                status,
+                meetingLink,
+              } = interview;
+
+              return (
+                <div
+                  key={_id}
+                  className="
+                    bg-white dark:bg-gray-900
+                    rounded-2xl p-5
+                    shadow-md border
+                    border-gray-200 dark:border-gray-800
+                    hover:shadow-lg transition
+                  "
+                >
+                  {/* TOP */}
+                  <div className="flex justify-between items-start gap-4">
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">
+                        {teacherId?.name}
+                      </h4>
+                      <p className="text-xs text-gray-500">
+                        {teacherId?.email}
+                      </p>
+                    </div>
+
+                    <span
+                      className={`
+                        px-3 py-1 rounded-full
+                        text-xs font-semibold text-white
+                        ${statusColor[status]}
+                      `}
+                    >
+                      {status}
+                    </span>
+                  </div>
+
+                  {/* DETAILS */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-gray-700 dark:text-gray-300 mt-4">
+                    <div>
+                      <span className="font-semibold">Date:</span> {date}
+                    </div>
+                    <div>
+                      <span className="font-semibold">Time:</span> {startTime}
+                    </div>
+                    <div>
+                      <span className="font-semibold">Duration:</span> {duration} min
+                    </div>
+                  </div>
+
+                  {/* ACTIONS */}
+                  <div className="flex gap-2 flex-wrap mt-5">
+                    {status === "completed" && (
+                      <button
+                        onClick={() => navigate(`/student/feedback/${_id}`)}
+                        className="
+                          px-4 py-2 text-xs rounded-xl
+                          bg-green-600 text-white
+                          hover:bg-green-500 transition
+                        "
+                      >
+                        View Feedback
+                      </button>
+                    )}
+
+                    {status === "cancelled" && (
+                      <button
+                        onClick={() => navigate(`/student/${_id}/reschedule`)}
+                        className="
+                          px-4 py-2 text-xs rounded-xl
+                          bg-indigo-600 text-white
+                          hover:bg-indigo-500 transition
+                        "
+                      >
+                        Reschedule
+                      </button>
+                    )}
+
+                    {(status === "pending" || status === "confirmed") && (
+                      <>
+                        {meetingLink && (
+                          <a
+                            href={meetingLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="
+                              px-4 py-2 text-xs rounded-xl
+                              bg-blue-600 text-white
+                              hover:bg-blue-500 transition
+                            "
+                          >
+                            Join
+                          </a>
+                        )}
+
+                        <button
+                          onClick={() => cancelInterview(_id)}
+                          className="
+                            px-4 py-2 text-xs rounded-xl
+                            bg-red-600 text-white
+                            hover:bg-red-500 transition
+                          "
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

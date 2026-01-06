@@ -7,6 +7,10 @@
    - CTA: Soft Orange
 ========================= */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Color Palette */
   --color-primary: #1a237e;        /* Deep Royal Blue */

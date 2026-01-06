@@ -22,6 +22,7 @@ const path = require("path");
 const logError = require("./utils/errorLogger");
 const { allowRoles } = require("./middlewares/roleMiddleware");
 const { isAuthenticated } = require("./middlewares/authMiddleware");
+const { verifyOtp,sendEmail } = require("./controllers/sendEmail");
 
 // =======================
 // CRON JOBS (RUN ON STARTUP)
@@ -31,7 +32,6 @@ require("../src/cron/index");
 // =======================
 // CONTROLLERS
 // =======================
-const { sendEmail } = require("./controllers/sendEmail");
 
 // =======================
 // ROUTES
@@ -93,12 +93,8 @@ app.get("/", (req, res) => {
 // =======================
 // EMAIL (ADMIN ONLY)
 // =======================
-app.post(
-  "/api/send-email",
-  isAuthenticated,
-  allowRoles("admin"),
-  sendEmail
-);
+app.post("/send-email", sendEmail);
+app.post("/verify-otp", verifyOtp);
 
 // =======================
 // API ROUTES

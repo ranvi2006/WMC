@@ -1,333 +1,101 @@
-/* ================= LAYOUT ================= */
+:root {
+  --bg: #0b0d1c;
+  --card: #141633;
+  --text: #e5e7eb;
+  --accent: #7c3aed;
+}
 
-.docs-layout {
+.light {
+  --bg: #ffffff;
+  --card: #f3f4f6;
+  --text: #111827;
+}
+
+.doc-layout {
   display: flex;
   min-height: 100vh;
-  background-color: #f8fafc; /* Premium light gray background - easy on eyes */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* ================= SIDEBAR ================= */
-
-.docs-sidebar {
-  width: 280px;
-  background-color: #ffffff; /* Clean white sidebar */
-  border-right: 1px solid #e2e8f0; /* Soft border - premium look */
-  padding: 24px;
+/* SIDEBAR */
+.doc-sidebar {
+  width: 260px;
+  background: var(--card);
+  padding: 20px;
   overflow-y: auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
 }
 
-.docs-sidebar h3 {
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: 600;
-  color: #1e293b; /* Premium dark gray - better readability */
-  letter-spacing: -0.02em;
+.sidebar-inner h4 {
+  color: var(--accent);
+  margin-top: 12px;
 }
 
-.docs-sidebar h4 {
-  margin-top: 24px;
-  margin-bottom: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #64748b; /* Premium medium gray */
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.docs-sidebar ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.docs-sidebar li {
-  margin-bottom: 6px;
-}
-
-.docs-sidebar a {
+.sidebar-inner a {
+  color: var(--text);
   display: block;
-  padding: 10px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #475569; /* Premium medium-dark gray - comfortable reading */
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  line-height: 1.5;
+  padding: 4px 0;
 }
 
-.docs-sidebar a:hover {
-  background-color: #f1f5f9; /* Premium light blue-gray hover */
-  color: #0ea5e9; /* Premium sky blue accent */
-  transform: translateX(2px); /* Subtle slide effect */
-}
-
-.docs-sidebar a.active {
-  background-color: #e0f2fe; /* Light blue background for active */
-  color: #0284c7; /* Darker blue for active */
-  font-weight: 600;
-}
-
-/* ================= MAIN CONTENT ================= */
-
-.docs-content {
+/* CONTENT */
+.doc-content {
   flex: 1;
-  padding: 40px 48px;
-  overflow-y: auto;
-  background-color: #ffffff;
-  max-width: 900px;
-  margin: 0 auto;
-  line-height: 1.75; /* Better readability */
+  padding: 20px;
+  overflow-x: hidden;
 }
 
-/* ================= SEARCH BAR ================= */
-
-.docs-search {
-  position: relative;
-  margin-bottom: 24px;
-}
-
-.docs-search input {
+/* SEARCH */
+.searchbar input {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  font-size: 14px;
-  outline: none;
-}
-
-.docs-search input:focus {
-  border-color: #2563eb;
-}
-
-/* ================= SEARCH RESULTS ================= */
-
-.docs-search-results {
-  position: absolute;
-  top: 42px;
-  left: 0;
-  right: 0;
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  max-height: 260px;
-  overflow-y: auto;
-  z-index: 10;
-}
-
-.docs-search-results li {
-  list-style: none;
-}
-
-.docs-search-results a {
-  display: block;
   padding: 10px;
-  text-decoration: none;
-  font-size: 14px;
-  color: #111827;
+  border-radius: 8px;
 }
 
-.docs-search-results a:hover {
-  background-color: #dbeafe;
-  color: #2563eb;
-}
-
-/* ================= DOC SECTIONS ================= */
-
-.docs-content section {
-  margin-bottom: 48px;
-}
-
-.docs-content h1 {
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  margin-top: 0;
-  color: #0f172a; /* Premium dark color */
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-.docs-content h2 {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  margin-top: 48px;
-  color: #1e293b; /* Premium dark gray */
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #e2e8f0; /* Subtle divider */
-}
-
-.docs-content h3 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  margin-top: 32px;
-  color: #334155; /* Premium medium-dark */
-  line-height: 1.4;
-}
-
-.docs-content h4 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  margin-top: 24px;
-  color: #475569; /* Premium medium gray */
-  line-height: 1.4;
-}
-
-.docs-content p {
-  font-size: 16px;
-  line-height: 1.8; /* Increased for better readability */
-  color: #475569; /* Premium medium-dark gray - easy on eyes */
-  margin-bottom: 16px;
-}
-
-/* ================= LISTS ================= */
-
-.docs-content ul {
-  padding-left: 24px;
-  margin-bottom: 20px;
-  list-style: none;
-}
-
-.docs-content ul li {
-  margin-bottom: 12px;
-  color: #475569;
-  position: relative;
-  padding-left: 24px;
-  line-height: 1.7;
-}
-
-.docs-content ul li::before {
-  content: "▸";
-  position: absolute;
-  left: 0;
-  color: #0ea5e9; /* Premium sky blue bullet */
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.docs-content ol {
-  padding-left: 24px;
-  margin-bottom: 20px;
-}
-
-.docs-content ol li {
-  margin-bottom: 12px;
-  color: #475569;
-  line-height: 1.7;
-  padding-left: 8px;
-}
-
-/* ================= CODE BLOCK ================= */
-
-.docs-content pre {
-  background-color: #1e293b; /* Premium dark blue-gray - easier on eyes than pure black */
-  color: #e2e8f0; /* Premium light gray - better contrast */
-  padding: 20px 24px;
-  border-radius: 12px;
+/* CODE */
+pre {
+  background: #000;
+  padding: 16px;
+  border-radius: 8px;
   overflow-x: auto;
-  font-size: 14px;
-  margin: 24px 0;
-  border: 1px solid #334155; /* Subtle border */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  line-height: 1.6;
 }
 
-.docs-content pre code {
-  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
-  font-size: 13.5px;
-  color: inherit;
+/* MOBILE */
+.doc-mobile-header {
+  display: none;
 }
 
-.docs-content code:not(pre code) {
-  font-family: "Fira Code", "Consolas", "Monaco", "Courier New", monospace;
-  font-size: 14px;
-  background-color: #f1f5f9; /* Light background for inline code */
-  color: #0ea5e9; /* Sky blue for inline code */
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: 500;
-}
-
-.docs-content pre[data-language]::before {
-  content: attr(data-language);
-  display: block;
-  text-align: right;
-  font-size: 11px;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #334155;
-}
-
-/* ================= HOME PAGE ================= */
-
-.docs-home {
-  max-width: 800px;
-}
-
-.docs-home h1 {
-  font-size: 42px;
-  font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 24px;
-  letter-spacing: -0.02em;
-}
-
-.docs-home p {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #475569;
-  margin-bottom: 32px;
-}
-
-/* ================= SCROLLBAR ================= */
-
-.docs-sidebar::-webkit-scrollbar,
-.docs-content::-webkit-scrollbar {
-  width: 10px;
-}
-
-.docs-sidebar::-webkit-scrollbar-track,
-.docs-content::-webkit-scrollbar-track {
-  background-color: #f8fafc; /* Light track */
-}
-
-.docs-sidebar::-webkit-scrollbar-thumb,
-.docs-content::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1; /* Premium light gray thumb */
-  border-radius: 5px;
-  border: 2px solid #f8fafc; /* Creates padding effect */
-}
-
-.docs-sidebar::-webkit-scrollbar-thumb:hover,
-.docs-content::-webkit-scrollbar-thumb:hover {
-  background-color: #94a3b8; /* Darker on hover */
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width: 900px) {
-  .docs-layout {
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .doc-layout {
     flex-direction: column;
   }
 
-  .docs-sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #e5e7eb;
+  .doc-sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    height: 100%;
+    z-index: 50;
+    transition: 0.3s;
   }
 
-  .docs-content {
-    padding: 20px;
+  .doc-sidebar.open {
+    left: 0;
+  }
+
+  .doc-mobile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--card);
+  }
+
+  .menu-btn,
+  .close-btn {
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: var(--text);
   }
 }

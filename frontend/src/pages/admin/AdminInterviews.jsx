@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import "./AdminInterviews.css";
 
 export default function AdminInterviews() {
   const navigate = useNavigate();
@@ -11,6 +10,7 @@ export default function AdminInterviews() {
   const [selectedInterview, setSelectedInterview] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  /* ================= FETCH ================= */
   useEffect(() => {
     fetchInterviews();
   }, []);
@@ -27,22 +27,27 @@ export default function AdminInterviews() {
     }
   };
 
+  /* ================= CANCEL ================= */
   const cancelInterview = async (id) => {
     if (!window.confirm("Cancel this interview?")) return;
 
-    await api.patch(`/api/interviews/${id}/admin-cancel`);
+    try {
+      await api.patch(`/api/interviews/${id}/admin-cancel`);
 
-    setInterviews((prev) =>
-      prev.map((i) =>
-        i._id === id ? { ...i, status: "cancelled" } : i
-      )
-    );
+      setInterviews((prev) =>
+        prev.map((i) =>
+          i._id === id ? { ...i, status: "cancelled" } : i
+        )
+      );
 
-    if (selectedInterview?._id === id) {
-      setSelectedInterview({
-        ...selectedInterview,
-        status: "cancelled",
-      });
+      if (selectedInterview?._id === id) {
+        setSelectedInterview((prev) => ({
+          ...prev,
+          status: "cancelled",
+        }));
+      }
+    } catch (err) {
+      console.error("Failed to cancel interview", err);
     }
   };
 
@@ -50,57 +55,102 @@ export default function AdminInterviews() {
     (i) => filter === "all" || i.status === filter
   );
 
-  /* =======================
-     DETAILS VIEW
-  ======================= */
+  /* ================= STATUS BADGE ================= */
+  const statusBadge = (status) => {
+    const base =
+      "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold";
+
+    switch (status) {
+      case "confirmed":
+        return `${base} bg-green-500/20 text-green-400`;
+      case "completed":
+        return `${base} bg-blue-500/20 text-blue-400`;
+      case "cancelled":
+        return `${base} bg-red-500/20 text-red-400`;
+      default:
+        return `${base} bg-yellow-500/20 text-yellow-300`;
+    }
+  };
+
+  /* ================= DETAILS VIEW ================= */
   if (selectedInterview) {
     const i = selectedInterview;
 
     return (
-      <div className="admin-interviews-page">
-        <button className="back-btn" onClick={() => setSelectedInterview(null)}>
-          ← Back to list
-        </button>
+      <div className="min-h-screen bg-[#0b0f1a] px-6 py-6">
+        <div className="max-w-3xl mx-auto bg-[#12172a] rounded-xl shadow p-6 text-gray-200">
 
-        <h2>Interview Details</h2>
+          <button
+            onClick={() => setSelectedInterview(null)}
+            className="text-sm text-purple-400 mb-4"
+          >
+            ← Back to list
+          </button>
 
-        <div className="details-card">
-          <p><strong>Status:</strong> {i.status}</p>
-          <p><strong>Date:</strong> {i.date}</p>
-          <p><strong>Time:</strong> {i.startTime}</p>
+          <h2 className="text-xl font-bold mb-4">
+            Interview Details
+          </h2>
 
-          <hr />
+          <div className="space-y-2 text-sm">
+            <p>
+              <strong>Status:</strong>{" "}
+              <span className={statusBadge(i.status)}>
+                {i.status}
+              </span>
+            </p>
+            <p><strong>Date:</strong> {i.date}</p>
+            <p><strong>Time:</strong> {i.startTime}</p>
+          </div>
 
-          <h3>Student</h3>
-          <p>{i.studentId?.name}</p>
-          <p>{i.studentId?.email}</p>
+          <hr className="my-4 border-white/10" />
 
-          <h3>Teacher</h3>
-          <p>{i.teacherId?.name}</p>
-          <p>{i.teacherId?.email}</p>
+          <div className="space-y-2 text-sm">
+            <h3 className="font-semibold">Student</h3>
+            <p>{i.studentId?.name}</p>
+            <p className="text-gray-400">{i.studentId?.email}</p>
 
-          <hr />
+            <h3 className="font-semibold mt-3">Teacher</h3>
+            <p>{i.teacherId?.name}</p>
+            <p className="text-gray-400">{i.teacherId?.email}</p>
+          </div>
 
-          <p>
-            <strong>Meeting Link:</strong>{" "}
-            {i.meetingLink ? (
-              <a href={i.meetingLink} target="_blank" rel="noreferrer">
-                Open meeting
-              </a>
-            ) : (
-              "Not added"
-            )}
-          </p>
+          <hr className="my-4 border-white/10" />
 
-          <p>
-            <strong>Payment:</strong>{" "}
-            {i.paymentId ? "Paid" : "Unpaid"}
-          </p>
+          <div className="space-y-2 text-sm">
+            <p>
+              <strong>Meeting Link:</strong>{" "}
+              {i.meetingLink ? (
+                <a
+                  href={i.meetingLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-purple-400 underline"
+                >
+                  Open meeting
+                </a>
+              ) : (
+                "Not added"
+              )}
+            </p>
+
+            <p>
+              <strong>Payment:</strong>{" "}
+              {i.paymentId ? (
+                <span className="text-green-400">Paid</span>
+              ) : (
+                <span className="text-red-400">Unpaid</span>
+              )}
+            </p>
+          </div>
 
           {i.status !== "cancelled" && (
             <button
-              className="cancel-btn"
               onClick={() => cancelInterview(i._id)}
+              className="
+                mt-6 px-4 py-2 rounded-lg
+                bg-red-600 hover:bg-red-500
+                text-white font-semibold
+              "
             >
               Cancel Interview
             </button>
@@ -110,80 +160,128 @@ export default function AdminInterviews() {
     );
   }
 
-  /* =======================
-     LIST VIEW
-  ======================= */
+  /* ================= LIST VIEW ================= */
   return (
-    <div className="admin-interviews-page">
-      <div className="admin-header">
-        <h2>All Interviews</h2>
+    <div className="min-h-screen bg-[#0b0f1a] px-6 py-6 text-gray-100">
+
+      {/* HEADER */}
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h2 className="text-2xl font-bold">
+          All Interviews
+        </h2>
 
         <button
-          className="create-slots-btn"
           onClick={() => navigate("/admin/create-slots")}
+          className="
+            bg-gradient-to-r from-purple-600 to-indigo-600
+            hover:from-purple-500 hover:to-indigo-500
+            text-white px-4 py-2 rounded-lg
+            font-semibold
+          "
         >
           + Create Interview Slots
         </button>
       </div>
 
-      <select
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      >
-        <option value="all">All</option>
-        <option value="pending">Pending</option>
-        <option value="confirmed">Confirmed</option>
-        <option value="completed">Completed</option>
-        <option value="cancelled">Cancelled</option>
-      </select>
+      {/* FILTER */}
+      <div className="max-w-7xl mx-auto mb-4">
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="
+            px-3 py-2 rounded-lg
+            bg-[#12172a]
+            border border-white/10
+            text-white
+            focus:ring-2 focus:ring-purple-500
+            [color-scheme:dark]
+          "
+        >
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Student</th>
-              <th>Teacher</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Status</th>
-              <th>Payment</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filtered.map((i) => (
-              <tr key={i._id}>
-                <td>{i.studentId?.name}</td>
-                <td>{i.teacherId?.name}</td>
-                <td>{i.date}</td>
-                <td>{i.startTime}</td>
-                <td>{i.status}</td>
-                <td>{i.paymentId ? "Paid" : "Unpaid"}</td>
-                <td>
-                  <button
-                    className="view-btn"
-                    onClick={() => setSelectedInterview(i)}
-                  >
-                    View
-                  </button>
-
-                  {i.status !== "cancelled" && (
-                    <button
-                      className="cancel-btn"
-                      onClick={() => cancelInterview(i._id)}
-                    >
-                      Cancel
-                    </button>
-                  )}
-                </td>
+      {/* TABLE */}
+      <div className="max-w-7xl mx-auto bg-[#12172a] rounded-xl shadow overflow-x-auto">
+        {loading ? (
+          <div className="p-6 text-center text-gray-300">
+            Loading interviews...
+          </div>
+        ) : (
+          <table className="w-full text-sm">
+            <thead className="bg-white/5 text-gray-300">
+              <tr>
+                <th className="px-4 py-3 text-left">Student</th>
+                <th className="px-4 py-3 text-left">Teacher</th>
+                <th className="px-4 py-3 text-left">Date</th>
+                <th className="px-4 py-3 text-left">Time</th>
+                <th className="px-4 py-3 text-left">Status</th>
+                <th className="px-4 py-3 text-left">Payment</th>
+                <th className="px-4 py-3 text-left">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+
+            <tbody>
+              {filtered.length === 0 ? (
+                <tr>
+                  <td colSpan="7" className="px-4 py-6 text-center text-gray-400">
+                    No interviews found
+                  </td>
+                </tr>
+              ) : (
+                filtered.map((i) => (
+                  <tr
+                    key={i._id}
+                    className="
+                      border-t border-white/10
+                      hover:bg-white/5
+                      text-gray-100
+                    "
+                  >
+                    <td className="px-4 py-3">{i.studentId?.name}</td>
+                    <td className="px-4 py-3">{i.teacherId?.name}</td>
+                    <td className="px-4 py-3">{i.date}</td>
+                    <td className="px-4 py-3">{i.startTime}</td>
+                    <td className="px-4 py-3">
+                      <span className={statusBadge(i.status)}>
+                        {i.status}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 font-medium">
+                      {i.paymentId ? (
+                        <span className="text-green-400">Paid</span>
+                      ) : (
+                        <span className="text-red-400">Unpaid</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 space-x-3">
+                      <button
+                        onClick={() => setSelectedInterview(i)}
+                        className="text-purple-400 hover:underline"
+                      >
+                        View
+                      </button>
+
+                      {i.status !== "cancelled" && (
+                        <button
+                          onClick={() => cancelInterview(i._id)}
+                          className="text-red-400 hover:underline"
+                        >
+                          Cancel
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }

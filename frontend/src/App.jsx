@@ -18,6 +18,7 @@ import UserNavbar from "./components/UserNavbar";
 import TeacherNavbar from "./components/TeacherNavbar";
 import AdminNavbar from "./components/AdminNavbar";
 
+
 /* =======================
    AUTH & COMMON PAGES
 ======================= */
@@ -91,12 +92,15 @@ function App() {
       ) : user.role === "admin" ? (
         <AdminNavbar />
       ) : null}
+   
+
+      
 
       <Routes>
         {/* =======================
            PUBLIC ROUTES
         ======================= */}
-        <Route path="/" element={<Home />} />
+       <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -314,6 +318,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        
       </Routes>
     </Router>
   );

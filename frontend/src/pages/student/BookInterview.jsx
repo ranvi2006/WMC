@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import loadRazorpay from "../../utils/loadRazorpay";
-import "./BookInterview.css";
 
 const BookInterview = () => {
   const navigate = useNavigate();
@@ -11,43 +10,41 @@ const BookInterview = () => {
   const [availability, setAvailability] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlot, setSelectedSlot] = useState(null);
-  const [pageLoading, setPageLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [booking, setBooking] = useState(false);
 
-  // 🔹 Fetch availability
+  /* ================= FETCH AVAILABILITY ================= */
   useEffect(() => {
     const fetchAvailability = async () => {
       try {
         const res = await api.get("/api/availability");
         setAvailability(res.data.availability || []);
-      } catch (err) {
+      } catch {
         alert("Failed to load availability");
       } finally {
-        setPageLoading(false);
+        setLoading(false);
       }
     };
     fetchAvailability();
   }, []);
 
-  // 🔹 Unique sorted dates
+  /* ================= DATES ================= */
   const availableDates = useMemo(() => {
-    const dates = availability.map((a) => a.date);
-    return [...new Set(dates)].sort();
+    return [...new Set(availability.map(a => a.date))].sort();
   }, [availability]);
 
-  // 🔹 Auto-select first date
   useEffect(() => {
-    if (availableDates.length > 0 && !selectedDate) {
+    if (availableDates.length && !selectedDate) {
       setSelectedDate(availableDates[0]);
     }
   }, [availableDates, selectedDate]);
 
-  // 🔹 Slots for selected date
+  /* ================= SLOTS ================= */
   const slotsForDate = useMemo(() => {
     return availability
-      .filter((a) => a.date === selectedDate)
-      .flatMap((a) =>
-        a.slots.map((slot) => ({
+      .filter(a => a.date === selectedDate)
+      .flatMap(a =>
+        a.slots.map(slot => ({
           ...slot,
           teacherId: a.teacherId._id,
           teacherName: a.teacherId.name,
@@ -55,10 +52,9 @@ const BookInterview = () => {
       );
   }, [availability, selectedDate]);
 
-  // 🔹 Verify payment + book interview
+  /* ================= PAYMENT ================= */
   const verifyPayment = async (response, paymentId) => {
     try {
-      // Verify payment
       await api.post("/api/payments/verify", {
         razorpay_order_id: response.razorpay_order_id,
         razorpay_payment_id: response.razorpay_payment_id,
@@ -66,7 +62,6 @@ const BookInterview = () => {
         paymentId,
       });
 
-      // Book interview AFTER verification
       await api.post("/api/interviews/book", {
         teacherId: selectedSlot.teacherId,
         date: selectedDate,
@@ -75,88 +70,68 @@ const BookInterview = () => {
         paymentId,
       });
 
-      alert("Interview booked successfully");
       navigate("/student/interviews");
-    } catch (err) {
+    } catch {
       alert("Payment verification failed");
     } finally {
       setBooking(false);
     }
   };
 
-  // 🔹 Handle booking + payment
   const handleBook = async () => {
-    if (!selectedSlot) {
-      alert("Please select a slot");
-      return;
-    }
+    if (!selectedSlot) return;
 
-    try {
-      setBooking(true);
+    setBooking(true);
+    const loaded = await loadRazorpay();
+    if (!loaded) return setBooking(false);
 
-      // 1️⃣ Load Razorpay SDK
-      const loaded = await loadRazorpay();
-      if (!loaded) {
-        alert("Razorpay failed to load");
-        setBooking(false);
-        return;
-      }
+    const res = await api.post("/api/payments/create");
+    const { orderId, paymentId, amount } = res.data;
 
-      // 2️⃣ Create payment/order
-      const res = await api.post("/api/payments/create");
-      const { orderId, paymentId, amount } = res.data;
-
-      // 3️⃣ Open Razorpay popup
-      const options = {
-        key: razorpayKey,
-        amount,
-        currency: "INR",
-        name: "Interview Booking",
-        description: "30 min interview slot",
-        order_id: orderId,
-
-        handler: function (response) {
-          verifyPayment(response, paymentId);
-        },
-
-        modal: {
-          ondismiss: function () {
-            alert("Payment cancelled");
-            setBooking(false);
-          },
-        },
-
-        theme: {
-          color: "#3399cc",
-        },
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    } catch (err) {
-      alert("Payment failed");
-      setBooking(false);
-    }
+    new window.Razorpay({
+      key: razorpayKey,
+      amount,
+      currency: "INR",
+      order_id: orderId,
+      handler: (response) => verifyPayment(response, paymentId),
+      modal: { ondismiss: () => setBooking(false) },
+      theme: { color: "#2563eb" },
+    }).open();
   };
 
-  if (pageLoading) {
-    return <p className="loading">Loading availability...</p>;
+  /* ================= LOADING ================= */
+  if (loading) {
+    return (
+      <div className="py-12 text-center text-sm text-gray-500">
+        Loading availability…
+      </div>
+    );
   }
 
+  /* ================= UI ================= */
   return (
-    <div className="book-interview-page">
-      <h2>Book an Interview</h2>
+    <div className="max-w-5xl mx-auto px-4 py-5 text-gray-900 dark:text-gray-100">
+
+      {/* TITLE */}
+      <h2 className="text-2xl font-bold mb-4">
+        Book an Interview
+      </h2>
 
       {/* DATE SELECTOR */}
-      <div className="date-selector">
-        {availableDates.map((date) => (
+      <div className="flex flex-wrap gap-2 mb-6">
+        {availableDates.map(date => (
           <button
             key={date}
-            className={`date-btn ${date === selectedDate ? "active" : ""}`}
             onClick={() => {
               setSelectedDate(date);
               setSelectedSlot(null);
             }}
+            className={`
+              px-3 py-1.5 text-xs font-semibold rounded-md border
+              ${date === selectedDate
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-gray-900 text-white border-gray-700 hover:border-blue-500"}
+            `}
           >
             {date}
           </button>
@@ -164,49 +139,105 @@ const BookInterview = () => {
       </div>
 
       {/* SLOTS */}
-      <div className="slots-section">
-        <h3>Available Slots</h3>
+      <h3 className="text-sm font-semibold mb-3">
+        Available Slots
+      </h3>
 
-        {slotsForDate.length === 0 ? (
-          <p className="empty">No slots available</p>
-        ) : (
-          <div className="slots-grid">
-            {slotsForDate.map((slot) => {
-              const isBooked = slot.isBooked;
-              const isSelected = selectedSlot?._id === slot._id;
+      {slotsForDate.length === 0 ? (
+        <p className="text-xs text-gray-500">
+          No slots available
+        </p>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          {slotsForDate.map(slot => {
+            const isBooked = slot.isBooked;
+            const isSelected = selectedSlot?._id === slot._id;
 
-              return (
-                <div
-                  key={slot._id}
-                  className={`slot-card 
-                    ${isBooked ? "booked" : ""} 
-                    ${isSelected ? "selected" : ""}`}
-                  onClick={() => {
-                    if (!isBooked) setSelectedSlot(slot);
-                  }}
-                >
-                  <p className="time">
-                    {slot.startTime} – {slot.endTime}
-                  </p>
-                  <p className="teacher">{slot.teacherName}</p>
-                  {isBooked && <span className="booked-label">Booked</span>}
+            return (
+              <button
+                key={slot._id}
+                disabled={isBooked}
+                onClick={() => setSelectedSlot(slot)}
+                className={`
+                  relative px-3 py-2 rounded-md border text-center transition
+                  
+                  ${isBooked && `
+                    bg-[repeating-linear-gradient(
+                      45deg,
+                      #1f2937,
+                      #1f2937 6px,
+                      #111827 6px,
+                      #111827 12px
+                    )]
+                    border-gray-600
+                    cursor-not-allowed
+                    opacity-70
+                  `}
+
+                  ${!isBooked && isSelected && `
+                    bg-blue-600 text-white border-blue-600
+                  `}
+
+                  ${!isBooked && !isSelected && `
+                    bg-gray-900 text-white border-gray-700
+                    hover:border-blue-500
+                  `}
+                `}
+              >
+                {/* TIME */}
+                <div className="text-sm font-semibold">
+                  {slot.startTime}
                 </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
 
-      {/* BOOK BUTTON */}
-      <div className="book-footer">
+                {/* TEACHER */}
+                <div className="text-[11px] opacity-80">
+                  {slot.teacherName}
+                </div>
+
+                {/* BOOKED BADGE */}
+                {isBooked && (
+                  <span className="
+                    absolute top-1 right-1
+                    text-[10px] font-semibold
+                    bg-red-600 text-white
+                    px-1.5 py-0.5 rounded
+                  ">
+                    BOOKED
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* SELECTED SUMMARY */}
+      {selectedSlot && (
+        <div className="mt-4 text-xs text-gray-300">
+          Selected: <strong>{selectedSlot.startTime}</strong> with{" "}
+          <strong>{selectedSlot.teacherName}</strong>
+        </div>
+      )}
+
+      {/* CTA */}
+      <div className="mt-6 flex justify-end">
         <button
-          className="book-btn"
           onClick={handleBook}
           disabled={!selectedSlot || booking}
+          className="
+            bg-gradient-to-r from-blue-600 to-indigo-600
+            text-white text-sm font-semibold
+            px-5 py-2 rounded-md
+            shadow-md shadow-blue-500/30
+            hover:from-blue-500 hover:to-indigo-500
+            disabled:opacity-50 disabled:cursor-not-allowed
+            transition
+          "
         >
-          {booking ? "Processing Payment..." : "Book Interview (₹9)"}
+          {booking ? "Processing…" : "Book ₹9"}
         </button>
       </div>
+
     </div>
   );
 };

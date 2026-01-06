@@ -3,20 +3,19 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 
-import "../styles/InstructorDashboard.css";
-
-const InstructorDashboard = () => {
+export default function InstructorDashboard() {
   const { user } = useSelector((state) => state.auth);
 
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  /* ================= FETCH ================= */
   useEffect(() => {
     const fetchMyCourses = async () => {
       try {
         const res = await api.get("/api/courses/my");
-        setCourses(res.data.data);
+        setCourses(res.data.data || []);
       } catch {
         setError("Failed to load instructor courses");
       } finally {
@@ -27,61 +26,124 @@ const InstructorDashboard = () => {
     fetchMyCourses();
   }, []);
 
-  if (loading) return <p className="container">Loading dashboard...</p>;
-  if (error) return <p className="container error">{error}</p>;
+  /* ================= LOADING ================= */
+  if (loading) {
+    return (
+      <div className="py-16 text-center text-sm text-gray-500 dark:text-gray-400">
+        Loading dashboard…
+      </div>
+    );
+  }
 
+  /* ================= ERROR ================= */
+  if (error) {
+    return (
+      <div className="py-16 text-center text-sm text-red-600 dark:text-red-400">
+        {error}
+      </div>
+    );
+  }
+
+  /* ================= UI ================= */
   return (
-    <div className="container instructor-dashboard">
-      <header className="instructor-header">
-        <h1>Instructor Dashboard</h1>
-        <p className="instructor-subtitle">
-          Welcome, {user?.name}. Manage your courses here.
-        </p>
-      </header>
+    <div
+      className="
+        min-h-screen px-4 py-10
+        bg-gray-50
+        dark:bg-gradient-to-br dark:from-[#050510] dark:via-[#0a0a1a] dark:to-[#050510]
+      "
+    >
+      <div className="max-w-6xl mx-auto">
 
-      {courses.length === 0 ? (
-        <div className="instructor-empty">
-          <p>You have not created any courses yet.</p>
-          <Link to="/courses/create" className="btn btn-primary">
-            Create Your First Course
-          </Link>
+        {/* HEADER */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Instructor Dashboard
+          </h1>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            Welcome, {user?.name}. Manage your courses here.
+          </p>
         </div>
-      ) : (
-        <div className="instructor-grid">
-          {courses.map((course) => (
-            <div key={course._id} className="instructor-card">
-              <h3>{course.title}</h3>
 
-              <p className="instructor-description">
-                {course.description}
-              </p>
+        {/* EMPTY */}
+        {courses.length === 0 ? (
+          <div
+            className="
+              max-w-md mx-auto text-center
+              bg-white dark:bg-gradient-to-br dark:from-[#0f1025] dark:to-[#0a0b1d]
+              border border-gray-200 dark:border-white/10
+              rounded-2xl p-6 shadow-lg
+            "
+          >
+            <p className="text-gray-600 dark:text-gray-400 mb-4">
+              You have not created any courses yet.
+            </p>
+            <Link
+              to="/courses/create"
+              className="
+                px-6 py-2 rounded-xl text-sm font-semibold
+                bg-gradient-to-r from-purple-600 to-indigo-600
+                text-white shadow-lg shadow-purple-600/30
+                hover:opacity-90 transition
+              "
+            >
+              Create Your First Course
+            </Link>
+          </div>
+        ) : (
+          /* GRID */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {courses.map((course) => (
+              <div
+                key={course._id}
+                className="
+                  rounded-2xl p-5
+                  bg-white dark:bg-gradient-to-br dark:from-[#0f1025] dark:to-[#0a0b1d]
+                  border border-gray-200 dark:border-white/10
+                  shadow-lg
+                  flex flex-col
+                "
+              >
+                {/* TITLE */}
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {course.title}
+                </h3>
 
-              <div className="instructor-meta">
-                <span>
-                  <strong>Status:</strong> {course.status}
-                </span>
-                <span>
-                  <strong>Enrollments:</strong>{" "}
-                  {course.totalEnrollments || 0}
-                </span>
+                {/* DESCRIPTION */}
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                  {course.description}
+                </p>
+
+                {/* META */}
+                <div className="text-xs text-gray-700 dark:text-gray-300 flex justify-between mb-4">
+                  <span>
+                    <strong>Status:</strong> {course.status}
+                  </span>
+                  <span>
+                    <strong>Enrollments:</strong>{" "}
+                    {course.totalEnrollments || 0}
+                  </span>
+                </div>
+
+                {/* ACTIONS */}
+                <div className="mt-auto">
+                  <Link
+                    to={`/courses/${course._id}`}
+                    className="
+                      inline-block px-4 py-2 rounded-xl text-xs font-semibold
+                      bg-gray-200 dark:bg-gray-700
+                      text-gray-800 dark:text-gray-200
+                      hover:opacity-80 transition
+                    "
+                  >
+                    View Course
+                  </Link>
+                </div>
               </div>
-
-              <div className="instructor-actions">
-                <Link
-                  to={`/courses/${course._id}`}
-                  className="btn btn-outline"
-                >
-                  View Course
-                </Link>
-
-                {/* Roadmap removed */}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
-};
-
-export default InstructorDashboard;
+}

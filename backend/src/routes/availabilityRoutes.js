@@ -5,8 +5,8 @@ const { allowRoles } = require("../middlewares/roleMiddleware");
 
 const router = express.Router();
 
-router.post("/", isAuthenticated, allowRoles("teacher"), setAvailability);
 router.get("/", isAuthenticated, allowRoles("teacher", "admin", "student"), getAvailabilitys);
+router.post("/", isAuthenticated, allowRoles("teacher"), setAvailability);
 
 router.post(
     "/getAll",
