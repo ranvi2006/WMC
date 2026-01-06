@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 
+
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [theme, setTheme] = useState(
@@ -11,6 +12,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
 
   /* ================= THEME ================= */
   useEffect(() => {
@@ -48,7 +50,7 @@ const Navbar = () => {
         {/* LOGO */}
         <Link to="/" className="flex items-center gap-3">
           <img
-            src="/images/CompanyLogo.jpg"
+            src="/images/CompanyLogo.png"
             alt="We Make Coder"
             className="w-9 h-9 rounded-lg"
           />

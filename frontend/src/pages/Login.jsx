@@ -62,7 +62,7 @@ export default function Login() {
         {/* LOGO */}
         <div className="flex justify-center mb-4">
           <img
-            src="/images/logo.jpg"
+            src="/images/CompanyLogo.png"
             alt="Logo"
             className="h-12"
             onError={(e) => {

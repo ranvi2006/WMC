@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const UserNavbar = () => {
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
   const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   /* ================= STATE ================= */
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -60,7 +62,8 @@ const UserNavbar = () => {
     dispatch(logout());
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.href = "/home";
+    // window.location.href = "/home";
+    navigate("/home");
   };
 
   /* ================= NAV LINKS ================= */
@@ -79,7 +82,7 @@ const UserNavbar = () => {
         {/* LOGO */}
         <Link to="/home" className="flex items-center gap-3">
           <img
-            src="/images/CompanyLogo.jpg"
+            src="/images/CompanyLogo.png"
             alt="We Make Coder"
             className="w-9 h-9 rounded-lg"
           />

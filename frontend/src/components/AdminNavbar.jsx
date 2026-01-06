@@ -2,10 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const AdminNavbar = () => {
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   /* ================= STATE ================= */
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -44,7 +46,8 @@ const AdminNavbar = () => {
     dispatch(logout());
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.href = "/home";
+    // window.location.href = "/home";
+    navigate("/home");
   };
 
   /* ================= NAV ITEMS ================= */
