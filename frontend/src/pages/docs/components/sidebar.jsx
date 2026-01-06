@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import docs from "../data";
 
-export default function Sidebar({ onNavigate }) {
+export default function sidebar({ onNavigate }) {
   return (
     <div className="sidebar-inner">
       <h3>Documentation</h3>

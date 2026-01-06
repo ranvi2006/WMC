@@ -2,7 +2,7 @@ import { useState } from "react";
 import docs from "../data";
 import { Link } from "react-router-dom";
 
-export default function SearchBar() {
+export default function searchbar() {
   const [query, setQuery] = useState("");
 
   const results = query

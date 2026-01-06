@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
-import Sidebar from "./Sidebar";
-import SearchBar from "./SearchBar";
+import Sidebar from "./sidebar";
+import SearchBar from "./searchbar";
 import "../Documentation.css";
 
 export default function DocLayout() {
