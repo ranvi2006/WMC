@@ -33,7 +33,9 @@ export default function Register() {
       setLoading(true);
       setError("");
 
-      await api.post("/send-email", { email });
+      const res=await api.post("/send-email", { email });
+      console.log(res);
+
       setStep("otp");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to send OTP");
