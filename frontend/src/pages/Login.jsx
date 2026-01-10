@@ -41,7 +41,6 @@ export default function Login() {
     }
   };
 
-  /* ================= UI ================= */
   return (
     <div
       className="
@@ -88,7 +87,6 @@ export default function Login() {
 
         {/* FORM */}
         <form onSubmit={handleLogin} className="space-y-4">
-
           {/* IDENTIFIER */}
           <div>
             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
@@ -131,6 +129,19 @@ export default function Login() {
               "
               required
             />
+          </div>
+
+          {/* FORGOT PASSWORD */}
+          <div className="flex justify-end">
+            <Link
+              to="/forgotpassword"
+              className="
+                text-sm text-indigo-600 dark:text-indigo-400
+                hover:underline font-medium
+              "
+            >
+              Forgot password?
+            </Link>
           </div>
 
           {/* SUBMIT */}

@@ -18,12 +18,13 @@ const sendEmail = async (req, res) => {
 
     // 🔥 Save OTP in DB (expires in 10 min)
     await Otp.deleteMany({ email });
-    await Otp.create({
+    const otpData = await Otp.create({
       email,
       otp,
       expiresAt: new Date(Date.now() + 10 * 60 * 1000),
     });
-     console.log(email);
+    
+    
     const result = await resend.emails.send({
   from: "We Make Coder <no-reply@wemakecoder.com>",
   to: email,
@@ -88,22 +89,34 @@ const sendEmail = async (req, res) => {
   }
 };
 
-const verifyOtp = async (req, res) => {
+ const verifyOtp = async (req, res) => {
   const { email, otp } = req.body;
 
-  const record = await Otp.findOne({ email, otp });
+  if (!email || !otp ) {
+    return res.status(400).json({
+      message: "Email and OTP is required"
+    });
+  }
 
-  if (!record)
+  const record = await Otp.findOne({
+    email: email.trim().toLowerCase(),
+    otp: otp.toString()
+  });
+
+  if (!record) {
     return res.status(400).json({ message: "Invalid OTP" });
+  }
 
   if (record.expiresAt < new Date()) {
     await Otp.deleteOne({ _id: record._id });
     return res.status(400).json({ message: "OTP expired" });
   }
 
-  // ✅ OTP valid
-  await Otp.deleteOne({ _id: record._id });
-  res.json({ success: true });
+  res.json({
+    success: true,
+    message: "OTP verified"
+  });
 };
+
 
 module.exports = { sendEmail, verifyOtp };

@@ -3,6 +3,8 @@ const {
   getAllInterviews,
   getAllPayments,
   getAllTeachers, // 👈 ADD
+  getAllUsers,
+  updateUserRole,
 } = require("../controllers/adminController");
 
 const { isAuthenticated } = require("../middlewares/authMiddleware");
@@ -15,5 +17,7 @@ router.get("/payments", isAuthenticated, allowRoles("admin"), getAllPayments);
 
 // ✅ ADD THIS ROUTE
 router.get("/teachers", isAuthenticated, allowRoles("admin"), getAllTeachers);
+router.get("/users", isAuthenticated, allowRoles("admin"), getAllUsers);
+router.put("/users/role", isAuthenticated, allowRoles("admin"), updateUserRole);
 
 module.exports = router;

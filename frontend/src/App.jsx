@@ -29,6 +29,7 @@ import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetails";
 import ViewRoadmap from "./pages/ViewRoadmap";
 import Documentation from "./pages/docs/Documentation";
+import ForgotPassword from "./pages/ForgotPassword";
 
 /* =======================
    STUDENT PAGES
@@ -63,6 +64,7 @@ import AdminInterviews from "./pages/admin/AdminInterviews";
 import CreateSlots from "./pages/admin/CreateSlots";
 import SystemMonitoring from "./pages/admin/SystemMonitoring";
 import ErrorLogs from "./pages/admin/ErrorLogs";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 /* =======================
    PROTECTED ROUTE
@@ -104,6 +106,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:id" element={<CourseDetails />} />
         <Route path="/docs/*" element={<Documentation />} />
@@ -318,6 +321,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <AdminUsers />
+            </ProtectedRoute>
+          }
+        /> 
         
       </Routes>
     </Router>

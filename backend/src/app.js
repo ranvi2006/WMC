@@ -23,6 +23,7 @@ const logError = require("./utils/errorLogger");
 const { allowRoles } = require("./middlewares/roleMiddleware");
 const { isAuthenticated } = require("./middlewares/authMiddleware");
 const { verifyOtp,sendEmail } = require("./controllers/sendEmail");
+const { resetPassword } = require("./controllers/authController");
 
 // =======================
 // CRON JOBS (RUN ON STARTUP)
@@ -95,6 +96,7 @@ app.get("/", (req, res) => {
 // =======================
 app.post("/send-email", sendEmail);
 app.post("/verify-otp", verifyOtp);
+app.post("/reset-password", resetPassword);
 
 // =======================
 // API ROUTES
