@@ -8,22 +8,140 @@
       "content": [
         {
           "type": "text",
-          "value": "Java is a high-level, object-oriented, platform-independent programming language."
+          "value": "Java is a high-level, object-oriented, and platform-independent programming language. It is widely used to build reliable, secure, and scalable applications."
+        },
+        {
+          "type": "text",
+          "value": "Java follows the principle of 'Write Once, Run Anywhere', which means a Java program can run on any system without modification."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Why Java is Popular"
         },
         {
           "type": "list",
           "value": [
-            "JDK",
-            "JRE",
-            "JVM",
-            "Platform Independent",
-            "Bytecode",
-            "Write Once Run Anywhere (WORA)"
+            "Easy to learn and read",
+            "Platform independent",
+            "Strong object-oriented concepts",
+            "Secure and robust",
+            "Widely used in industry"
           ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "1. JDK (Java Development Kit)"
+        },
+        {
+          "type": "text",
+          "value": "JDK is a software package required to develop Java applications. It includes tools like the Java compiler (javac) and the Java runtime."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Just like a carpenter needs tools to make furniture, a developer needs JDK to write and compile Java programs."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "2. JRE (Java Runtime Environment)"
+        },
+        {
+          "type": "text",
+          "value": "JRE provides the environment required to run Java programs. It includes libraries and the JVM."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Watching a movie only needs a video player, not a video editor. Similarly, running Java programs needs JRE, not JDK."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "3. JVM (Java Virtual Machine)"
+        },
+        {
+          "type": "text",
+          "value": "JVM is the heart of Java. It converts Java bytecode into machine-specific code so the program can run on any operating system."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: JVM acts like a translator that converts one language into another so everyone can understand it."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "4. Bytecode"
+        },
+        {
+          "type": "text",
+          "value": "Bytecode is an intermediate code generated after compiling Java source code. It is not specific to any operating system."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Bytecode is like a universal document format that can be read anywhere."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "5. Platform Independent"
+        },
+        {
+          "type": "text",
+          "value": "Java programs do not depend on a specific operating system. The same program can run on Windows, Linux, or macOS."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: A PDF file opens on any device regardless of OS."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "6. Write Once, Run Anywhere (WORA)"
+        },
+        {
+          "type": "text",
+          "value": "Once a Java program is written and compiled, it can be run anywhere using JVM."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Writing one email and sending it to multiple people using different devices."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Simple Java Program Example"
+        },
+        {
+          "type": "text",
+          "value": "This is a basic Java program that prints a message to the screen."
         },
         {
           "type": "code",
           "value": "class Main {\n  public static void main(String[] args) {\n    System.out.println(\"Hello Java\");\n  }\n}"
+        },
+        {
+          "type": "text",
+          "value": "👉 Explanation: The main() method is the entry point of any Java program. The println() statement prints output to the console."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Real-Life Applications of Java"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Banking applications (ATM, transactions)",
+            "Android mobile apps",
+            "Web applications (Spring, Hibernate)",
+            "Enterprise software",
+            "E-commerce platforms"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "In summary, Java is a powerful and versatile programming language used to build applications that are secure, scalable, and platform independent."
         }
       ]
     },
@@ -32,19 +150,214 @@
       "title": "Data Types & Variables",
       "content": [
         {
+          "type": "text",
+          "value": "Data types define what kind of data a variable can store. Variables are containers used to store values in memory."
+        },
+        {
+          "type": "text",
+          "value": "In Java, data types are mainly divided into two categories: Primitive and Non-Primitive."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Primitive Data Types"
+        },
+        {
+          "type": "text",
+          "value": "Primitive data types store simple values directly in memory."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "1. byte"
+        },
+        {
+          "type": "text",
+          "value": "Stores very small integer values."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Age of a newborn baby."
+        },
+        {
+          "type": "code",
+          "value": "byte age = 10;\nSystem.out.println(age);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "2. short"
+        },
+        {
+          "type": "text",
+          "value": "Stores small integer values larger than byte."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Student marks."
+        },
+        {
+          "type": "code",
+          "value": "short marks = 320;\nSystem.out.println(marks);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "3. int"
+        },
+        {
+          "type": "text",
+          "value": "Stores whole numbers and is the most commonly used integer type."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Number of employees in a company."
+        },
+        {
+          "type": "code",
+          "value": "int employees = 1500;\nSystem.out.println(employees);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "4. long"
+        },
+        {
+          "type": "text",
+          "value": "Stores very large whole numbers."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Population of a country."
+        },
+        {
+          "type": "code",
+          "value": "long population = 1400000000L;\nSystem.out.println(population);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "5. float"
+        },
+        {
+          "type": "text",
+          "value": "Stores decimal values with single precision."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Product weight."
+        },
+        {
+          "type": "code",
+          "value": "float weight = 65.5f;\nSystem.out.println(weight);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "6. double"
+        },
+        {
+          "type": "text",
+          "value": "Stores decimal values with high precision."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Bank account balance."
+        },
+        {
+          "type": "code",
+          "value": "double balance = 25345.75;\nSystem.out.println(balance);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "7. char"
+        },
+        {
+          "type": "text",
+          "value": "Stores a single character."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Grade of a student."
+        },
+        {
+          "type": "code",
+          "value": "char grade = 'A';\nSystem.out.println(grade);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "8. boolean"
+        },
+        {
+          "type": "text",
+          "value": "Stores true or false values."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Account active or not."
+        },
+        {
+          "type": "code",
+          "value": "boolean isActive = true;\nSystem.out.println(isActive);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Non-Primitive Data Type"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "9. String"
+        },
+        {
+          "type": "text",
+          "value": "String stores a sequence of characters and is used to represent text."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Customer name."
+        },
+        {
+          "type": "code",
+          "value": "String name = \"Ritik\";\nSystem.out.println(name);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "10. final Keyword"
+        },
+        {
+          "type": "text",
+          "value": "The final keyword is used to make a variable constant, meaning its value cannot be changed."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Fixed interest rate."
+        },
+        {
+          "type": "code",
+          "value": "final double PI = 3.14;\nSystem.out.println(PI);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Summary"
+        },
+        {
           "type": "list",
           "value": [
-            "byte",
-            "short",
-            "int",
-            "long",
-            "float",
-            "double",
-            "char",
-            "boolean",
-            "String",
-            "final keyword"
+            "Primitive types store simple values",
+            "Non-primitive types store complex data",
+            "Variables hold data in memory",
+            "final keyword makes values constant"
           ]
+        },
+        {
+          "type": "text",
+          "value": "Understanding data types and variables is essential for writing efficient and error-free Java programs."
         }
       ]
     },
@@ -53,16 +366,152 @@
       "title": "Operators",
       "content": [
         {
+          "type": "text",
+          "value": "Operators are symbols used to perform operations on variables and values. They help in calculations, comparisons, and decision making in programs."
+        },
+        {
+          "type": "text",
+          "value": "In Java, operators are classified into different types based on the operations they perform."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "1. Arithmetic Operators"
+        },
+        {
+          "type": "text",
+          "value": "Arithmetic operators are used to perform mathematical calculations."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Calculating total bill amount."
+        },
+        {
+          "type": "code",
+          "value": "int a = 10;\nint b = 5;\n\nSystem.out.println(a + b);  // Addition\nSystem.out.println(a - b);  // Subtraction\nSystem.out.println(a * b);  // Multiplication\nSystem.out.println(a / b);  // Division\nSystem.out.println(a % b);  // Modulus"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "2. Relational Operators"
+        },
+        {
+          "type": "text",
+          "value": "Relational operators compare two values and return true or false."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Checking eligibility based on age."
+        },
+        {
+          "type": "code",
+          "value": "int age = 18;\n\nSystem.out.println(age > 17);  // true\nSystem.out.println(age < 18);  // false\nSystem.out.println(age == 18); // true\nSystem.out.println(age != 20); // true"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "3. Logical Operators"
+        },
+        {
+          "type": "text",
+          "value": "Logical operators are used to combine multiple conditions."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Login system checking username and password."
+        },
+        {
+          "type": "code",
+          "value": "boolean hasUsername = true;\nboolean hasPassword = false;\n\nSystem.out.println(hasUsername && hasPassword); // AND\nSystem.out.println(hasUsername || hasPassword); // OR\nSystem.out.println(!hasPassword);               // NOT"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "4. Assignment Operators"
+        },
+        {
+          "type": "text",
+          "value": "Assignment operators assign values to variables."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Updating account balance."
+        },
+        {
+          "type": "code",
+          "value": "int balance = 1000;\nbalance += 500;  // balance = balance + 500\nbalance -= 200;  // balance = balance - 200\n\nSystem.out.println(balance);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "5. Unary Operators"
+        },
+        {
+          "type": "text",
+          "value": "Unary operators work with a single operand."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Increasing score by one."
+        },
+        {
+          "type": "code",
+          "value": "int score = 10;\n\nSystem.out.println(++score); // Pre-increment\nSystem.out.println(--score); // Pre-decrement"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "6. Bitwise Operators"
+        },
+        {
+          "type": "text",
+          "value": "Bitwise operators perform operations on bits (0s and 1s)."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Low-level hardware operations."
+        },
+        {
+          "type": "code",
+          "value": "int x = 5;   // 0101\nint y = 3;   // 0011\n\nSystem.out.println(x & y); // AND\nSystem.out.println(x | y); // OR\nSystem.out.println(x ^ y); // XOR"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "7. Ternary Operator"
+        },
+        {
+          "type": "text",
+          "value": "The ternary operator is a short form of if-else."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Pass or fail result."
+        },
+        {
+          "type": "code",
+          "value": "int marks = 60;\nString result = (marks >= 40) ? \"Pass\" : \"Fail\";\nSystem.out.println(result);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Summary"
+        },
+        {
           "type": "list",
           "value": [
-            "Arithmetic Operators",
-            "Relational Operators",
-            "Logical Operators",
-            "Assignment Operators",
-            "Unary Operators",
-            "Bitwise Operators",
-            "Ternary Operator"
+            "Arithmetic → Calculations",
+            "Relational → Comparisons",
+            "Logical → Combine conditions",
+            "Assignment → Update values",
+            "Unary → Single operand",
+            "Bitwise → Bit-level operations",
+            "Ternary → Short if-else"
           ]
+        },
+        {
+          "type": "text",
+          "value": "Operators are fundamental building blocks of Java programs and are used in almost every real-world application."
         }
       ]
     },
@@ -71,18 +520,185 @@
       "title": "Control Statements",
       "content": [
         {
+          "type": "text",
+          "value": "Control statements are used to control the flow of execution in a Java program. They decide which code will run, how many times it will run, and when to stop."
+        },
+        {
+          "type": "text",
+          "value": "In real life, control statements are like decision-making and repetition in daily activities."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "1. if Statement"
+        },
+        {
+          "type": "text",
+          "value": "The if statement executes a block of code only when a condition is true."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: If it is raining, take an umbrella."
+        },
+        {
+          "type": "code",
+          "value": "int age = 18;\n\nif (age >= 18) {\n  System.out.println(\"Eligible to vote\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "2. if-else Statement"
+        },
+        {
+          "type": "text",
+          "value": "The if-else statement executes one block when the condition is true and another block when it is false."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: If marks are above 40, pass; otherwise, fail."
+        },
+        {
+          "type": "code",
+          "value": "int marks = 35;\n\nif (marks >= 40) {\n  System.out.println(\"Pass\");\n} else {\n  System.out.println(\"Fail\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "3. switch Statement"
+        },
+        {
+          "type": "text",
+          "value": "The switch statement selects execution paths based on the value of a variable."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Selecting a menu option in a restaurant."
+        },
+        {
+          "type": "code",
+          "value": "int day = 3;\n\nswitch (day) {\n  case 1:\n    System.out.println(\"Monday\");\n    break;\n  case 2:\n    System.out.println(\"Tuesday\");\n    break;\n  case 3:\n    System.out.println(\"Wednesday\");\n    break;\n  default:\n    System.out.println(\"Invalid day\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "4. for Loop"
+        },
+        {
+          "type": "text",
+          "value": "The for loop is used when the number of iterations is known in advance."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Printing attendance numbers from 1 to 5."
+        },
+        {
+          "type": "code",
+          "value": "for (int i = 1; i <= 5; i++) {\n  System.out.println(i);\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "5. while Loop"
+        },
+        {
+          "type": "text",
+          "value": "The while loop runs as long as a condition is true."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Keep studying until the exam starts."
+        },
+        {
+          "type": "code",
+          "value": "int i = 1;\n\nwhile (i <= 3) {\n  System.out.println(i);\n  i++;\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "6. do-while Loop"
+        },
+        {
+          "type": "text",
+          "value": "The do-while loop executes the code at least once, even if the condition is false."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Trying a password at least once."
+        },
+        {
+          "type": "code",
+          "value": "int i = 5;\n\ndo {\n  System.out.println(i);\n  i++;\n} while (i < 3);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "7. break Statement"
+        },
+        {
+          "type": "text",
+          "value": "The break statement is used to exit a loop or switch statement immediately."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Stop searching once the item is found."
+        },
+        {
+          "type": "code",
+          "value": "for (int i = 1; i <= 5; i++) {\n  if (i == 3) {\n    break;\n  }\n  System.out.println(i);\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "8. continue Statement"
+        },
+        {
+          "type": "text",
+          "value": "The continue statement skips the current iteration and moves to the next one."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Skipping a holiday while counting working days."
+        },
+        {
+          "type": "code",
+          "value": "for (int i = 1; i <= 5; i++) {\n  if (i == 3) {\n    continue;\n  }\n  System.out.println(i);\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "9. return Statement"
+        },
+        {
+          "type": "text",
+          "value": "The return statement sends a value back from a method and stops its execution."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Returning the result after calculation."
+        },
+        {
+          "type": "code",
+          "value": "static int add(int a, int b) {\n  return a + b;\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Summary"
+        },
+        {
           "type": "list",
           "value": [
-            "if",
-            "if-else",
-            "switch",
-            "for loop",
-            "while loop",
-            "do-while loop",
-            "break",
-            "continue",
-            "return"
+            "if / if-else → Decision making",
+            "switch → Multiple choices",
+            "for / while / do-while → Repetition",
+            "break → Stop execution",
+            "continue → Skip iteration",
+            "return → Send result back"
           ]
+        },
+        {
+          "type": "text",
+          "value": "Control statements are essential for building real-world logic such as validations, workflows, and automation in Java applications."
         }
       ]
     },
@@ -91,18 +707,107 @@
       "title": "Object-Oriented Programming (OOP)",
       "content": [
         {
-          "type": "list",
-          "value": [
-            "Class",
-            "Object",
-            "Encapsulation",
-            "Inheritance",
-            "Polymorphism",
-            "Abstraction",
-            "Constructor",
-            "this keyword",
-            "super keyword"
-          ]
+          "type": "section",
+          "title": "Class",
+          "description": "A class is a blueprint or template used to create objects. It defines what properties (data) and behaviors (methods) an object will have. A class itself does not occupy memory until an object is created.",
+          "details": [
+            "Acts as a template for objects",
+            "Contains variables (properties) and functions (methods)",
+            "Helps organize large codebases",
+            "Improves reusability and readability"
+          ],
+          "code": "class Student {\n  constructor(name, age) {\n    this.name = name;\n    this.age = age;\n  }\n\n  greet() {\n    return `Hello, my name is ${this.name}`;\n  }\n}"
+        },
+        {
+          "type": "section",
+          "title": "Object",
+          "description": "An object is a real-world instance of a class. It represents actual data created using the class blueprint and occupies memory.",
+          "details": [
+            "Created using the 'new' keyword",
+            "Each object has its own copy of data",
+            "Multiple objects can be created from one class"
+          ],
+          "code": "const student1 = new Student(\"Ritik\", 21);\nconst student2 = new Student(\"Amit\", 22);\n\nconsole.log(student1.greet());\nconsole.log(student2.greet());"
+        },
+        {
+          "type": "section",
+          "title": "Encapsulation",
+          "description": "Encapsulation means binding data and methods together and hiding internal implementation details from outside access. It protects data from unauthorized modification.",
+          "details": [
+            "Achieved using private variables",
+            "Improves security",
+            "Prevents accidental data changes",
+            "Follows 'data hiding' principle"
+          ],
+          "code": "class BankAccount {\n  #balance = 0; // private variable\n\n  deposit(amount) {\n    if (amount > 0) {\n      this.#balance += amount;\n    }\n  }\n\n  getBalance() {\n    return this.#balance;\n  }\n}\n\nconst acc = new BankAccount();\nacc.deposit(5000);\nconsole.log(acc.getBalance());"
+        },
+        {
+          "type": "section",
+          "title": "Inheritance",
+          "description": "Inheritance allows a child class to reuse properties and methods of a parent class. It avoids code duplication and follows a hierarchical relationship.",
+          "details": [
+            "Uses 'extends' keyword",
+            "Supports code reusability",
+            "Represents IS-A relationship",
+            "Parent class is also called superclass"
+          ],
+          "code": "class Person {\n  constructor(name) {\n    this.name = name;\n  }\n}\n\nclass Employee extends Person {\n  constructor(name, role) {\n    super(name);\n    this.role = role;\n  }\n}\n\nconst emp = new Employee(\"Amit\", \"Developer\");\nconsole.log(emp.name, emp.role);"
+        },
+        {
+          "type": "section",
+          "title": "Polymorphism",
+          "description": "Polymorphism means 'many forms'. It allows a child class to provide a different implementation of a method already defined in the parent class.",
+          "details": [
+            "Method overriding is a common example",
+            "Same method name, different behavior",
+            "Improves flexibility and scalability"
+          ],
+          "code": "class Animal {\n  sound() {\n    console.log(\"Animal makes a sound\");\n  }\n}\n\nclass Dog extends Animal {\n  sound() {\n    console.log(\"Dog barks\");\n  }\n}\n\nconst animal = new Animal();\nconst dog = new Dog();\n\nanimal.sound();\ndog.sound();"
+        },
+        {
+          "type": "section",
+          "title": "Abstraction",
+          "description": "Abstraction focuses on showing only essential features and hiding internal logic. It helps reduce complexity and increases maintainability.",
+          "details": [
+            "Hides implementation details",
+            "Shows only required functionality",
+            "Achieved using abstract-like methods",
+            "Improves code clarity"
+          ],
+          "code": "class Vehicle {\n  start() {\n    throw new Error(\"Method must be implemented\");\n  }\n}\n\nclass Car extends Vehicle {\n  start() {\n    console.log(\"Car started\");\n  }\n}\n\nconst car = new Car();\ncar.start();"
+        },
+        {
+          "type": "section",
+          "title": "Constructor",
+          "description": "A constructor is a special method that initializes an object when it is created. It runs automatically and sets initial values.",
+          "details": [
+            "Executed automatically on object creation",
+            "Used to initialize variables",
+            "Only one constructor per class in JavaScript"
+          ],
+          "code": "class User {\n  constructor(username) {\n    this.username = username;\n  }\n}\n\nconst user1 = new User(\"admin\");\nconsole.log(user1.username);"
+        },
+        {
+          "type": "section",
+          "title": "this keyword",
+          "description": "The 'this' keyword refers to the current object that is calling the method. It helps access object-specific data.",
+          "details": [
+            "Refers to current instance",
+            "Avoids variable confusion",
+            "Context-dependent keyword"
+          ],
+          "code": "class Laptop {\n  constructor(brand) {\n    this.brand = brand;\n  }\n\n  showBrand() {\n    console.log(this.brand);\n  }\n}\n\nconst lap = new Laptop(\"HP\");\nlap.showBrand();"
+        },
+        {
+          "type": "section",
+          "title": "super keyword",
+          "description": "The 'super' keyword is used to call the parent class constructor or methods. It ensures proper initialization of inherited properties.",
+          "details": [
+            "Used inside child class",
+            "Calls parent constructor",
+            "Avoids code duplication"
+          ],
+          "code": "class Shape {\n  constructor(color) {\n    this.color = color;\n  }\n}\n\nclass Circle extends Shape {\n  constructor(color, radius) {\n    super(color);\n    this.radius = radius;\n  }\n}\n\nconst c = new Circle(\"Red\", 10);\nconsole.log(c.color, c.radius);"
         }
       ]
     },
@@ -111,15 +816,147 @@
       "title": "Methods",
       "content": [
         {
+          "type": "text",
+          "value": "Methods are blocks of code that perform a specific task. They help reduce code duplication, improve readability, and make programs reusable."
+        },
+        {
+          "type": "text",
+          "value": "In real life, methods are like tasks we perform repeatedly, such as calculating a bill or logging into an account."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "1. Method Declaration"
+        },
+        {
+          "type": "text",
+          "value": "A method declaration defines the method name, return type, and parameters."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: A calculator function that adds two numbers."
+        },
+        {
+          "type": "code",
+          "value": "static void greet() {\n  System.out.println(\"Hello, Welcome to Java!\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "2. Return Types"
+        },
+        {
+          "type": "text",
+          "value": "The return type specifies what value a method sends back after execution."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Returning total bill amount after calculation."
+        },
+        {
+          "type": "code",
+          "value": "static int add(int a, int b) {\n  return a + b;\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "3. Parameters"
+        },
+        {
+          "type": "text",
+          "value": "Parameters are values passed to methods to perform operations."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Passing marks to calculate result."
+        },
+        {
+          "type": "code",
+          "value": "static void printResult(int marks) {\n  System.out.println(\"Marks: \" + marks);\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "4. Static Methods"
+        },
+        {
+          "type": "text",
+          "value": "Static methods belong to the class and can be called without creating an object."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Utility functions like math calculations."
+        },
+        {
+          "type": "code",
+          "value": "class Test {\n  static void show() {\n    System.out.println(\"Static method called\");\n  }\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "5. Method Overloading"
+        },
+        {
+          "type": "text",
+          "value": "Method overloading allows multiple methods with the same name but different parameters."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: A calculator that adds two or three numbers."
+        },
+        {
+          "type": "code",
+          "value": "static int add(int a, int b) {\n  return a + b;\n}\n\nstatic int add(int a, int b, int c) {\n  return a + b + c;\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "6. Method Overriding"
+        },
+        {
+          "type": "text",
+          "value": "Method overriding occurs when a child class provides a specific implementation of a method already defined in its parent class."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Different vehicles have different speed limits."
+        },
+        {
+          "type": "code",
+          "value": "class Parent {\n  void show() {\n    System.out.println(\"Parent method\");\n  }\n}\n\nclass Child extends Parent {\n  void show() {\n    System.out.println(\"Child method\");\n  }\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Method Overloading vs Overriding"
+        },
+        {
           "type": "list",
           "value": [
-            "Method Declaration",
-            "Method Overloading",
-            "Method Overriding",
-            "Static Methods",
-            "Return Types",
-            "Parameters"
+            "Overloading → Same class, different parameters",
+            "Overriding → Parent-child classes",
+            "Overloading → Compile-time polymorphism",
+            "Overriding → Runtime polymorphism"
           ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Summary"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Methods improve code reusability",
+            "Parameters pass data to methods",
+            "Return type sends result back",
+            "Static methods belong to class",
+            "Overloading and overriding enable polymorphism"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Methods are the backbone of Java programming and are heavily used in real-world applications such as banking, web development, and enterprise systems."
         }
       ]
     },
@@ -128,15 +965,70 @@
       "title": "Arrays & Strings",
       "content": [
         {
-          "type": "list",
-          "value": [
-            "Single Dimensional Array",
-            "Multi Dimensional Array",
-            "String",
-            "StringBuilder",
-            "StringBuffer",
-            "Immutable Strings"
-          ]
+          "type": "section",
+          "title": "Single Dimensional Array",
+          "description": "A single dimensional array is a linear collection of elements of the same data type stored in contiguous memory locations. Each element is accessed using an index, starting from 0.",
+          "details": [
+            "All elements must be of the same data type",
+            "Array size is fixed once created",
+            "Index starts from 0 and ends at length-1"
+          ],
+          "code": "int[] marks = new int[5];\nmarks[0] = 80;\nmarks[1] = 75;\nmarks[2] = 90;\nmarks[3] = 85;\nmarks[4] = 88;\n\nfor(int i = 0; i < marks.length; i++) {\n  System.out.println(marks[i]);\n}"
+        },
+        {
+          "type": "section",
+          "title": "Multi Dimensional Array",
+          "description": "A multi dimensional array is an array of arrays. The most common example is a 2D array, which represents data in rows and columns like a matrix.",
+          "details": [
+            "Used to represent tables or matrices",
+            "Accessed using row and column indexes",
+            "Memory is allocated in row-wise manner"
+          ],
+          "code": "int[][] matrix = {\n  {1, 2, 3},\n  {4, 5, 6},\n  {7, 8, 9}\n};\n\nfor(int i = 0; i < matrix.length; i++) {\n  for(int j = 0; j < matrix[i].length; j++) {\n    System.out.print(matrix[i][j] + \" \");\n  }\n  System.out.println();\n}"
+        },
+        {
+          "type": "section",
+          "title": "String",
+          "description": "A String is a sequence of characters. In Java, String is an object and is immutable, meaning once created, it cannot be changed.",
+          "details": [
+            "Stored in String Constant Pool",
+            "Any modification creates a new object",
+            "Provides many built-in methods like length(), charAt(), substring()"
+          ],
+          "code": "String name = \"Ritik\";\nSystem.out.println(name.length());\nSystem.out.println(name.charAt(0));\nSystem.out.println(name.substring(0, 3));"
+        },
+        {
+          "type": "section",
+          "title": "Immutable Strings",
+          "description": "Immutable means unchangeable. In Java, String objects are immutable, so modifying a string creates a new object instead of changing the existing one.",
+          "details": [
+            "Improves security",
+            "Thread-safe by default",
+            "Used efficiently with String Pool"
+          ],
+          "code": "String s1 = \"Hello\";\nString s2 = s1.concat(\" World\");\n\nSystem.out.println(s1); // Hello\nSystem.out.println(s2); // Hello World"
+        },
+        {
+          "type": "section",
+          "title": "StringBuilder",
+          "description": "StringBuilder is a mutable sequence of characters. It allows modification without creating new objects and is faster than StringBuffer.",
+          "details": [
+            "Mutable (can be changed)",
+            "Not thread-safe",
+            "Better performance in single-threaded environment"
+          ],
+          "code": "StringBuilder sb = new StringBuilder(\"Hello\");\nsb.append(\" World\");\nsb.insert(5, \",\");\nSystem.out.println(sb);"
+        },
+        {
+          "type": "section",
+          "title": "StringBuffer",
+          "description": "StringBuffer is similar to StringBuilder but is thread-safe. It is used in multi-threaded environments.",
+          "details": [
+            "Mutable",
+            "Thread-safe (synchronized)",
+            "Slower than StringBuilder due to synchronization"
+          ],
+          "code": "StringBuffer sbf = new StringBuffer(\"Hello\");\nsbf.append(\" World\");\nSystem.out.println(sbf);"
         }
       ]
     },
@@ -145,17 +1037,192 @@
       "title": "Exception Handling",
       "content": [
         {
+          "type": "text",
+          "value": "Exception handling in Java is a mechanism to handle runtime errors so that the normal flow of the program does not break."
+        },
+        {
+          "type": "text",
+          "value": "In real life, exceptions are unexpected situations. For example, an ATM runs out of cash or the internet connection fails."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Why Exception Handling is Important"
+        },
+        {
           "type": "list",
           "value": [
-            "try",
-            "catch",
-            "finally",
-            "throw",
-            "throws",
-            "Checked Exceptions",
-            "Unchecked Exceptions",
-            "Custom Exceptions"
+            "Prevents program crashes",
+            "Handles unexpected errors gracefully",
+            "Improves user experience",
+            "Makes applications reliable and secure"
           ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "1. try Block"
+        },
+        {
+          "type": "text",
+          "value": "The try block contains code that may cause an exception."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Trying to withdraw money from an ATM."
+        },
+        {
+          "type": "code",
+          "value": "try {\n  int a = 10 / 0;\n} catch (Exception e) {\n  System.out.println(\"Error occurred\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "2. catch Block"
+        },
+        {
+          "type": "text",
+          "value": "The catch block handles the exception thrown in the try block."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Showing an error message when ATM cash is unavailable."
+        },
+        {
+          "type": "code",
+          "value": "try {\n  int[] arr = {1, 2, 3};\n  System.out.println(arr[5]);\n} catch (ArrayIndexOutOfBoundsException e) {\n  System.out.println(\"Index out of range\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "3. finally Block"
+        },
+        {
+          "type": "text",
+          "value": "The finally block always executes, whether an exception occurs or not."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Closing the ATM session after transaction."
+        },
+        {
+          "type": "code",
+          "value": "try {\n  int x = 10 / 2;\n} catch (Exception e) {\n  System.out.println(\"Error\");\n} finally {\n  System.out.println(\"Operation completed\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "4. throw Keyword"
+        },
+        {
+          "type": "text",
+          "value": "The throw keyword is used to manually throw an exception."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Bank rejecting withdrawal due to insufficient balance."
+        },
+        {
+          "type": "code",
+          "value": "int balance = 500;\n\nif (balance < 1000) {\n  throw new ArithmeticException(\"Insufficient balance\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "5. throws Keyword"
+        },
+        {
+          "type": "text",
+          "value": "The throws keyword is used to declare exceptions that a method may pass to the calling method."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Passing responsibility to higher authority."
+        },
+        {
+          "type": "code",
+          "value": "static void readFile() throws Exception {\n  throw new Exception(\"File not found\");\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "6. Checked Exceptions"
+        },
+        {
+          "type": "text",
+          "value": "Checked exceptions are checked at compile time and must be handled."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Missing required documents."
+        },
+        {
+          "type": "list",
+          "value": [
+            "IOException",
+            "SQLException",
+            "FileNotFoundException"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "7. Unchecked Exceptions"
+        },
+        {
+          "type": "text",
+          "value": "Unchecked exceptions occur at runtime and are not checked by the compiler."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Dividing by zero accidentally."
+        },
+        {
+          "type": "list",
+          "value": [
+            "NullPointerException",
+            "ArithmeticException",
+            "ArrayIndexOutOfBoundsException"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "8. Custom Exceptions"
+        },
+        {
+          "type": "text",
+          "value": "Custom exceptions are user-defined exceptions created to handle specific business logic errors."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Age validation in an online exam system."
+        },
+        {
+          "type": "code",
+          "value": "class AgeException extends Exception {\n  AgeException(String msg) {\n    super(msg);\n  }\n}\n\nclass Test {\n  static void checkAge(int age) throws AgeException {\n    if (age < 18) {\n      throw new AgeException(\"Not eligible\");\n    }\n  }\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Summary"
+        },
+        {
+          "type": "list",
+          "value": [
+            "try → Code that may cause error",
+            "catch → Handle the error",
+            "finally → Always executed",
+            "throw → Manually throw exception",
+            "throws → Declare exception",
+            "Checked → Compile-time",
+            "Unchecked → Runtime",
+            "Custom → Business logic errors"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Exception handling is essential for building real-world Java applications that are stable, secure, and user-friendly."
         }
       ]
     },
@@ -164,19 +1231,180 @@
       "title": "Collections Framework",
       "content": [
         {
+          "type": "text",
+          "value": "The Java Collections Framework is a set of classes and interfaces used to store, manage, and manipulate groups of objects efficiently."
+        },
+        {
+          "type": "text",
+          "value": "In real life, collections are like containers used to store items such as a list of students, a set of unique IDs, or a map of phone contacts."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Why Collections Are Needed"
+        },
+        {
           "type": "list",
           "value": [
-            "List",
-            "ArrayList",
-            "LinkedList",
-            "Set",
-            "HashSet",
-            "TreeSet",
-            "Map",
-            "HashMap",
-            "TreeMap",
-            "Iterator"
+            "Dynamic size (unlike arrays)",
+            "Built-in methods for data manipulation",
+            "Efficient searching and sorting",
+            "Real-world data handling"
           ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "1. List Interface"
+        },
+        {
+          "type": "text",
+          "value": "List stores ordered data and allows duplicate values."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: A list of student names in a class."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "ArrayList"
+        },
+        {
+          "type": "text",
+          "value": "ArrayList uses a dynamic array to store elements. It is fast for searching."
+        },
+        {
+          "type": "code",
+          "value": "import java.util.*;\n\nArrayList<String> students = new ArrayList<>();\nstudents.add(\"Aman\");\nstudents.add(\"Ritik\");\nstudents.add(\"Neha\");\nSystem.out.println(students);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "LinkedList"
+        },
+        {
+          "type": "text",
+          "value": "LinkedList stores elements using nodes. It is fast for insertion and deletion."
+        },
+        {
+          "type": "code",
+          "value": "LinkedList<Integer> numbers = new LinkedList<>();\nnumbers.add(10);\nnumbers.add(20);\nnumbers.addFirst(5);\nSystem.out.println(numbers);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "2. Set Interface"
+        },
+        {
+          "type": "text",
+          "value": "Set stores unique elements and does not allow duplicates."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Unique roll numbers of students."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "HashSet"
+        },
+        {
+          "type": "text",
+          "value": "HashSet stores elements randomly and ensures uniqueness."
+        },
+        {
+          "type": "code",
+          "value": "HashSet<String> cities = new HashSet<>();\ncities.add(\"Delhi\");\ncities.add(\"Mumbai\");\ncities.add(\"Delhi\");\nSystem.out.println(cities);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "TreeSet"
+        },
+        {
+          "type": "text",
+          "value": "TreeSet stores elements in sorted order."
+        },
+        {
+          "type": "code",
+          "value": "TreeSet<Integer> scores = new TreeSet<>();\nscores.add(50);\nscores.add(20);\nscores.add(80);\nSystem.out.println(scores);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "3. Map Interface"
+        },
+        {
+          "type": "text",
+          "value": "Map stores data in key-value pairs."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Phone contacts (name → number)."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "HashMap"
+        },
+        {
+          "type": "text",
+          "value": "HashMap stores data without maintaining order."
+        },
+        {
+          "type": "code",
+          "value": "HashMap<Integer, String> employees = new HashMap<>();\nemployees.put(101, \"Ritik\");\nemployees.put(102, \"Aman\");\nSystem.out.println(employees);"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "value": "TreeMap"
+        },
+        {
+          "type": "text",
+          "value": "TreeMap stores data in sorted order based on keys."
+        },
+        {
+          "type": "code",
+          "value": "TreeMap<Integer, String> data = new TreeMap<>();\ndata.put(3, \"C\");\ndata.put(1, \"A\");\ndata.put(2, \"B\");\nSystem.out.println(data);"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "4. Iterator"
+        },
+        {
+          "type": "text",
+          "value": "Iterator is used to traverse elements in a collection."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Reading items one by one from a list."
+        },
+        {
+          "type": "code",
+          "value": "ArrayList<String> names = new ArrayList<>();\nnames.add(\"A\");\nnames.add(\"B\");\n\nIterator<String> it = names.iterator();\nwhile (it.hasNext()) {\n  System.out.println(it.next());\n}"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "When to Use Which Collection"
+        },
+        {
+          "type": "list",
+          "value": [
+            "ArrayList → Fast access",
+            "LinkedList → Frequent insert/delete",
+            "HashSet → Unique elements",
+            "TreeSet → Sorted unique data",
+            "HashMap → Fast key-value access",
+            "TreeMap → Sorted key-value data"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "The Collections Framework is heavily used in real-world Java applications such as banking systems, e-commerce platforms, and enterprise software."
         }
       ]
     },

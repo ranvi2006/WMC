@@ -8,284 +8,2311 @@
       "content": [
         {
           "type": "text",
-          "value": "Data Science is an interdisciplinary field that uses scientific methods, statistics, algorithms, and systems to extract knowledge and insights from structured and unstructured data."
+          "value": "Data Science is a field that focuses on extracting meaningful insights and predictions from data using statistics, programming, and machine learning techniques."
+        },
+        {
+          "type": "text",
+          "value": "Unlike data analysis, which mainly looks at past data, data science also focuses on predicting future outcomes and building intelligent systems."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "What Does Data Science Combine?"
         },
         {
           "type": "list",
           "value": [
-            "Combines statistics, computer science, and domain knowledge",
-            "Used for decision making and prediction",
-            "Drives AI and machine learning systems"
+            "Statistics - to understand data patterns and uncertainty",
+            "Computer Science - to process large and complex data",
+            "Domain Knowledge - to solve real business problems",
+            "Machine Learning - to build predictive models"
           ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Why is Data Science Important?"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Helps businesses make data-driven decisions",
+            "Predicts future trends and customer behavior",
+            "Automates decision-making processes",
+            "Improves efficiency and accuracy",
+            "Drives AI-based products and services"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Real-Life Examples of Data Science"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Netflix recommends movies based on user behavior",
+            "Amazon predicts what products you may buy next",
+            "Banks detect fraud using transaction patterns",
+            "Healthcare systems predict disease risks",
+            "Ride-sharing apps estimate arrival times and pricing"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Data Science vs Data Analysis"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Data Analysis focuses on past and present data",
+            "Data Science focuses on prediction and automation",
+            "Data Analysis answers: What happened?",
+            "Data Science answers: What will happen next?"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Typical Data Science Workflow"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Understand the problem",
+            "Collect and clean data",
+            "Explore and analyze data",
+            "Build machine learning models",
+            "Evaluate and improve models",
+            "Deploy models into real systems"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Simple Example (Prediction)"
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: A company wants to predict whether a customer will leave (churn) or stay."
+        },
+        {
+          "type": "code",
+          "value": "from sklearn.linear_model import LogisticRegression\n\n# Example features\nX = [[2, 3000], [5, 8000], [1, 1500]]  # years, spending\ny = [0, 1, 0]  # churn (0 = no, 1 = yes)\n\nmodel = LogisticRegression()\nmodel.fit(X, y)\n\nprediction = model.predict([[3, 5000]])\nprint('Churn Prediction:', prediction)"
+        },
+        {
+          "type": "text",
+          "value": "👉 Interpretation: The model predicts whether a new customer is likely to churn based on past data."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "Careers in Data Science"
+        },
+        {
+          "type": "list",
+          "value": [
+            "Data Scientist",
+            "Machine Learning Engineer",
+            "AI Engineer",
+            "Research Scientist",
+            "Applied Scientist"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "In summary, data science goes beyond analysis. It focuses on building intelligent systems that learn from data and help businesses predict outcomes and automate decisions."
         }
       ]
     },
-
     {
       "id": "lifecycle",
       "title": "Data Science Lifecycle",
       "content": [
         {
-          "type": "list",
-          "value": [
-            "Business Understanding",
-            "Data Collection",
-            "Data Cleaning",
-            "Exploratory Data Analysis (EDA)",
-            "Feature Engineering",
-            "Model Building",
-            "Evaluation",
-            "Deployment",
-            "Monitoring & Maintenance"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "math",
-      "title": "Mathematics for Data Science",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Linear Algebra (vectors, matrices, eigenvalues)",
-            "Probability (random variables, distributions)",
-            "Statistics (mean, median, variance, hypothesis testing)",
-            "Calculus (derivatives, gradients for optimization)"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "python",
-      "title": "Python for Data Science",
-      "content": [
+          "type": "text",
+          "value": "The Data Science Lifecycle is a structured process that data scientists follow to solve real-world problems using data. It helps convert a business problem into a data-driven solution."
+        },
         {
           "type": "text",
-          "value": "Python is the most widely used programming language in data science due to its simplicity and rich ecosystem."
+          "value": "Unlike simple data analysis, the data science lifecycle focuses on prediction, automation, and continuous improvement of models."
         },
         {
-          "type": "list",
-          "value": [
-            "NumPy – numerical computing",
-            "Pandas – data manipulation",
-            "Matplotlib & Seaborn – data visualization",
-            "Scikit-learn – machine learning"
-          ]
+          "type": "heading",
+          "level": 2,
+          "value": "1. Business Understanding"
         },
-        {
-          "type": "code",
-          "value": "import pandas as pd\n\ndf = pd.read_csv('data.csv')\nprint(df.head())"
-        }
-      ]
-    },
-
-    {
-      "id": "data-cleaning",
-      "title": "Data Cleaning & Preprocessing",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Handling missing values",
-            "Removing duplicates",
-            "Outlier detection",
-            "Data normalization and scaling",
-            "Encoding categorical variables"
-          ]
-        },
-        {
-          "type": "code",
-          "value": "df.fillna(df.mean(), inplace=True)"
-        }
-      ]
-    },
-
-    {
-      "id": "eda",
-      "title": "Exploratory Data Analysis (EDA)",
-      "content": [
         {
           "type": "text",
-          "value": "EDA is used to understand data patterns, trends, and anomalies before modeling."
+          "value": "This is the most important step. The goal is to clearly understand the business problem and define success criteria."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: A telecom company wants to reduce customer churn."
         },
         {
           "type": "list",
           "value": [
-            "Univariate analysis",
-            "Bivariate analysis",
+            "What is the business goal?",
+            "What problem are we solving?",
+            "How will success be measured?"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "2. Data Collection"
+        },
+        {
+          "type": "text",
+          "value": "In this step, relevant data is collected from different sources such as databases, files, APIs, or logs."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Collect customer usage data, billing data, and support tickets."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Databases (SQL, NoSQL)",
+            "CSV / Excel files",
+            "APIs and logs",
+            "Business applications"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "3. Data Cleaning"
+        },
+        {
+          "type": "text",
+          "value": "Raw data is often messy. Data cleaning ensures accuracy by handling missing values, duplicates, and inconsistencies."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Removing duplicate customer records and fixing missing usage values."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Handle missing values",
+            "Remove duplicates",
+            "Fix inconsistent data",
+            "Handle outliers"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "4. Exploratory Data Analysis (EDA)"
+        },
+        {
+          "type": "text",
+          "value": "EDA helps understand patterns, trends, and relationships in data before modeling."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Finding which customer segments churn the most."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Summary statistics",
+            "Data visualization",
             "Correlation analysis",
-            "Visualization using charts and plots"
+            "Pattern detection"
           ]
-        }
-      ]
-    },
-
-    {
-      "id": "ml",
-      "title": "Machine Learning",
-      "content": [
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "5. Feature Engineering"
+        },
+        {
+          "type": "text",
+          "value": "Feature engineering involves creating new meaningful variables from raw data to improve model performance."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Creating a 'customer tenure' feature from account start date."
+        },
+        {
+          "type": "code",
+          "value": "df['tenure_days'] = (pd.Timestamp.now() - df['join_date']).dt.days"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "6. Model Building"
+        },
+        {
+          "type": "text",
+          "value": "In this step, machine learning algorithms are used to build predictive models."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Building a model to predict customer churn."
+        },
+        {
+          "type": "code",
+          "value": "from sklearn.linear_model import LogisticRegression\n\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train)"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "7. Model Evaluation"
+        },
+        {
+          "type": "text",
+          "value": "Model evaluation checks how well the model performs using evaluation metrics."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Measuring how accurately the model predicts churn."
+        },
         {
           "type": "list",
           "value": [
-            "Supervised Learning",
-            "Unsupervised Learning",
-            "Semi-supervised Learning",
-            "Reinforcement Learning"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "supervised",
-      "title": "Supervised Learning Algorithms",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Linear Regression",
-            "Logistic Regression",
-            "Decision Trees",
-            "Random Forest",
-            "Support Vector Machines (SVM)",
-            "K-Nearest Neighbors (KNN)"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "unsupervised",
-      "title": "Unsupervised Learning Algorithms",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "K-Means Clustering",
-            "Hierarchical Clustering",
-            "DBSCAN",
-            "Principal Component Analysis (PCA)"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "model-evaluation",
-      "title": "Model Evaluation",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Train-test split",
-            "Cross-validation",
-            "Accuracy, Precision, Recall",
+            "Accuracy",
+            "Precision and Recall",
             "F1 Score",
             "ROC-AUC"
           ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "8. Deployment"
+        },
+        {
+          "type": "text",
+          "value": "Deployment means making the model available for real-world use."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Deploying a churn prediction model as an API for the CRM system."
+        },
+        {
+          "type": "list",
+          "value": [
+            "APIs (Flask / FastAPI)",
+            "Cloud platforms",
+            "Batch or real-time predictions"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "value": "9. Monitoring & Maintenance"
+        },
+        {
+          "type": "text",
+          "value": "After deployment, the model must be monitored and updated to ensure accuracy over time."
+        },
+        {
+          "type": "text",
+          "value": "👉 Real-life example: Retraining the model when customer behavior changes."
+        },
+        {
+          "type": "list",
+          "value": [
+            "Monitor model performance",
+            "Detect data drift",
+            "Retrain models periodically",
+            "Improve features"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "In summary, the data science lifecycle is an iterative process. Models are continuously improved as new data becomes available and business requirements evolve."
         }
+      ]
+    },
+    {
+  "id": "math",
+  "title": "Mathematics for Data Science",
+  "content": [
+    {
+      "type": "text",
+      "value": "Mathematics is the foundation of data science and machine learning. While tools like Python and libraries make implementation easy, understanding math helps you know how models work internally and why they behave in a certain way."
+    },
+
+    {
+      "type": "text",
+      "value": "You do not need advanced mathematics like a mathematician, but a clear understanding of core concepts is essential for building and interpreting machine learning models."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Linear Algebra"
+    },
+    {
+      "type": "text",
+      "value": "Linear Algebra deals with vectors, matrices, and linear transformations. It is used to represent and manipulate data efficiently."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Vectors represent features",
+        "Matrices represent datasets",
+        "Eigenvalues help in dimensionality reduction"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A dataset with customer age, salary, and spending score can be represented as a matrix."
+    },
+    {
+      "type": "code",
+      "value": "import numpy as np\n\n# Each row is a customer, each column is a feature\nX = np.array([\n  [25, 30000, 40],\n  [35, 50000, 70],\n  [45, 80000, 90]\n])\n\nprint(X)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Linear Regression, Logistic Regression, Neural Networks, PCA all rely heavily on matrix operations."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Probability"
+    },
+    {
+      "type": "text",
+      "value": "Probability helps measure uncertainty and likelihood of events. It is used to model randomness in data."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Random variables",
+        "Probability distributions",
+        "Conditional probability"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting the probability that a customer will churn."
+    },
+    {
+      "type": "code",
+      "value": "from scipy.stats import norm\n\n# Probability that sales exceed 2000\nmean = 1800\nstd = 300\nprob = 1 - norm.cdf(2000, mean, std)\nprint('Probability:', prob)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Naive Bayes, Hidden Markov Models, probabilistic classifiers, and uncertainty estimation."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Statistics"
+    },
+    {
+      "type": "text",
+      "value": "Statistics is used to summarize data, test assumptions, and validate results. It helps decide whether patterns are real or due to randomness."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Mean, median, variance",
+        "Correlation",
+        "Hypothesis testing"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Checking whether average sales are significantly higher this month."
+    },
+    {
+      "type": "code",
+      "value": "import numpy as np\n\nsales = [1200, 1500, 1800, 2000, 1700]\nprint('Mean Sales:', np.mean(sales))\nprint('Standard Deviation:', np.std(sales))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Model evaluation, feature selection, A/B testing, confidence intervals, and hypothesis testing."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Calculus"
+    },
+    {
+      "type": "text",
+      "value": "Calculus helps understand how models learn by optimizing a loss function. It is mainly used for optimization."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Derivatives",
+        "Gradients",
+        "Optimization techniques"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Minimizing error between predicted and actual values."
+    },
+    {
+      "type": "code",
+      "value": "import sympy as sp\n\nx = sp.symbols('x')\nloss = (x - 5)**2\n\ngradient = sp.diff(loss, x)\nprint('Gradient:', gradient)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Gradient Descent, Neural Networks, Backpropagation, Support Vector Machines."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "How Mathematics Fits into Machine Learning"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Linear Algebra → Data representation and transformations",
+        "Probability → Handling uncertainty and predictions",
+        "Statistics → Validation and evaluation",
+        "Calculus → Learning and optimization"
       ]
     },
 
     {
-      "id": "deep-learning",
-      "title": "Deep Learning",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Artificial Neural Networks (ANN)",
-            "Convolutional Neural Networks (CNN)",
-            "Recurrent Neural Networks (RNN)",
-            "LSTM and GRU"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "tools",
-      "title": "Data Science Tools",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Jupyter Notebook",
-            "Google Colab",
-            "VS Code",
-            "Git & GitHub",
-            "Docker"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "big-data",
-      "title": "Big Data Technologies",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Hadoop",
-            "Apache Spark",
-            "Hive",
-            "Kafka"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "deployment",
-      "title": "Model Deployment",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "REST APIs using Flask/FastAPI",
-            "Docker containers",
-            "Cloud deployment (AWS, GCP, Azure)",
-            "CI/CD pipelines"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "ethics",
-      "title": "Ethics in Data Science",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Data privacy",
-            "Bias and fairness",
-            "Explainability",
-            "Responsible AI"
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "careers",
-      "title": "Careers in Data Science",
-      "content": [
-        {
-          "type": "list",
-          "value": [
-            "Data Analyst",
-            "Data Scientist",
-            "Machine Learning Engineer",
-            "AI Engineer",
-            "Business Analyst"
-          ]
-        }
-      ]
+      "type": "text",
+      "value": "In summary, mathematics gives data scientists the power to understand how machine learning algorithms work internally. Strong fundamentals lead to better model design, debugging, and interpretation."
     }
+  ]
+}
+,
+    {
+  "id": "python",
+  "title": "Python for Data Science",
+  "content": [
+    {
+      "type": "text",
+      "value": "Python is the most widely used programming language in data science because it is easy to learn, readable, and supported by a powerful ecosystem of libraries for data processing, analysis, visualization, and machine learning."
+    },
+
+    {
+      "type": "text",
+      "value": "In real-world data science projects, Python is used from data collection to model deployment."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why Python is Popular in Data Science"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Simple and beginner-friendly syntax",
+        "Large number of data science libraries",
+        "Strong community support",
+        "Works well with big data and machine learning",
+        "Used in both research and industry"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Core Python Libraries for Data Science"
+    },
+    {
+      "type": "list",
+      "value": [
+        "NumPy – numerical computing",
+        "Pandas – data manipulation and analysis",
+        "Matplotlib & Seaborn – data visualization",
+        "Scikit-learn – machine learning"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. NumPy (Numerical Computing)"
+    },
+    {
+      "type": "text",
+      "value": "NumPy is used for fast numerical operations. It provides support for arrays, matrices, and mathematical functions."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Calculating average and total sales."
+    },
+    {
+      "type": "code",
+      "value": "import numpy as np\n\nsales = np.array([1200, 1500, 1800, 2000, 1700])\n\nprint('Total Sales:', np.sum(sales))\nprint('Average Sales:', np.mean(sales))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Linear algebra operations, loss calculations, and performance optimization."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Pandas (Data Manipulation)"
+    },
+    {
+      "type": "text",
+      "value": "Pandas is the most important library for data science. It allows you to work with structured data using DataFrames, similar to Excel tables."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Reading a CSV file and analyzing sales data."
+    },
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\n# Load dataset\ndf = pd.read_csv('data.csv')\n\n# View first rows\nprint(df.head())\n\n# Summary statistics\nprint(df.describe())"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Data cleaning, feature engineering, and dataset preparation."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Common Pandas Functions Used in Data Science"
+    },
+    {
+      "type": "list",
+      "value": [
+        "head(), tail() – preview data",
+        "info() – dataset structure",
+        "isnull(), fillna() – handle missing values",
+        "groupby() – aggregation",
+        "merge() – combine datasets"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Matplotlib & Seaborn (Data Visualization)"
+    },
+    {
+      "type": "text",
+      "value": "Visualization helps data scientists understand patterns, trends, and relationships in data."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Visualizing sales trends over time."
+    },
+    {
+      "type": "code",
+      "value": "import matplotlib.pyplot as plt\n\nplt.plot(df.index, df['Sales'])\nplt.xlabel('Index')\nplt.ylabel('Sales')\nplt.title('Sales Trend')\nplt.show()"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Exploratory Data Analysis (EDA) and model result visualization."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Scikit-learn (Machine Learning)"
+    },
+    {
+      "type": "text",
+      "value": "Scikit-learn is the most popular library for machine learning in Python. It provides easy-to-use tools for training and evaluating models."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting customer churn."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\n\nX = df[['Feature1', 'Feature2']]\ny = df['Target']\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)\n\nmodel = LogisticRegression()\nmodel.fit(X_train, y_train)\n\nprint('Model trained successfully')"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Classification, regression, clustering, and model evaluation."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "How Python Fits into the Data Science Workflow"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Collect data from files, APIs, or databases",
+        "Clean and preprocess data",
+        "Perform EDA and visualization",
+        "Build and evaluate machine learning models",
+        "Deploy models into production"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, Python acts as the backbone of data science. From data preparation to machine learning and deployment, Python enables data scientists to build powerful and scalable solutions."
+    }
+  ]
+},
+    {
+  "id": "data-cleaning",
+  "title": "Data Cleaning & Preprocessing",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data Cleaning and Preprocessing is the process of preparing raw data so that it can be used for analysis and machine learning. Real-world data is almost never clean and usually contains missing values, errors, duplicates, and inconsistent formats."
+    },
+
+    {
+      "type": "text",
+      "value": "If data is not cleaned properly, machine learning models produce wrong predictions. This step often takes 60–70% of a data scientist’s time."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why Data Cleaning is Important"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Improves accuracy of analysis and models",
+        "Prevents misleading insights",
+        "Ensures consistency across datasets",
+        "Required before machine learning training"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Handling Missing Values"
+    },
+    {
+      "type": "text",
+      "value": "Missing values occur when data is not recorded properly. These can break analysis and ML models."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Some customers did not enter their age while signing up."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Remove rows with missing values",
+        "Fill with mean/median (numerical data)",
+        "Fill with most frequent value (categorical data)"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "df['age'].fillna(df['age'].median(), inplace=True)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Models like Logistic Regression and KNN cannot handle missing values directly."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Removing Duplicates"
+    },
+    {
+      "type": "text",
+      "value": "Duplicate data occurs when the same record is stored multiple times, which can bias results."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A customer placed one order but it was recorded twice."
+    },
+    {
+      "type": "code",
+      "value": "df.drop_duplicates(inplace=True)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Prevents over-representing certain data points during training."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Outlier Detection"
+    },
+    {
+      "type": "text",
+      "value": "Outliers are extreme values that differ significantly from most data points."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A customer with salary = ₹10,00,00,000 due to data entry error."
+    },
+    {
+      "type": "code",
+      "value": "Q1 = df['salary'].quantile(0.25)\nQ3 = df['salary'].quantile(0.75)\nIQR = Q3 - Q1\n\ndf = df[(df['salary'] >= Q1 - 1.5*IQR) & (df['salary'] <= Q3 + 1.5*IQR)]"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Outliers can distort models like Linear Regression and K-Means."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Data Normalization & Scaling"
+    },
+    {
+      "type": "text",
+      "value": "Scaling ensures all numerical features are on a similar scale."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Salary (₹) and age (years) should not dominate each other."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.preprocessing import StandardScaler\n\nscaler = StandardScaler()\ndf[['salary', 'age']] = scaler.fit_transform(df[['salary', 'age']])"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Required for KNN, SVM, Logistic Regression, Neural Networks."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Encoding Categorical Variables"
+    },
+    {
+      "type": "text",
+      "value": "Machine learning models only understand numbers, not text."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Gender (Male/Female) or City names must be converted into numbers."
+    },
+    {
+      "type": "code",
+      "value": "df = pd.get_dummies(df, columns=['gender'], drop_first=True)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Required before training almost all ML models."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Advanced (Industry Usage)"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Pipeline automation using Scikit-learn Pipelines",
+        "Handling imbalanced data",
+        "Feature scaling inside ML pipelines",
+        "Data validation in production systems"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, data cleaning and preprocessing directly impact model accuracy. A well-cleaned dataset leads to better insights, stronger models, and reliable business decisions."
+    }
+  ]
+},
+    {
+  "id": "eda",
+  "title": "Exploratory Data Analysis (EDA)",
+  "content": [
+    {
+      "type": "text",
+      "value": "Exploratory Data Analysis (EDA) is the process of exploring and understanding data before building machine learning models. It helps identify patterns, trends, relationships, and anomalies in the dataset."
+    },
+
+    {
+      "type": "text",
+      "value": "EDA answers important questions like: What does the data look like? Are there unusual values? Which features are important? Can this data be used for modeling?"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why EDA is Important"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Reveals hidden patterns and trends",
+        "Detects outliers and anomalies",
+        "Validates assumptions before modeling",
+        "Helps select relevant features",
+        "Improves model performance"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Sample Dataset"
+    },
+    {
+      "type": "text",
+      "value": "Let’s consider a simple dataset containing customer age and annual spending."
+    },
+
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\n# Sample data\ndata = {\n  'age': [22, 25, 30, 35, 40, 45, 50],\n  'spending': [200, 300, 500, 700, 900, 1200, 1500]\n}\n\ndf = pd.DataFrame(data)\nprint(df)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Univariate Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Univariate analysis focuses on understanding a single variable at a time."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Understanding how customer spending is distributed."
+    },
+    {
+      "type": "code",
+      "value": "print(df['spending'].describe())"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Helps detect skewness and scale issues before training."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Bivariate Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Bivariate analysis examines the relationship between two variables."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Understanding how age affects spending."
+    },
+    {
+      "type": "code",
+      "value": "print(df[['age', 'spending']].corr())"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Helps decide which features influence the target variable."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Correlation Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Correlation measures the strength and direction of relationships between numerical variables."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Checking whether older customers spend more."
+    },
+    {
+      "type": "code",
+      "value": "df.corr()"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Prevents multicollinearity and improves feature selection."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Visualization Using Charts"
+    },
+    {
+      "type": "text",
+      "value": "Visualization makes data insights easier to understand than raw numbers."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Visualizing the age vs spending relationship."
+    },
+    {
+      "type": "code",
+      "value": "import matplotlib.pyplot as plt\n\nplt.scatter(df['age'], df['spending'])\nplt.xlabel('Age')\nplt.ylabel('Spending')\nplt.title('Age vs Spending')\nplt.show()"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Helps identify linear or non-linear relationships."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Advanced (Industry Usage)"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Feature selection based on correlation",
+        "Outlier detection using visual tools",
+        "Data validation before model training",
+        "EDA automation in data pipelines"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, EDA is a critical step that ensures data is suitable for modeling. Good EDA leads to better features, improved accuracy, and fewer surprises in production."
+    }
+  ]
+},
+    {
+  "id": "ml",
+  "title": "Machine Learning",
+  "content": [
+    {
+      "type": "text",
+      "value": "Machine Learning (ML) is a branch of data science where systems learn patterns from data and make predictions or decisions without being explicitly programmed."
+    },
+
+    {
+      "type": "text",
+      "value": "Instead of writing rules manually, machine learning models learn from historical data and improve performance over time."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why Machine Learning is Important"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Automates decision making",
+        "Handles large and complex data",
+        "Learns patterns humans may miss",
+        "Improves accuracy with more data",
+        "Used in AI-powered products"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Types of Machine Learning"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Supervised Learning",
+        "Unsupervised Learning",
+        "Semi-supervised Learning",
+        "Reinforcement Learning"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Supervised Learning"
+    },
+    {
+      "type": "text",
+      "value": "Supervised learning is a type of machine learning where the model is trained on labeled data. This means the correct output (target) is already known."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting whether an email is spam or not."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Input: Email text",
+        "Output: Spam / Not Spam"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.linear_model import LinearRegression\n\nX = [[1], [2], [3], [4]]  # hours studied\ny = [40, 50, 60, 70]     # marks\n\nmodel = LinearRegression()\nmodel.fit(X, y)\n\nprint(model.predict([[5]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Linear Regression, Logistic Regression, Decision Trees, Random Forest, SVM."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Unsupervised Learning"
+    },
+    {
+      "type": "text",
+      "value": "Unsupervised learning works with unlabeled data. The model tries to find patterns or groups on its own."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Grouping customers based on buying behavior."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.cluster import KMeans\n\nX = [[200], [220], [500], [520], [1000]]  # spending\n\nkmeans = KMeans(n_clusters=2)\nkmeans.fit(X)\nprint(kmeans.labels_)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: K-Means, Hierarchical Clustering, PCA, DBSCAN."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Semi-Supervised Learning"
+    },
+    {
+      "type": "text",
+      "value": "Semi-supervised learning uses a small amount of labeled data and a large amount of unlabeled data."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Image recognition where only some images are labeled."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Few labeled samples",
+        "Many unlabeled samples"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Large-scale image classification, speech recognition, medical imaging."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Reinforcement Learning"
+    },
+    {
+      "type": "text",
+      "value": "Reinforcement learning is a type of learning where an agent learns by interacting with an environment and receiving rewards or penalties."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Training a self-driving car or a game-playing AI."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Agent takes action",
+        "Environment gives reward or penalty",
+        "Agent learns optimal strategy"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Robotics, gaming (AlphaGo), recommendation systems, autonomous systems."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Where Machine Learning is Used (Industry)"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Finance – fraud detection, credit scoring",
+        "Healthcare – disease prediction",
+        "E-commerce – recommendations",
+        "Marketing – customer segmentation",
+        "Transportation – self-driving vehicles"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, machine learning enables systems to learn from data and make intelligent decisions. Different types of machine learning are used depending on the nature of the problem and available data."
+    }
+  ]
+},
+    {
+  "id": "supervised",
+  "title": "Supervised Learning Algorithms",
+  "content": [
+    {
+      "type": "text",
+      "value": "Supervised learning algorithms are trained on labeled data, where the correct output (target variable) is already known. The goal is to learn a mapping between input features and the output."
+    },
+
+    {
+      "type": "text",
+      "value": "These algorithms are widely used for prediction tasks such as forecasting values or classifying data into categories."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Linear Regression"
+    },
+    {
+      "type": "text",
+      "value": "Linear Regression is used to predict a continuous value by fitting a straight line between input features and the target."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting house price based on size."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.linear_model import LinearRegression\n\nX = [[500], [800], [1000], [1200]]  # house size\ny = [20, 30, 40, 50]                # price in lakhs\n\nmodel = LinearRegression()\nmodel.fit(X, y)\nprint(model.predict([[900]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Price prediction, sales forecasting, trend analysis."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Logistic Regression"
+    },
+    {
+      "type": "text",
+      "value": "Logistic Regression is used for classification problems where the output is categorical (usually binary)."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting whether a customer will churn (Yes/No)."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.linear_model import LogisticRegression\n\nX = [[25], [35], [45], [55]]  # age\ny = [0, 0, 1, 1]             # churn\n\nmodel = LogisticRegression()\nmodel.fit(X, y)\nprint(model.predict([[40]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Churn prediction, spam detection, fraud detection."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Decision Trees"
+    },
+    {
+      "type": "text",
+      "value": "Decision Trees work like a flowchart, making decisions by splitting data based on conditions."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Loan approval based on income and credit score."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.tree import DecisionTreeClassifier\n\nX = [[30000, 650], [50000, 720], [25000, 600]]\ny = [0, 1, 0]\n\nmodel = DecisionTreeClassifier()\nmodel.fit(X, y)\nprint(model.predict([[40000, 700]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Rule-based decisions, credit scoring, customer segmentation."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Random Forest"
+    },
+    {
+      "type": "text",
+      "value": "Random Forest is an ensemble algorithm that combines multiple decision trees to improve accuracy and reduce overfitting."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting customer churn with high accuracy."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.ensemble import RandomForestClassifier\n\nmodel = RandomForestClassifier()\nmodel.fit(X, y)\nprint(model.predict([[40000, 700]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Fraud detection, healthcare prediction, recommendation systems."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Support Vector Machines (SVM)"
+    },
+    {
+      "type": "text",
+      "value": "SVM separates data using an optimal boundary (hyperplane) that maximizes the margin between classes."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Classifying emails as spam or not spam."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.svm import SVC\n\nmodel = SVC()\nmodel.fit(X, y)\nprint(model.predict([[45000, 710]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Text classification, image recognition, bioinformatics."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "6. K-Nearest Neighbors (KNN)"
+    },
+    {
+      "type": "text",
+      "value": "KNN predicts output based on the nearest data points in the dataset."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Recommending products based on similar customers."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.neighbors import KNeighborsClassifier\n\nmodel = KNeighborsClassifier(n_neighbors=3)\nmodel.fit(X, y)\nprint(model.predict([[42000, 690]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Recommendation systems, pattern recognition."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "How to Choose the Right Algorithm"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Linear Regression → Continuous value prediction",
+        "Logistic Regression → Binary classification",
+        "Decision Trees → Interpretable decisions",
+        "Random Forest → High accuracy and robustness",
+        "SVM → Complex classification boundaries",
+        "KNN → Similarity-based problems"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, supervised learning algorithms are the backbone of predictive analytics. Choosing the right algorithm depends on data size, complexity, and business requirements."
+    }
+  ]
+},
+    {
+  "id": "unsupervised",
+  "title": "Unsupervised Learning Algorithms",
+  "content": [
+    {
+      "type": "text",
+      "value": "Unsupervised learning algorithms work with unlabeled data. This means the data does not have predefined output labels, and the goal is to discover hidden patterns, structures, or relationships in the data."
+    },
+
+    {
+      "type": "text",
+      "value": "These algorithms are mainly used for grouping, segmentation, dimensionality reduction, and anomaly detection."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why Unsupervised Learning is Important"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Works when labeled data is not available",
+        "Discovers hidden patterns automatically",
+        "Helps understand data structure",
+        "Used before supervised learning in many projects"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. K-Means Clustering"
+    },
+    {
+      "type": "text",
+      "value": "K-Means groups data points into K clusters based on similarity. Each data point belongs to the cluster with the nearest mean."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Grouping customers based on spending behavior."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.cluster import KMeans\n\nX = [[200], [220], [250], [800], [820], [850]]  # spending\n\nkmeans = KMeans(n_clusters=2)\nkmeans.fit(X)\nprint(kmeans.labels_)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Customer segmentation, market analysis, image compression."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Hierarchical Clustering"
+    },
+    {
+      "type": "text",
+      "value": "Hierarchical clustering builds a tree-like structure (dendrogram) showing how data points are grouped step by step."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Grouping products into categories and subcategories."
+    },
+    {
+      "type": "code",
+      "value": "from scipy.cluster.hierarchy import linkage, fcluster\n\nX = [[10], [12], [15], [50], [55], [60]]\nZ = linkage(X, method='ward')\nclusters = fcluster(Z, t=2, criterion='maxclust')\nprint(clusters)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Taxonomy creation, customer hierarchy, biological data analysis."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. DBSCAN"
+    },
+    {
+      "type": "text",
+      "value": "DBSCAN groups data points based on density and can identify noise or outliers automatically."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Detecting unusual transactions or abnormal user behavior."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.cluster import DBSCAN\n\nX = [[1], [2], [2], [3], [50]]  # last point is an outlier\n\ndbscan = DBSCAN(eps=2, min_samples=2)\nprint(dbscan.fit_predict(X))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Anomaly detection, fraud detection, spatial data analysis."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Principal Component Analysis (PCA)"
+    },
+    {
+      "type": "text",
+      "value": "PCA is a dimensionality reduction technique that transforms high-dimensional data into fewer components while retaining most information."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Reducing hundreds of features into a few important ones."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.decomposition import PCA\nimport numpy as np\n\nX = np.array([\n  [2.5, 2.4],\n  [0.5, 0.7],\n  [2.2, 2.9],\n  [1.9, 2.2]\n])\n\npca = PCA(n_components=1)\nX_reduced = pca.fit_transform(X)\nprint(X_reduced)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Feature reduction, noise reduction, visualization of high-dimensional data."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "When to Use Which Algorithm"
+    },
+    {
+      "type": "list",
+      "value": [
+        "K-Means → Well-separated clusters",
+        "Hierarchical → Understand cluster hierarchy",
+        "DBSCAN → Detect outliers and irregular clusters",
+        "PCA → Reduce dimensions and speed up models"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Industry Applications"
+    },
+    {
+      "type": "list",
+      "value": [
+        "E-commerce – customer segmentation",
+        "Finance – fraud and anomaly detection",
+        "Healthcare – patient grouping",
+        "Marketing – audience segmentation",
+        "Image processing – compression and feature reduction"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, unsupervised learning helps uncover hidden patterns in data without labels. It is essential for exploration, segmentation, and preparing data for supervised learning."
+    }
+  ]
+},
+    {
+  "id": "model-evaluation",
+  "title": "Model Evaluation",
+  "content": [
+    {
+      "type": "text",
+      "value": "Model evaluation is the process of measuring how well a machine learning model performs on unseen data. A model that performs well on training data but poorly on new data is not useful in real life."
+    },
+
+    {
+      "type": "text",
+      "value": "Evaluation helps answer an important question: Can this model be trusted for real-world decisions?"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why Model Evaluation is Important"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Prevents overfitting",
+        "Measures real-world performance",
+        "Helps compare different models",
+        "Ensures reliable business decisions"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Train-Test Split"
+    },
+    {
+      "type": "text",
+      "value": "Train-test split divides the dataset into two parts: one for training the model and one for testing it."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Studying from practice questions (train) and then giving the final exam (test)."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Almost every machine learning project."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Cross-Validation"
+    },
+    {
+      "type": "text",
+      "value": "Cross-validation evaluates the model multiple times on different subsets of data to get a more reliable performance estimate."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Taking multiple mock tests before the final exam."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.model_selection import cross_val_score\n\nscores = cross_val_score(model, X, y, cv=5)\nprint(scores.mean())"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Model selection and hyperparameter tuning."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Accuracy"
+    },
+    {
+      "type": "text",
+      "value": "Accuracy measures the percentage of correct predictions made by the model."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: If 90 out of 100 predictions are correct, accuracy is 90%."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.metrics import accuracy_score\n\naccuracy = accuracy_score(y_test, y_pred)\nprint('Accuracy:', accuracy)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Balanced datasets where all errors are equally important."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Precision"
+    },
+    {
+      "type": "text",
+      "value": "Precision tells us how many of the predicted positive cases were actually correct."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Of all emails marked as spam, how many were actually spam?"
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.metrics import precision_score\n\nprecision = precision_score(y_test, y_pred)\nprint('Precision:', precision)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Spam detection, fraud detection (false positives are costly)."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Recall"
+    },
+    {
+      "type": "text",
+      "value": "Recall measures how many actual positive cases were correctly identified by the model."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Of all actual spam emails, how many were detected?"
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.metrics import recall_score\n\nrecall = recall_score(y_test, y_pred)\nprint('Recall:', recall)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Medical diagnosis, fraud detection (missing positives is dangerous)."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "6. F1 Score"
+    },
+    {
+      "type": "text",
+      "value": "F1 Score is the harmonic mean of precision and recall. It balances both metrics."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A balanced score for detecting spam without blocking important emails."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.metrics import f1_score\n\nf1 = f1_score(y_test, y_pred)\nprint('F1 Score:', f1)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Imbalanced datasets."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "7. ROC-AUC"
+    },
+    {
+      "type": "text",
+      "value": "ROC-AUC measures how well the model distinguishes between classes across all thresholds."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Ranking customers by risk level."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.metrics import roc_auc_score\n\nroc_auc = roc_auc_score(y_test, y_pred_proba)\nprint('ROC-AUC:', roc_auc)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in ML: Credit scoring, churn prediction, ranking problems."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Which Metric to Use?"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Accuracy → Balanced datasets",
+        "Precision → False positives are costly",
+        "Recall → Missing positives is risky",
+        "F1 Score → Imbalanced data",
+        "ROC-AUC → Ranking & probability-based models"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, model evaluation ensures that machine learning models are reliable, robust, and ready for real-world use. Choosing the right metric is as important as choosing the right algorithm."
+    }
+  ]
+},
+    {
+  "id": "deep-learning",
+  "title": "Deep Learning",
+  "content": [
+    {
+      "type": "text",
+      "value": "Deep Learning is a subset of Machine Learning that uses neural networks with multiple layers to learn complex patterns from large amounts of data."
+    },
+
+    {
+      "type": "text",
+      "value": "It is inspired by how the human brain works and is especially powerful for tasks like image recognition, speech recognition, and natural language processing."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why Deep Learning is Important"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Handles very large and complex data",
+        "Learns features automatically",
+        "Powers modern AI systems",
+        "Outperforms traditional ML in vision and language tasks"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Artificial Neural Networks (ANN)"
+    },
+    {
+      "type": "text",
+      "value": "ANN is the basic form of a neural network. It consists of input layers, hidden layers, and an output layer."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting house prices using size, location, and number of rooms."
+    },
+    {
+      "type": "code",
+      "value": "from sklearn.neural_network import MLPRegressor\n\nX = [[500], [800], [1000]]\ny = [20, 35, 45]\n\nmodel = MLPRegressor(hidden_layer_sizes=(10,))\nmodel.fit(X, y)\nprint(model.predict([[900]]))"
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in DL: Tabular data prediction, basic deep learning tasks."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Convolutional Neural Networks (CNN)"
+    },
+    {
+      "type": "text",
+      "value": "CNNs are specialized neural networks designed for image and video data. They automatically learn edges, shapes, and patterns."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Face recognition on smartphones."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Image classification",
+        "Object detection",
+        "Medical image analysis"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in DL: Computer vision, self-driving cars, security systems."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Recurrent Neural Networks (RNN)"
+    },
+    {
+      "type": "text",
+      "value": "RNNs are designed to work with sequence data where order matters."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting the next word while typing on a mobile keyboard."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Text processing",
+        "Speech recognition",
+        "Time-series prediction"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Limitation: RNNs struggle with long-term memory."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. LSTM (Long Short-Term Memory)"
+    },
+    {
+      "type": "text",
+      "value": "LSTM is an improved version of RNN that remembers information for long periods."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Predicting stock prices based on long historical data."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Handles long sequences",
+        "Avoids forgetting earlier data"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in DL: Speech recognition, financial forecasting, NLP."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. GRU (Gated Recurrent Unit)"
+    },
+    {
+      "type": "text",
+      "value": "GRU is a simpler and faster alternative to LSTM with fewer gates."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Chatbots and text generation."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Faster training",
+        "Less complex than LSTM"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in DL: NLP tasks, chat systems, sequence modeling."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Where Deep Learning is Used (Industry)"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Healthcare – disease detection",
+        "Automotive – self-driving cars",
+        "Finance – fraud detection",
+        "Entertainment – recommendations",
+        "AI Assistants – speech and language understanding"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Machine Learning vs Deep Learning"
+    },
+    {
+      "type": "list",
+      "value": [
+        "ML → Works well with small datasets",
+        "DL → Requires large datasets",
+        "ML → Manual feature engineering",
+        "DL → Automatic feature learning"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, deep learning is a powerful technology behind modern AI systems. It excels at handling complex data like images, text, and audio, making it essential for advanced AI applications."
+    }
+  ]
+}
+,
+    {
+  "id": "tools",
+  "title": "Data Science Tools",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data science tools help data scientists write code, analyze data, collaborate with teams, track changes, and deploy models. These tools make the entire data science workflow faster, cleaner, and more professional."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Jupyter Notebook"
+    },
+    {
+      "type": "text",
+      "value": "Jupyter Notebook is an interactive environment where you can write code, run it step by step, and see results immediately along with text and visualizations."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A data scientist explores a dataset, creates charts, and explains insights in one notebook."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Interactive coding",
+        "Data exploration (EDA)",
+        "Visualization",
+        "Experimentation"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in industry: Research, data exploration, prototyping models."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Google Colab"
+    },
+    {
+      "type": "text",
+      "value": "Google Colab is a cloud-based Jupyter Notebook that runs in the browser. It does not require any installation and provides free GPU and TPU support."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Training a deep learning model using a free GPU without setting up a local machine."
+    },
+    {
+      "type": "list",
+      "value": [
+        "No setup required",
+        "Free GPU/TPU access",
+        "Easy sharing and collaboration"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in industry: Learning, prototyping, deep learning experiments."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. VS Code"
+    },
+    {
+      "type": "text",
+      "value": "VS Code is a powerful code editor used for writing production-level data science and machine learning code."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Writing clean Python scripts for data pipelines and ML models."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Writing Python scripts",
+        "Project-based development",
+        "Debugging code",
+        "Extension support (Python, Git, Docker)"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in industry: Production-ready ML projects and large codebases."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Git & GitHub"
+    },
+    {
+      "type": "text",
+      "value": "Git is a version control system that tracks changes in code, while GitHub is a platform to host and collaborate on Git repositories."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Multiple data scientists working on the same ML project without overwriting each other's code."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Version control",
+        "Collaboration",
+        "Backup of code",
+        "Portfolio and project sharing"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in industry: Team collaboration, CI/CD, code review."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Docker"
+    },
+    {
+      "type": "text",
+      "value": "Docker is a tool that packages applications and their dependencies into containers so they run the same everywhere."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Deploying a machine learning model so it runs the same on developer, testing, and production servers."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Environment consistency",
+        "Easy deployment",
+        "Scalable ML applications"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Used in industry: Model deployment, MLOps, production systems."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "How These Tools Are Used Together"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Jupyter / Colab → Explore and analyze data",
+        "VS Code → Build production code",
+        "Git & GitHub → Track and collaborate",
+        "Docker → Deploy models safely"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, mastering these tools helps data scientists work efficiently, collaborate effectively, and deploy models confidently in real-world environments."
+    }
+  ]
+}
+,
+    {
+  "id": "big-data",
+  "title": "Big Data Technologies",
+  "content": [
+    {
+      "type": "text",
+      "value": "Big Data technologies are used when data becomes too large, fast, or complex to handle using traditional databases and tools."
+    },
+    {
+      "type": "text",
+      "value": "These technologies help store, process, and analyze massive datasets generated by companies like Google, Amazon, Netflix, and Facebook."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Hadoop"
+    },
+    {
+      "type": "text",
+      "value": "Hadoop is a framework that allows storing and processing huge datasets across multiple computers."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Storing years of user activity logs."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Distributed storage (HDFS)",
+        "Batch processing",
+        "Fault tolerant"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Apache Spark"
+    },
+    {
+      "type": "text",
+      "value": "Apache Spark is a fast data processing engine that works in memory, making it much faster than Hadoop."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Real-time recommendation systems."
+    },
+    {
+      "type": "list",
+      "value": [
+        "In-memory computation",
+        "Supports batch and streaming",
+        "Used for ML and analytics"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Hive"
+    },
+    {
+      "type": "text",
+      "value": "Hive allows querying big data stored in Hadoop using SQL-like syntax."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Analysts writing SQL queries on large log files."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Kafka"
+    },
+    {
+      "type": "text",
+      "value": "Kafka is used for real-time data streaming."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Processing live transactions or sensor data."
+    },
+
+    {
+      "type": "text",
+      "value": "Big data technologies are essential for handling data at scale and powering real-time analytics systems."
+    }
+  ]
+}
+,
+    {
+  "id": "deployment",
+  "title": "Model Deployment",
+  "content": [
+    {
+      "type": "text",
+      "value": "Model deployment is the process of making a trained machine learning model available for real-world use."
+    },
+
+    {
+      "type": "text",
+      "value": "A model is useless if it stays in a notebook. Deployment allows applications to use predictions in real time."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. REST APIs (Flask / FastAPI)"
+    },
+    {
+      "type": "text",
+      "value": "Models are exposed as APIs so applications can send data and receive predictions."
+    },
+    {
+      "type": "code",
+      "value": "from fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get('/predict')\ndef predict(x: int):\n    return {'prediction': x * 2}"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Docker Containers"
+    },
+    {
+      "type": "text",
+      "value": "Docker packages the model and dependencies into a container so it runs the same everywhere."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Cloud Deployment"
+    },
+    {
+      "type": "text",
+      "value": "Cloud platforms like AWS, GCP, and Azure host deployed models at scale."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. CI/CD Pipelines"
+    },
+    {
+      "type": "text",
+      "value": "CI/CD automates testing, deployment, and updates of ML models."
+    },
+
+    {
+      "type": "text",
+      "value": "Deployment ensures models are scalable, reliable, and accessible to real applications."
+    }
+  ]
+}
+,
+    {
+  "id": "ethics",
+  "title": "Ethics in Data Science",
+  "content": [
+    {
+      "type": "text",
+      "value": "Ethics in data science focuses on using data and AI responsibly, fairly, and transparently."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Data Privacy"
+    },
+    {
+      "type": "text",
+      "value": "Personal data must be protected and used only with proper consent."
+    },
+    {
+      "type": "text",
+      "value": "👉 Example: Protecting customer phone numbers and medical records."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Bias and Fairness"
+    },
+    {
+      "type": "text",
+      "value": "Models should not discriminate based on gender, race, or background."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Explainability"
+    },
+    {
+      "type": "text",
+      "value": "Users should understand why a model made a decision."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Responsible AI"
+    },
+    {
+      "type": "text",
+      "value": "AI should be safe, transparent, and aligned with human values."
+    },
+
+    {
+      "type": "text",
+      "value": "Ethical data science builds trust and prevents harm."
+    }
+  ]
+}
+,
+    {
+  "id": "careers",
+  "title": "Careers in Data Science",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data science offers multiple high-demand career paths across industries such as tech, finance, healthcare, and e-commerce."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Data Scientist"
+    },
+    {
+      "type": "text",
+      "value": "Builds predictive models and extracts insights from data."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Machine Learning Engineer"
+    },
+    {
+      "type": "text",
+      "value": "Deploys and scales machine learning models in production."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. AI Engineer"
+    },
+    {
+      "type": "text",
+      "value": "Builds AI-powered systems using deep learning."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Data Analyst"
+    },
+    {
+      "type": "text",
+      "value": "Analyzes historical data and creates reports."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Business Analyst"
+    },
+    {
+      "type": "text",
+      "value": "Bridges data insights with business decisions."
+    },
+
+    {
+      "type": "text",
+      "value": "Careers in data science offer strong growth, high salaries, and global opportunities."
+    }
+  ]
+}
+
   ]
 }
