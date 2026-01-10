@@ -1,0 +1,2207 @@
+{
+  "id": "dataanalysis",
+  "title": "Data Analysis Tutorial",
+  "sections": [
+    {
+  "id": "overview",
+  "title": "What is Data Analysis?",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data Analysis is the process of collecting, inspecting, cleaning, transforming, and interpreting data to discover meaningful patterns, trends, and insights that help in decision-making."
+    },
+    {
+      "type": "text",
+      "value": "In simple words, data analysis helps us answer questions using data. Instead of guessing or assuming, we use data to understand what actually happened and why it happened."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Focuses on understanding past and present data",
+        "Helps organizations make data-driven decisions",
+        "Used in almost every industry like business, healthcare, finance, and education",
+        "Forms the foundation for data science and machine learning"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "Let’s understand Data Analysis with a very simple real-life example."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-Life Example: Grocery Store Sales"
+    },
+    {
+      "type": "text",
+      "value": "Imagine you own a grocery store. Every day, you record sales data such as product name, quantity sold, price, date, and payment method. After one month, you want to understand how your business is performing."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Which products sell the most?",
+        "Which products sell the least?",
+        "On which days are sales highest?",
+        "Do customers buy more on weekends?",
+        "Which payment method is most used?"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "To answer these questions, you analyze your sales data. This process of studying the data to find answers is called Data Analysis."
+    },
+    {
+      "type": "text",
+      "value": "👉 Step-by-Step Breakdown:"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Collect Data: Gather sales records from billing software or Excel",
+        "Clean Data: Remove duplicate entries and fix missing values",
+        "Analyze Data: Calculate total sales, average sales, and trends",
+        "Visualize Data: Create charts to see daily or monthly performance",
+        "Make Decisions: Increase stock for high-selling items and reduce low-selling ones"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Another Simple Example: Student Exam Results"
+    },
+    {
+      "type": "text",
+      "value": "A school collects marks of students in different subjects. By analyzing this data, teachers can find which subject students struggle with the most and take action to improve teaching methods."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Find average marks per subject",
+        "Identify students who need extra support",
+        "Compare performance across classes",
+        "Improve overall academic results"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "In summary, Data Analysis converts raw data into useful information. It helps individuals and organizations make smarter decisions based on facts rather than assumptions."
+    }
+  ]
+},
+
+    {
+  "id": "types",
+  "title": "Types of Data Analysis",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data analysis can be divided into different types based on the kind of questions we want to answer. Each type of data analysis helps us move from understanding past data to making better decisions for the future."
+    },
+
+    {
+      "type": "text",
+      "value": "Let’s understand each type of data analysis using one simple real-life example: an online shopping store."
+    },
+
+    {
+      "type": "text",
+      "value": "1️⃣ Descriptive Analysis – What happened?"
+    },
+    {
+      "type": "text",
+      "value": "Descriptive analysis focuses on summarizing historical data to understand what has already happened. It does not explain why something happened, only what happened."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Total sales last month",
+        "Number of orders per day",
+        "Most sold product",
+        "Average order value"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: An online store checks last month’s data and finds that total sales were ₹5,00,000 and the most sold product was a smartphone. This tells the business what happened."
+    },
+
+    {
+      "type": "text",
+      "value": "2️⃣ Diagnostic Analysis – Why did it happen?"
+    },
+    {
+      "type": "text",
+      "value": "Diagnostic analysis goes one step further and tries to understand the reasons behind what happened. It looks for patterns, relationships, and causes."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Why did sales increase or decrease?",
+        "Why did a product sell more?",
+        "Why was there a sudden drop in orders?"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: The store analyzes data and finds that smartphone sales increased because of a festival discount and social media ads. This explains why sales went up."
+    },
+
+    {
+      "type": "text",
+      "value": "3️⃣ Predictive Analysis – What will happen?"
+    },
+    {
+      "type": "text",
+      "value": "Predictive analysis uses historical data and statistical or machine learning models to predict future outcomes. It helps organizations prepare for what might happen next."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Expected sales next month",
+        "Future demand for a product",
+        "Customer churn prediction",
+        "Forecasting trends"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Based on past sales data, the store predicts that smartphone sales will increase by 20% during the upcoming festival season."
+    },
+
+    {
+      "type": "text",
+      "value": "4️⃣ Prescriptive Analysis – What should be done?"
+    },
+    {
+      "type": "text",
+      "value": "Prescriptive analysis suggests actions that should be taken to achieve the best possible outcome. It combines insights from descriptive, diagnostic, and predictive analysis."
+    },
+    {
+      "type": "list",
+      "value": [
+        "What actions should be taken?",
+        "How to maximize profit?",
+        "How to reduce losses?",
+        "What is the best strategy?"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: The store decides to increase smartphone inventory, offer early discounts, and run targeted ads to maximize sales during the festival."
+    },
+
+    {
+      "type": "text",
+      "value": "👉 Summary: These four types of data analysis work together. Descriptive tells us what happened, Diagnostic explains why it happened, Predictive estimates what will happen, and Prescriptive recommends what actions to take."
+    }
+  ]
+},
+
+    {
+  "id": "lifecycle",
+  "title": "Data Analysis Lifecycle with Code Implementation Guide",
+  "content": [
+    {
+      "type": "callout",
+      "variant": "info",
+      "value": "This guide explains the complete Data Analysis Lifecycle with real-world Python examples using a retail customer churn dataset."
+    },
+
+    {
+      "type": "section_title",
+      "value": "🔄 Data Analysis Lifecycle  Overview"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Problem Definition",
+        "Data Collection",
+        "Data Cleaning",
+        "Data Transformation",
+        "Exploratory Data Analysis (EDA)",
+        "Insights & Visualization",
+        "Reporting & Decision Making"
+      ]
+    },
+
+    {
+      "type": "divider"
+    },
+
+    {
+      "type": "step",
+      "step_no": 1,
+      "title": "Problem Definition",
+      "description": "Clearly define the business problem, success metrics, and expected impact before touching the data.",
+      "code": "# Define business problem\nproblem_statement = {\n  'objective': 'Predict customer churn',\n  'target_variable': 'churned',\n  'success_metric': 'AUC > 0.85',\n  'business_impact': 'Reduce churn by 15%'\n}\n\nprint(problem_statement)",
+      "where_used": "Business analysis, project planning"
+    },
+
+    {
+      "type": "step",
+      "step_no": 2,
+      "title": "Data Collection",
+      "description": "Collect data from multiple sources such as databases, CSV files, and APIs.",
+      "code": "import pandas as pd\n\ncustomers = pd.read_csv('customers.csv')\ntransactions = pd.read_csv('transactions.csv')\n\ndata = customers.merge(transactions, on='customer_id')\nprint(data.shape)",
+      "where_used": "ETL pipelines, data ingestion systems"
+    },
+
+    {
+      "type": "step",
+      "step_no": 3,
+      "title": "Data Cleaning",
+      "description": "Fix missing values, remove duplicates, and handle outliers to ensure data quality.",
+      "code": "# Handle missing values\ndata['age'].fillna(data['age'].median(), inplace=True)\n\n# Remove duplicates\ndata.drop_duplicates(inplace=True)\n\nprint('Clean data ready')",
+      "where_used": "All real-world analytics projects"
+    },
+
+    {
+      "type": "step",
+      "step_no": 4,
+      "title": "Data Transformation",
+      "description": "Create meaningful features and prepare data for analysis or modeling.",
+      "code": "from sklearn.preprocessing import StandardScaler\n\n# Feature engineering\ndata['avg_order_value'] = data['total_spent'] / data['orders']\n\nscaler = StandardScaler()\ndata[['avg_order_value']] = scaler.fit_transform(data[['avg_order_value']])",
+      "where_used": "Machine learning & advanced analytics"
+    },
+
+    {
+      "type": "step",
+      "step_no": 5,
+      "title": "Exploratory Data Analysis (EDA)",
+      "description": "Understand patterns, trends, and relationships using statistics and visualizations.",
+      "code": "import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.countplot(data=data, x='churned')\nplt.title('Customer Churn Distribution')\nplt.show()",
+      "where_used": "Insight discovery & hypothesis building"
+    },
+
+    {
+      "type": "step",
+      "step_no": 6,
+      "title": "Insights & Visualization",
+      "description": "Convert analysis into clear insights using charts and summaries.",
+      "code": "# Churn by region\nchurn_rate = data.groupby('region')['churned'].mean() * 100\nprint(churn_rate)",
+      "where_used": "Stakeholder dashboards & presentations"
+    },
+
+    {
+      "type": "step",
+      "step_no": 7,
+      "title": "Reporting & Decision Making",
+      "description": "Present results and recommend actions based on data-driven evidence.",
+      "code": "print('Recommendations:')\nprint('- Focus retention offers on high-churn regions')\nprint('- Engage inactive customers within 30 days')",
+      "where_used": "Business strategy & executive decisions"
+    },
+
+    {
+      "type": "callout",
+      "variant": "success",
+      "value": "✅ Real-life usage: Retail (customer churn), Telecom (subscriber retention), E-commerce (recommendation systems), Healthcare (patient risk analysis)."
+    }
+  ]
+},
+
+
+    {
+  "id": "data-sources",
+  "title": "Data Sources",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data sources are the places from where data is collected for analysis. Choosing the right data source is the first and most important step in any data analysis project."
+    },
+
+    {
+      "type": "text",
+      "value": "In real life, businesses collect data from multiple sources such as databases, files, APIs, and business software. Let’s understand each data source with simple examples."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Databases (SQL & NoSQL)"
+    },
+    {
+      "type": "text",
+      "value": "Databases store structured or semi-structured data and are widely used by companies to store large volumes of information such as customers, orders, payments, and products."
+    },
+    {
+      "type": "list",
+      "value": [
+        "SQL Databases: MySQL, PostgreSQL, SQL Server",
+        "NoSQL Databases: MongoDB, Cassandra, DynamoDB"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: An e-commerce company stores customer details and order history in a database. A data analyst queries this database to analyze sales and customer behavior."
+    },
+    {
+      "type": "code",
+      "value": "SELECT product_category, SUM(order_amount) AS total_sales\nFROM orders\nGROUP BY product_category;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. CSV / Excel Files"
+    },
+    {
+      "type": "text",
+      "value": "CSV and Excel files are one of the most common and simple data sources. They are widely used in small businesses and for sharing data between teams."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A sales manager shares monthly sales data in an Excel file. A data analyst loads this file to analyze performance."
+    },
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\nsales_df = pd.read_csv('sales_data.csv')\nprint(sales_df.head())"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. APIs (Application Programming Interfaces)"
+    },
+    {
+      "type": "text",
+      "value": "APIs allow applications to share data automatically. APIs are commonly used to fetch real-time or external data."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A company fetches daily currency exchange rates or weather data using APIs for analysis."
+    },
+    {
+      "type": "code",
+      "value": "import requests\n\nresponse = requests.get('https://api.example.com/sales')\ndata = response.json()\nprint(data)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Web Scraping"
+    },
+    {
+      "type": "text",
+      "value": "Web scraping is the process of extracting data from websites when APIs are not available. It is used to collect publicly available data."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A price comparison website scrapes product prices from multiple online stores."
+    },
+    {
+      "type": "code",
+      "value": "from bs4 import BeautifulSoup\nimport requests\n\nurl = 'https://example.com/products'\nhtml = requests.get(url).text\nsoup = BeautifulSoup(html, 'html.parser')\n\nfor item in soup.find_all('h2'):\n    print(item.text)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Business Applications (CRM, ERP)"
+    },
+    {
+      "type": "text",
+      "value": "Business applications like CRM and ERP systems store critical business data such as customer interactions, inventory, finance, and employee records."
+    },
+    {
+      "type": "list",
+      "value": [
+        "CRM: Salesforce, HubSpot",
+        "ERP: SAP, Oracle, Microsoft Dynamics"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A sales team uses CRM data to analyze customer retention and sales performance."
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, data analysts often work with multiple data sources together. Combining data from databases, files, APIs, and business tools helps create a complete picture for better decision-making."
+    }
+  ]
+}
+,
+
+    {
+  "id": "statistics",
+  "title": "Statistics for Data Analysis",
+  "content": [
+    {
+      "type": "text",
+      "value": "Statistics is a branch of mathematics that helps us collect, summarize, analyze, and interpret data. In data analysis, statistics helps us understand data and make decisions based on evidence rather than assumptions."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Types of Statistics"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Descriptive Statistics",
+        "Inferential Statistics"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Descriptive Statistics"
+    },
+    {
+      "type": "text",
+      "value": "Descriptive statistics is used to summarize and describe the main features of a dataset. It answers the question: What happened in the data?"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Mean, Median, Mode",
+        "Minimum and Maximum",
+        "Variance and Standard Deviation"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A shop owner records daily sales for one week and wants to understand average sales and variability."
+    },
+
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\nsales = [1200, 1500, 1800, 1500, 2000, 1700, 1500]\ndf = pd.DataFrame({'Daily_Sales': sales})\n\nprint('Mean:', df['Daily_Sales'].mean())\nprint('Median:', df['Daily_Sales'].median())\nprint('Mode:', df['Daily_Sales'].mode()[0])\nprint('Standard Deviation:', df['Daily_Sales'].std())"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Population and Sample"
+    },
+    {
+      "type": "text",
+      "value": "A population includes all possible data points of interest, while a sample is a smaller subset taken from the population to represent it."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Population: All customers of a store",
+        "Sample: Sales data of customers from the last 7 days"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "👉 Real-life example: It is expensive and time-consuming to analyze sales data of all customers. Instead, a sample is analyzed to draw conclusions."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Inferential Statistics"
+    },
+    {
+      "type": "text",
+      "value": "Inferential statistics uses a sample of data to make predictions or decisions about a population. It answers the question: What can we conclude about the larger group?"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Hypothesis Testing",
+        "Confidence Intervals",
+        "Correlation and Regression"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Based on a sample of daily sales, a shop owner wants to decide whether average sales are greater than ₹1500."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Hypothesis Testing"
+    },
+    {
+      "type": "text",
+      "value": "Hypothesis testing is a statistical method used to test assumptions using sample data. It helps decide whether an assumption is true or false."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Null Hypothesis (H₀): No effect or no difference",
+        "Alternative Hypothesis (H₁): There is an effect or difference",
+        "P-value: Probability of observing results if H₀ is true"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "👉 Example Hypothesis: Average daily sales are equal to ₹1500."
+    },
+
+    {
+      "type": "code",
+      "value": "from scipy import stats\n\nsales = [1200, 1500, 1800, 1500, 2000, 1700, 1500]\n\n# One-sample t-test\nt_stat, p_value = stats.ttest_1samp(sales, 1500)\n\nprint('T-statistic:', t_stat)\nprint('P-value:', p_value)"
+    },
+
+    {
+      "type": "text",
+      "value": "👉 Interpretation: If the p-value is less than 0.05, the shop owner can reject the null hypothesis and conclude that average sales are significantly different from ₹1500."
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, descriptive statistics helps us understand what happened in the data, while inferential statistics helps us make predictions and decisions about a population using sample data."
+    }
+  ]
+}
+,
+
+    {
+  "id": "excel",
+  "title": "Excel for Data Analysis",
+  "content": [
+    {
+      "type": "text",
+      "value": "Excel is one of the most widely used tools for data analysis. It is easy to learn, powerful, and commonly used in companies for reporting, analysis, and decision-making."
+    },
+
+    {
+      "type": "text",
+      "value": "Excel helps analysts clean data, analyze trends, summarize large datasets, and present insights visually without writing complex code."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Pivot Tables"
+    },
+    {
+      "type": "text",
+      "value": "Pivot Tables are used to summarize large datasets quickly. They help answer questions like totals, averages, counts, and comparisons."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A sales manager wants to see total sales by region and product category."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Rows: Region",
+        "Columns: Product Category",
+        "Values: Sum of Sales"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Result: In seconds, the manager can see which region and product are performing best."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. VLOOKUP / XLOOKUP"
+    },
+    {
+      "type": "text",
+      "value": "VLOOKUP and XLOOKUP are used to find and fetch data from another table. XLOOKUP is the modern and more flexible version."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: You have an employee ID in one sheet and want to get the employee name and department from another sheet."
+    },
+    {
+      "type": "code",
+      "value": "=XLOOKUP(A2, Employees!A:A, Employees!B:B)"
+    },
+    {
+      "type": "text",
+      "value": "👉 This formula searches the employee ID and returns the employee name automatically."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Conditional Formatting"
+    },
+    {
+      "type": "text",
+      "value": "Conditional Formatting highlights important values using colors, icons, or data bars. It helps quickly identify patterns and problems."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Highlight sales below target in red and above target in green."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Red color for low performance",
+        "Green color for high performance",
+        "Color scales for trends"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 This makes reports easier to understand at a glance."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Charts and Dashboards"
+    },
+    {
+      "type": "text",
+      "value": "Charts and dashboards are used to visually represent data so that insights can be easily communicated to stakeholders."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Bar charts for comparison",
+        "Line charts for trends",
+        "Pie charts for distribution",
+        "Dashboards for KPI tracking"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A dashboard showing monthly sales, profit, and top products helps management make faster decisions."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Data Cleaning Using Excel Formulas"
+    },
+    {
+      "type": "text",
+      "value": "Raw data is often messy. Excel provides formulas to clean and prepare data before analysis."
+    },
+    {
+      "type": "list",
+      "value": [
+        "TRIM() – Remove extra spaces",
+        "UPPER(), LOWER() – Fix text case",
+        "IF() – Apply conditions",
+        "ISBLANK() – Detect missing values",
+        "REMOVE DUPLICATES – Remove duplicate rows"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "=TRIM(A2)"
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Cleaning customer names and removing duplicate records before analysis."
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, Excel is an essential tool for data analysts. It is widely used for data cleaning, analysis, reporting, and visualization, especially in business environments."
+    }
+  ]
+}
+,
+
+   {
+  "id": "sql",
+  "title": "SQL for Data Analysis",
+  "content": [
+    {
+      "type": "text",
+      "value": "SQL (Structured Query Language) is the most important skill for a Data Analyst. It is used to fetch, clean, transform, and analyze data stored in databases."
+    },
+    {
+      "type": "text",
+      "value": "In real companies, almost all business data such as sales, customers, orders, and payments is stored in databases, and SQL is used to analyze this data."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Types of SQL Commands"
+    },
+    {
+      "type": "list",
+      "value": [
+        "DDL – Data Definition Language",
+        "DML – Data Manipulation Language",
+        "DCL – Data Control Language",
+        "TCL – Transaction Control Language"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. DDL (Data Definition Language)"
+    },
+    {
+      "type": "text",
+      "value": "DDL commands are used to create, modify, and delete database structures such as tables."
+    },
+    {
+      "type": "list",
+      "value": [
+        "CREATE",
+        "ALTER",
+        "DROP",
+        "TRUNCATE"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "CREATE TABLE customers (\n  customer_id INT,\n  name VARCHAR(50),\n  city VARCHAR(30)\n);"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. DML (Data Manipulation Language)"
+    },
+    {
+      "type": "text",
+      "value": "DML commands are used to insert, update, and delete data inside tables."
+    },
+    {
+      "type": "list",
+      "value": [
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "SELECT"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "INSERT INTO customers VALUES (1, 'Rahul', 'Delhi');"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. DCL (Data Control Language)"
+    },
+    {
+      "type": "text",
+      "value": "DCL commands control access to data in the database."
+    },
+    {
+      "type": "list",
+      "value": [
+        "GRANT",
+        "REVOKE"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. TCL (Transaction Control Language)"
+    },
+    {
+      "type": "text",
+      "value": "TCL commands manage transactions in the database."
+    },
+    {
+      "type": "list",
+      "value": [
+        "COMMIT",
+        "ROLLBACK",
+        "SAVEPOINT"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Basic SQL Queries for Data Analysis"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "SELECT & SELECT DISTINCT"
+    },
+    {
+      "type": "code",
+      "value": "SELECT DISTINCT city FROM customers;"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "Selecting Individual Columns & SELECT *"
+    },
+    {
+      "type": "code",
+      "value": "SELECT name, city FROM customers;\n\nSELECT * FROM customers;"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "WHERE Clause"
+    },
+    {
+      "type": "code",
+      "value": "SELECT * FROM customers WHERE city = 'Delhi';"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "BETWEEN & IN Operators"
+    },
+    {
+      "type": "code",
+      "value": "SELECT * FROM orders WHERE amount BETWEEN 1000 AND 5000;\n\nSELECT * FROM customers WHERE city IN ('Delhi', 'Mumbai');"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "Comparison & Logical Operators"
+    },
+    {
+      "type": "code",
+      "value": "SELECT * FROM orders WHERE amount > 2000 AND status = 'Completed';"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "LIKE Operator & Wildcards"
+    },
+    {
+      "type": "code",
+      "value": "SELECT * FROM customers WHERE name LIKE 'R%';"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "NULL Values & IS NULL"
+    },
+    {
+      "type": "code",
+      "value": "SELECT * FROM customers WHERE city IS NULL;"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "ORDER BY & Multiple Column Ordering"
+    },
+    {
+      "type": "code",
+      "value": "SELECT * FROM orders ORDER BY amount DESC, order_date ASC;"
+    },
+
+    {
+      "type": "heading",
+      "level": 3,
+      "value": "LIMIT / TOP / FETCH FIRST"
+    },
+    {
+      "type": "code",
+      "value": "SELECT * FROM orders ORDER BY amount DESC LIMIT 5;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Aggregate Functions & GROUP BY"
+    },
+    {
+      "type": "list",
+      "value": [
+        "COUNT()",
+        "SUM()",
+        "AVG()",
+        "MIN()",
+        "MAX()"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT city, COUNT(*) AS total_customers FROM customers GROUP BY city;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "HAVING Clause & WHERE vs HAVING"
+    },
+    {
+      "type": "code",
+      "value": "SELECT city, COUNT(*) FROM customers GROUP BY city HAVING COUNT(*) > 5;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Joining Data from Multiple Tables"
+    },
+    {
+      "type": "list",
+      "value": [
+        "INNER JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN",
+        "FULL JOIN"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT o.order_id, c.name\nFROM orders o\nINNER JOIN customers c\nON o.customer_id = c.customer_id;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Data Cleaning & Transformation in SQL"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Removing duplicates",
+        "Handling NULL values",
+        "Data type conversion",
+        "String cleaning"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT DISTINCT * FROM customers;\n\nSELECT COALESCE(city, 'Unknown') FROM customers;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Advanced Data Analysis Techniques in SQL"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Subqueries",
+        "CTEs (WITH clause)",
+        "Window Functions",
+        "Ranking functions"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT name, amount,\nRANK() OVER (ORDER BY amount DESC) AS rank\nFROM orders;"
+    },
+
+    {
+      "type": "text",
+      "value": "In real-world data analyst roles, SQL is used daily for reporting, dashboards, ad-hoc analysis, and decision-making. Mastering SQL makes you job-ready."
+    }
+  ]
+},
+
+    {
+  "id": "python",
+  "title": "Python for Data Analysis",
+  "content": [
+    {
+      "type": "text",
+      "value": "Python is one of the most popular programming languages for data analysis because it is easy to learn, flexible, and has a rich ecosystem of libraries designed specifically for working with data."
+    },
+
+    {
+      "type": "text",
+      "value": "In real-life projects, Python is used at every stage of the data analysis process—from data collection and cleaning to analysis, visualization, and reporting."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Main Python Libraries Used in Data Analysis"
+    },
+    {
+      "type": "list",
+      "value": [
+        "NumPy – numerical operations",
+        "Pandas – data manipulation and analysis",
+        "Matplotlib – basic data visualization",
+        "Seaborn – advanced and statistical visualization"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. NumPy (Numerical Operations)"
+    },
+    {
+      "type": "text",
+      "value": "NumPy is used for fast numerical calculations. It works efficiently with arrays and is the foundation for many other data science libraries."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Calculating average daily sales and total revenue."
+    },
+    {
+      "type": "code",
+      "value": "import numpy as np\n\nsales = np.array([1200, 1500, 1800, 1500, 2000])\n\nprint('Total Sales:', np.sum(sales))\nprint('Average Sales:', np.mean(sales))"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Pandas (Data Manipulation)"
+    },
+    {
+      "type": "text",
+      "value": "Pandas is the most important library for data analysis. It allows you to work with structured data using DataFrames, similar to Excel tables."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Analyzing sales data stored in a CSV file."
+    },
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\n# Load data\ndf = pd.read_csv('sales.csv')\n\n# View first 5 rows\nprint(df.head())\n\n# Summary statistics\nprint(df.describe())"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Common Pandas Functions Used in Data Analysis"
+    },
+    {
+      "type": "list",
+      "value": [
+        "head(), tail() – preview data",
+        "info() – dataset structure",
+        "describe() – summary statistics",
+        "isnull(), fillna() – handle missing values",
+        "groupby() – data aggregation",
+        "sort_values() – sorting data"
+      ]
+    },
+
+    {
+      "type": "code",
+      "value": "# Handling missing values\ndf['Sales'].fillna(df['Sales'].mean(), inplace=True)\n\n# Grouping data by region\nprint(df.groupby('Region')['Sales'].sum())"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Matplotlib (Basic Visualization)"
+    },
+    {
+      "type": "text",
+      "value": "Matplotlib is used to create basic charts such as line plots, bar charts, and histograms. It helps visualize trends and patterns in data."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Visualizing daily sales trend."
+    },
+    {
+      "type": "code",
+      "value": "import matplotlib.pyplot as plt\n\nplt.plot(df['Day'], df['Sales'])\nplt.xlabel('Day')\nplt.ylabel('Sales')\nplt.title('Daily Sales Trend')\nplt.show()"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Seaborn (Advanced Visualization)"
+    },
+    {
+      "type": "text",
+      "value": "Seaborn is built on top of Matplotlib and provides more attractive and statistical visualizations with less code."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Comparing sales across different regions."
+    },
+    {
+      "type": "code",
+      "value": "import seaborn as sns\n\nsns.barplot(x='Region', y='Sales', data=df)\nplt.title('Sales by Region')\nplt.show()"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Python in the Data Analysis Process"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Collect data from files, databases, or APIs",
+        "Clean and preprocess data",
+        "Analyze patterns and trends",
+        "Visualize insights",
+        "Generate reports for decision-making"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, Python allows data analysts to perform end-to-end data analysis efficiently. With libraries like NumPy, Pandas, Matplotlib, and Seaborn, analysts can handle real-world datasets and generate meaningful insights."
+    }
+  ]
+}
+,
+
+   {
+  "id": "data-cleaning",
+  "title": "Data Cleaning",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data Cleaning is one of the most important steps in data analysis. In real life, raw data is often incomplete, messy, and inconsistent. Data cleaning ensures that the data is accurate, reliable, and ready for analysis."
+    },
+
+    {
+      "type": "text",
+      "value": "It is commonly said that data analysts spend nearly 60–70% of their time cleaning data before actual analysis."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why is Data Cleaning Important?"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Incorrect data leads to wrong insights",
+        "Missing values can affect calculations",
+        "Duplicate data can inflate results",
+        "Inconsistent data reduces data quality",
+        "Clean data improves model accuracy"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Sample Dataset (Sales Data)"
+    },
+    {
+      "type": "text",
+      "value": "Let’s consider a small real-life sales dataset containing some common data quality issues."
+    },
+
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\n# Sample dataset\ndata = {\n  'Customer': ['Amit', 'Ravi', 'Amit', 'Neha', None],\n  'Sales': [1200, 1500, 1200, None, 1800],\n  'Region': ['Delhi', 'Mumbai', 'Delhi', 'mumbai', 'Delhi']\n}\n\ndf = pd.DataFrame(data)\nprint(df)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Handling Missing Values"
+    },
+    {
+      "type": "text",
+      "value": "Missing values occur when data is not recorded properly. They can be handled by removing rows or filling them with suitable values."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Sales amount is missing for some customers."
+    },
+    {
+      "type": "code",
+      "value": "# Check missing values\nprint(df.isnull().sum())\n\n# Fill missing sales with average\ndf['Sales'].fillna(df['Sales'].mean(), inplace=True)\n\n# Drop rows with missing customer name\ndf.dropna(subset=['Customer'], inplace=True)\nprint(df)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Removing Duplicates"
+    },
+    {
+      "type": "text",
+      "value": "Duplicate records occur when the same data is entered multiple times. They can cause incorrect totals and averages."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Same customer sales entry recorded twice."
+    },
+    {
+      "type": "code",
+      "value": "# Remove duplicate rows\ndf = df.drop_duplicates()\nprint(df)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Fixing Inconsistent Data"
+    },
+    {
+      "type": "text",
+      "value": "Inconsistent data occurs when the same value is written in different formats."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: 'Mumbai' and 'mumbai' should be treated as the same region."
+    },
+    {
+      "type": "code",
+      "value": "# Standardize text data\ndf['Region'] = df['Region'].str.title()\nprint(df)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Outlier Detection"
+    },
+    {
+      "type": "text",
+      "value": "Outliers are extreme values that differ significantly from other observations. They can distort analysis results."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A very high sales value caused by a data entry error."
+    },
+    {
+      "type": "code",
+      "value": "# Detect outliers using IQR\nQ1 = df['Sales'].quantile(0.25)\nQ3 = df['Sales'].quantile(0.75)\nIQR = Q3 - Q1\n\noutliers = df[(df['Sales'] < Q1 - 1.5 * IQR) | (df['Sales'] > Q3 + 1.5 * IQR)]\nprint(outliers)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Data Type Conversion"
+    },
+    {
+      "type": "text",
+      "value": "Data type issues occur when numbers are stored as text or dates are not in the correct format."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Sales data imported as text instead of numbers."
+    },
+    {
+      "type": "code",
+      "value": "# Convert data type\ndf['Sales'] = df['Sales'].astype(float)\nprint(df.dtypes)"
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, data cleaning improves data quality and ensures accurate analysis. Without proper data cleaning, even the best analysis techniques can produce misleading results."
+    }
+  ]
+}
+,
+{
+  "id": "eda",
+  "title": "Exploratory Data Analysis (EDA)",
+  "content": [
+    {
+      "type": "text",
+      "value": "Exploratory Data Analysis (EDA) is the process of exploring and understanding the data before applying any modeling or advanced analysis. It helps analysts discover patterns, trends, relationships, and anomalies in the data."
+    },
+
+    {
+      "type": "text",
+      "value": "EDA answers important questions like: What does the data look like? Are there missing values? Which variables are related? Are there any unusual patterns?"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why is EDA Important?"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Helps understand the structure of the data",
+        "Identifies patterns and trends",
+        "Detects outliers and anomalies",
+        "Validates assumptions before modeling",
+        "Guides better business decisions"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Sample Dataset (Sales Data)"
+    },
+    {
+      "type": "text",
+      "value": "Let’s consider a simple sales dataset to perform EDA."
+    },
+
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\nsales_data = {\n  'Day': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],\n  'Sales': [1200, 1500, 1800, 1500, 2000, 2300, 1700],\n  'Region': ['Delhi', 'Delhi', 'Mumbai', 'Mumbai', 'Delhi', 'Mumbai', 'Delhi']\n}\n\ndf = pd.DataFrame(sales_data)\nprint(df)"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Summary Statistics"
+    },
+    {
+      "type": "text",
+      "value": "Summary statistics give a quick numerical overview of the data such as mean, minimum, maximum, and standard deviation."
+    },
+    {
+      "type": "code",
+      "value": "print(df['Sales'].describe())"
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life insight: Helps understand average sales, sales range, and variability."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Univariate Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Univariate analysis focuses on analyzing a single variable to understand its distribution."
+    },
+    {
+      "type": "text",
+      "value": "👉 Example: Analyzing sales distribution."
+    },
+    {
+      "type": "code",
+      "value": "import matplotlib.pyplot as plt\n\nplt.hist(df['Sales'], bins=5)\nplt.xlabel('Sales')\nplt.ylabel('Frequency')\nplt.title('Sales Distribution')\nplt.show()"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Bivariate Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Bivariate analysis studies the relationship between two variables."
+    },
+    {
+      "type": "text",
+      "value": "👉 Example: Comparing sales across regions."
+    },
+    {
+      "type": "code",
+      "value": "import seaborn as sns\n\nsns.boxplot(x='Region', y='Sales', data=df)\nplt.title('Sales by Region')\nplt.show()"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Correlation Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Correlation analysis helps identify how strongly variables are related to each other."
+    },
+    {
+      "type": "text",
+      "value": "👉 Example: Checking relationship between sales and day index."
+    },
+    {
+      "type": "code",
+      "value": "df['Day_Index'] = range(1, 8)\nprint(df[['Sales', 'Day_Index']].corr())"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Visual Exploration"
+    },
+    {
+      "type": "text",
+      "value": "Visualization makes patterns and trends easier to understand than raw numbers."
+    },
+    {
+      "type": "text",
+      "value": "👉 Example: Line chart showing sales trend over days."
+    },
+    {
+      "type": "code",
+      "value": "plt.plot(df['Day'], df['Sales'], marker='o')\nplt.xlabel('Day')\nplt.ylabel('Sales')\nplt.title('Weekly Sales Trend')\nplt.show()"
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, EDA is a critical step that helps analysts understand data deeply before applying machine learning or making business decisions. Good EDA leads to better insights and fewer mistakes later."
+    }
+  ]
+}
+,
+
+    {
+  "id": "visualization",
+  "title": "Data Visualization",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data Visualization is the graphical representation of data. It helps analysts and stakeholders understand patterns, trends, and insights quickly."
+    },
+
+    {
+      "type": "text",
+      "value": "Visuals make complex data easy to understand and are widely used in reports, dashboards, and presentations."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Common Types of Data Visualizations"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Bar Charts",
+        "Line Charts",
+        "Pie Charts",
+        "Histograms",
+        "Heatmaps"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Bar Chart"
+    },
+    {
+      "type": "text",
+      "value": "Bar charts are used to compare values across different categories."
+    },
+    {
+      "type": "image",
+      "src": "/images/Gemini_Generated_Imagebarchat.png",
+      "alt": "Bar Chart Example",
+      "caption": "Bar Chart – Comparing sales across regions"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Line Chart"
+    },
+    {
+      "type": "text",
+      "value": "Line charts show trends over time, such as daily, monthly, or yearly performance."
+    },
+    {
+      "type": "image",
+      "src": "/images/sales_trendGemini_Generated_Image_.png",
+      "alt": "Line Chart Example",
+      "caption": "Line Chart – Sales trend over time"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Pie Chart"
+    },
+    {
+      "type": "text",
+      "value": "Pie charts show percentage distribution of categories."
+    },
+    {
+      "type": "image",
+      "src": "/images/piechat.png",
+      "alt": "Pie Chart Example",
+      "caption": "Pie Chart – Market share distribution"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Histogram"
+    },
+    {
+      "type": "text",
+      "value": "Histograms show the distribution of numerical data."
+    },
+    {
+      "type": "image",
+      "src":"/images/histogram.png",
+      "alt": "Histogram Example",
+      "caption": "Histogram – Distribution of sales values"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Heatmap"
+    },
+    {
+      "type": "text",
+      "value": "Heatmaps show relationships or intensity using colors."
+    },
+    {
+      "type": "image",
+      "src": "/images/heatmap.webp",
+      "alt": "Heatmap Example",
+      "caption": "Heatmap – Correlation between features"
+    }
+  ]
+}
+,
+
+    {
+  "id": "dashboards",
+  "title": "Dashboards & Reporting",
+  "content": [
+    {
+      "type": "text",
+      "value": "Dashboards and reporting are used to present analyzed data in a clear, visual, and meaningful way so that stakeholders can quickly understand business performance and make decisions."
+    },
+
+    {
+      "type": "text",
+      "value": "While analysis helps find insights, dashboards and reports help communicate those insights to managers, executives, and non-technical users."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Why Dashboards & Reporting Are Important"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Track business performance in real time",
+        "Monitor key metrics and goals",
+        "Identify problems and opportunities quickly",
+        "Support data-driven decision making",
+        "Reduce dependency on manual reports"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. KPI Tracking"
+    },
+    {
+      "type": "text",
+      "value": "KPIs (Key Performance Indicators) are measurable values that show how well a business or process is performing against its objectives."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: An e-commerce company tracks KPIs such as Total Sales, Conversion Rate, Average Order Value, and Customer Retention."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Total Sales",
+        "Revenue Growth",
+        "Customer Acquisition Cost",
+        "Customer Retention Rate"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Interactive Dashboards"
+    },
+    {
+      "type": "text",
+      "value": "Interactive dashboards allow users to filter, drill down, and explore data dynamically instead of viewing static reports."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A sales dashboard where managers can filter performance by region, product, or time period."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Filters (date, region, category)",
+        "Drill-down into details",
+        "Hover tooltips",
+        "Real-time updates"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Business Reports"
+    },
+    {
+      "type": "text",
+      "value": "Business reports are structured summaries of data presented weekly, monthly, or quarterly. Reports are usually static and shared as PDFs, slides, or emails."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A monthly sales report showing revenue, profit, top products, and performance comparison with last month."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Daily operational reports",
+        "Monthly performance reports",
+        "Quarterly executive reports"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Storytelling with Data"
+    },
+    {
+      "type": "text",
+      "value": "Storytelling with data means presenting insights in a narrative format so that the audience understands not just the numbers, but the meaning behind them."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Instead of saying 'Sales dropped by 10%', explain why it happened and what action should be taken."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Start with the business question",
+        "Highlight key insights",
+        "Explain the reason behind trends",
+        "Recommend actions"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Common Tools Used for Dashboards & Reporting"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Power BI",
+        "Tableau",
+        "Google Data Studio",
+        "Excel Dashboards",
+        "Python (Matplotlib, Seaborn, Plotly)"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, dashboards help monitor real-time performance, while reports provide detailed analysis over a period of time. Together, they play a crucial role in turning data into business decisions."
+    }
+  ]
+},
+
+   {
+  "id": "tools",
+  "title": "Data Analysis Tools",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data analysis tools help analysts collect, clean, analyze, visualize, and present data. Each tool has a specific purpose, and in real-world projects, multiple tools are often used together."
+    },
+
+    {
+      "type": "text",
+      "value": "Choosing the right tool depends on the type of data, business requirements, and the level of analysis needed."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Excel"
+    },
+    {
+      "type": "text",
+      "value": "Excel is one of the most widely used tools for data analysis, especially in business environments. It is easy to use and suitable for small to medium-sized datasets."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Data cleaning using formulas",
+        "Pivot Tables for summarization",
+        "Charts and dashboards",
+        "Ad-hoc analysis and reporting"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A sales manager uses Excel to track monthly sales, create pivot tables, and share reports with management."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. SQL"
+    },
+    {
+      "type": "text",
+      "value": "SQL is used to work with data stored in databases. It allows analysts to fetch, filter, aggregate, and transform large volumes of data efficiently."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Querying large datasets",
+        "Joining multiple tables",
+        "Data cleaning and transformation",
+        "Generating reports from databases"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: An analyst uses SQL to extract sales and customer data from a database to prepare reports and dashboards."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Python"
+    },
+    {
+      "type": "text",
+      "value": "Python is a powerful programming language used for advanced data analysis, automation, and large-scale data processing."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Data cleaning and preprocessing (Pandas)",
+        "Numerical analysis (NumPy)",
+        "Visualization (Matplotlib, Seaborn)",
+        "Automation and reusable analysis"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A data analyst uses Python to clean raw data, perform EDA, and generate insights automatically every day."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Power BI"
+    },
+    {
+      "type": "text",
+      "value": "Power BI is a business intelligence tool used to create interactive dashboards and reports. It connects easily to multiple data sources."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Interactive dashboards",
+        "Real-time data updates",
+        "DAX calculations",
+        "Sharing reports with stakeholders"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A company uses Power BI dashboards to monitor sales, revenue, and KPIs in real time."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Tableau"
+    },
+    {
+      "type": "text",
+      "value": "Tableau is a data visualization tool known for its powerful and user-friendly visual analytics capabilities."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Drag-and-drop visualizations",
+        "Interactive dashboards",
+        "Storytelling with data",
+        "Handling large datasets visually"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: Business leaders use Tableau dashboards to explore trends and make strategic decisions."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "6. Google Data Studio (Looker Studio)"
+    },
+    {
+      "type": "text",
+      "value": "Google Data Studio is a free, cloud-based tool used for creating dashboards and reports, especially for marketing and web analytics."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Integration with Google Analytics",
+        "Real-time dashboards",
+        "Easy sharing and collaboration",
+        "Web and marketing reporting"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A digital marketing team tracks website traffic, conversions, and campaign performance using Google Data Studio."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "How These Tools Are Used Together in Real Projects"
+    },
+    {
+      "type": "list",
+      "value": [
+        "SQL → Extract data from databases",
+        "Python → Clean and analyze data",
+        "Excel → Quick analysis and validation",
+        "Power BI / Tableau → Build dashboards",
+        "Reports → Share insights with stakeholders"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, mastering multiple data analysis tools makes an analyst more efficient and job-ready. Each tool plays a unique role in the complete data analysis workflow."
+    }
+  ]
+},
+
+   {
+  "id": "business",
+  "title": "Business Use Cases",
+  "content": [
+    {
+      "type": "text",
+      "value": "Business use cases show how data analysis is applied in real-world scenarios to solve business problems, improve performance, and support decision-making."
+    },
+
+    {
+      "type": "text",
+      "value": "Data analysts work closely with business teams to answer questions like: Why are sales dropping? Which customers are leaving? Which campaign performed best?"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Sales Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Sales analysis focuses on understanding revenue trends, product performance, and regional sales patterns."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A retail company wants to know which products and regions generate the highest revenue."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Total and monthly sales",
+        "Top-selling products",
+        "Sales by region or store",
+        "Year-over-year growth"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT region, SUM(sales_amount) AS total_sales\nFROM sales\nGROUP BY region\nORDER BY total_sales DESC;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Customer Behavior Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Customer behavior analysis helps businesses understand how customers interact with products or services."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: An e-commerce company analyzes customer data to reduce churn and improve retention."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Customer purchase frequency",
+        "Average order value",
+        "Customer churn rate",
+        "Repeat vs new customers"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "import pandas as pd\n\n# Calculate average order value\ndf.groupby('customer_id')['order_value'].mean()"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Marketing Campaign Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Marketing campaign analysis evaluates how effective marketing efforts are in driving traffic, conversions, and revenue."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A marketing team wants to compare the performance of email and social media campaigns."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Click-through rate (CTR)",
+        "Conversion rate",
+        "Cost per acquisition (CPA)",
+        "Return on investment (ROI)"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT campaign_type, AVG(conversion_rate)\nFROM campaigns\nGROUP BY campaign_type;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Financial Reporting"
+    },
+    {
+      "type": "text",
+      "value": "Financial reporting uses data analysis to track revenue, expenses, profit, and financial health of a business."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A finance team prepares monthly profit and loss (P&L) reports for management."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Revenue and expenses",
+        "Profit and loss analysis",
+        "Budget vs actual comparison",
+        "Cash flow analysis"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT month, SUM(revenue - expense) AS profit\nFROM finance\nGROUP BY month;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Operational Analysis"
+    },
+    {
+      "type": "text",
+      "value": "Operational analysis focuses on improving internal processes and efficiency."
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A logistics company analyzes delivery times to reduce delays."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Process efficiency",
+        "Delivery or service time",
+        "Resource utilization",
+        "Bottleneck identification"
+      ]
+    },
+    {
+      "type": "code",
+      "value": "SELECT AVG(delivery_time) AS avg_delivery_time\nFROM orders;"
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "How Data Analysts Use These Use Cases"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Understand the business problem",
+        "Collect and clean relevant data",
+        "Analyze trends and patterns",
+        "Create dashboards and reports",
+        "Recommend actions to stakeholders"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, business use cases show the real value of data analysis. They help organizations improve performance, reduce costs, and make smarter decisions."
+    }
+  ]
+},
+
+    {
+  "id": "careers",
+  "title": "Careers in Data Analysis",
+  "content": [
+    {
+      "type": "text",
+      "value": "Data analysis offers multiple career paths across industries such as IT, finance, healthcare, retail, marketing, and operations. Each role focuses on turning data into insights that help businesses make better decisions."
+    },
+
+    {
+      "type": "text",
+      "value": "Although the titles may differ, all data analysis roles share a common goal: understanding data and communicating insights clearly to stakeholders."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "1. Data Analyst"
+    },
+    {
+      "type": "text",
+      "value": "A Data Analyst works with raw data to clean, analyze, and visualize it. This role focuses on finding trends, patterns, and insights from data."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Collect and clean data",
+        "Perform exploratory data analysis (EDA)",
+        "Create dashboards and reports",
+        "Present insights to stakeholders"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A data analyst analyzes monthly sales data to identify top-performing products and regions."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "2. Business Analyst"
+    },
+    {
+      "type": "text",
+      "value": "A Business Analyst focuses on understanding business needs and using data to improve processes and strategies."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Translate business problems into data questions",
+        "Analyze business performance metrics",
+        "Work with stakeholders to define requirements",
+        "Recommend data-driven solutions"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A business analyst evaluates why customer churn is increasing and suggests retention strategies."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "3. Reporting Analyst"
+    },
+    {
+      "type": "text",
+      "value": "A Reporting Analyst specializes in creating regular reports and dashboards for management and business teams."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Prepare daily, weekly, and monthly reports",
+        "Maintain dashboards",
+        "Ensure data accuracy and consistency",
+        "Automate recurring reports"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A reporting analyst generates weekly performance reports for sales and operations teams."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "4. Operations Analyst"
+    },
+    {
+      "type": "text",
+      "value": "An Operations Analyst focuses on improving internal business processes using data."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Analyze operational efficiency",
+        "Identify bottlenecks and delays",
+        "Optimize resource usage",
+        "Improve service delivery"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: An operations analyst studies delivery times to reduce shipping delays."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "5. Product Analyst"
+    },
+    {
+      "type": "text",
+      "value": "A Product Analyst uses data to improve product features, user experience, and product performance."
+    },
+    {
+      "type": "list",
+      "value": [
+        "Analyze user behavior",
+        "Track product KPIs",
+        "Run A/B tests",
+        "Support product decisions"
+      ]
+    },
+    {
+      "type": "text",
+      "value": "👉 Real-life example: A product analyst analyzes user engagement data to decide which features to improve."
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Skills Commonly Required for Data Analysis Careers"
+    },
+    {
+      "type": "list",
+      "value": [
+        "SQL and databases",
+        "Excel and spreadsheets",
+        "Python for data analysis",
+        "Data visualization tools (Power BI, Tableau)",
+        "Communication and storytelling skills"
+      ]
+    },
+
+    {
+      "type": "heading",
+      "level": 2,
+      "value": "Career Growth Path in Data Analysis"
+    },
+    {
+      "type": "list",
+      "value": [
+        "Junior Data Analyst → Data Analyst → Senior Data Analyst",
+        "Business Analyst → Senior Business Analyst → Product Manager",
+        "Reporting Analyst → BI Analyst → Analytics Manager"
+      ]
+    },
+
+    {
+      "type": "text",
+      "value": "In summary, careers in data analysis are diverse and in high demand. By mastering analytical skills and tools, professionals can grow into senior, leadership, or specialized roles."
+    }
+  ]
+}
+  ]
+}
