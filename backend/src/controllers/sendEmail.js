@@ -24,10 +24,16 @@ const sendEmail = async (req, res) => {
     });
 
     await resend.emails.send({
-      from: "We Make Coder <onboarding@resend.dev>",
+      from: "We Make Coder <no-reply@send.wemakecoder.com>",
       to: [email],
       subject: "Your OTP Code – We Make Coder",
-      html: `<h2>Your OTP is ${otp}</h2><p>Valid for 10 minutes</p>`,
+      html: `
+        <div style="font-family: Arial, sans-serif">
+          <h2>Your OTP is ${otp}</h2>
+          <p>Valid for <strong>10 minutes</strong>.</p>
+          <p>If you did not request this, please ignore.</p>
+        </div>
+      `,
     });
 
     res.json({ success: true, message: "OTP sent" });
