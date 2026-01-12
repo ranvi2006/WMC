@@ -5,6 +5,7 @@ const {
   getAllTeachers, // 👈 ADD
   getAllUsers,
   updateUserRole,
+  getAdminAnalytics,
 } = require("../controllers/adminController");
 
 const { isAuthenticated } = require("../middlewares/authMiddleware");
@@ -19,5 +20,11 @@ router.get("/payments", isAuthenticated, allowRoles("admin"), getAllPayments);
 router.get("/teachers", isAuthenticated, allowRoles("admin"), getAllTeachers);
 router.get("/users", isAuthenticated, allowRoles("admin"), getAllUsers);
 router.put("/users/role", isAuthenticated, allowRoles("admin"), updateUserRole);
+router.get(
+  "/analytics",
+  isAuthenticated,
+  allowRoles("admin"),
+  getAdminAnalytics
+);
 
 module.exports = router;

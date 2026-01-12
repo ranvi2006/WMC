@@ -56,6 +56,9 @@ const monitoringRoutes = require("./routes/monitoringRoutes");
 // Phase 4
 const errorRoutes = require("./routes/errorRoutes");
 
+//combile 
+const userRoutes=require("./routes/userRoutes");
+
 // =======================
 // APP INIT
 // =======================
@@ -142,9 +145,13 @@ app.use("/api/monitoring", monitoringRoutes);
 // Admin Error Logs
 app.use("/api/admin/errors", errorRoutes);
 
+//combile 
+app.use("/api/user",userRoutes);
+
 // =======================
 // 404 HANDLER (MUST BE LAST)
 // =======================
+
 app.use((req, res) => {
   res.status(404).json({
     success: false,

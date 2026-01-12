@@ -30,6 +30,7 @@ import CourseDetails from "./pages/CourseDetails";
 import ViewRoadmap from "./pages/ViewRoadmap";
 import Documentation from "./pages/docs/Documentation";
 import ForgotPassword from "./pages/ForgotPassword";
+import Roadmaps from "./pages/public/Roadmaps";
 
 /* =======================
    STUDENT PAGES
@@ -65,15 +66,30 @@ import CreateSlots from "./pages/admin/CreateSlots";
 import SystemMonitoring from "./pages/admin/SystemMonitoring";
 import ErrorLogs from "./pages/admin/ErrorLogs";
 import AdminUsers from "./pages/admin/AdminUsers";
+import Analytics from "./pages/admin/Analytics";
+
+ /* =======================
+     PROFILE PAGE
+  ======================= */ 
+  import Profile from "./pages/combine/Profile"
+  import Settings from "./pages/combine/Settings";
 
 /* =======================
    PROTECTED ROUTE
 ======================= */
 import ProtectedRoute from "./components/ProtectedRoute";
+import Footer from "./pages/Footer";
+
 
 function App() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
+
+
+  /* =======================
+     PROFILE PAGE
+  ======================= */
 
   /* =======================
      REHYDRATE AUTH ON REFRESH
@@ -114,6 +130,31 @@ function App() {
           path="/courses/:courseId/showroadmap"
           element={<ViewRoadmap />}
         />
+        <Route path="/roadmaps" element={<Roadmaps />} />
+
+
+
+          {/* similar Routes */}
+            {/* ======================= */}
+
+            <Route
+          path="/profile"
+          element={
+            <ProtectedRoute roles={["student","teacher","admin"]}>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+            <Route
+          path="/settings"
+          element={
+            <ProtectedRoute roles={["student","teacher","admin"]}>
+              <Settings/>
+            </ProtectedRoute>
+          }
+        />
+
+
 
         {/* =======================
            STUDENT ROUTES
@@ -329,8 +370,18 @@ function App() {
             </ProtectedRoute>
           }
         /> 
+        <Route
+          path="/admin/analytics"
+          element={
+            <ProtectedRoute roles={["admin"]}>
+              <Analytics />
+            </ProtectedRoute>
+          }
+        /> 
         
       </Routes>
+      <Footer/>
+    
     </Router>
   );
 }
