@@ -3,7 +3,20 @@ import { Link } from "react-router-dom";
 import api from "../services/api";
 
 export default function ForgotPassword() {
-  const [step, setStep] = useState("email"); // email | otp | reset | done
+  /* ================= APP MODE ================= */
+
+  const isProduction = import.meta.env.VITE_APP_MODE === "production";
+
+  /* ================= STATES ================= */
+
+  // Development:
+  // directly show reset form
+
+  // Production:
+  // email -> otp -> reset
+
+  const [step, setStep] = useState(isProduction ? "email" : "reset");
+
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -13,14 +26,22 @@ export default function ForgotPassword() {
   const [success, setSuccess] = useState("");
 
   /* ================= SEND OTP ================= */
+
   const sendOtp = async () => {
-    if (!email) return setError("Email is required");
+    if (!email) {
+      return setError("Email is required");
+    }
 
     try {
       setLoading(true);
       setError("");
-      const res = await api.post("/send-email", { email });
+
+      const res = await api.post("/send-email", {
+        email,
+      });
+
       setSuccess(res.data.message);
+
       setStep("otp");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to send OTP");
@@ -30,14 +51,23 @@ export default function ForgotPassword() {
   };
 
   /* ================= VERIFY OTP ================= */
+
   const verifyOtp = async () => {
-    if (!otp) return setError("OTP is required");
+    if (!otp) {
+      return setError("OTP is required");
+    }
 
     try {
       setLoading(true);
       setError("");
-      const res = await api.post("/verify-otp", { email, otp });
+
+      const res = await api.post("/verify-otp", {
+        email,
+        otp,
+      });
+
       setSuccess(res.data.message);
+
       setStep("reset");
     } catch (err) {
       setError(err.response?.data?.message || "Invalid OTP");
@@ -47,18 +77,43 @@ export default function ForgotPassword() {
   };
 
   /* ================= RESET PASSWORD ================= */
+
   const resetPassword = async () => {
-    if (!newPassword) return setError("Password is required");
+    if (!email) {
+      return setError("Email is required");
+    }
+
+    if (!newPassword) {
+      return setError("Password is required");
+    }
+
+    if (newPassword.length < 6) {
+      return setError("Password must be at least 6 characters");
+    }
 
     try {
       setLoading(true);
       setError("");
-      const res = await api.post("/reset-password", {
-        email,
-        otp,
-        newPassword
-      });
-      setSuccess(res.data.message);
+
+      // Production -> send OTP
+      // Development -> skip OTP
+
+      const payload =
+        isProduction ?
+          {
+            email,
+            otp,
+            newPassword,
+          }
+        : {
+            email,
+            newPassword,
+          };
+
+      const res = await api.post("/reset-password", payload);
+
+      setSuccess(res.data.message || "Password updated successfully");
+
       setStep("done");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to reset password");
@@ -87,6 +142,7 @@ export default function ForgotPassword() {
         "
       >
         {/* LOGO */}
+
         <div className="flex justify-center mb-4">
           <img
             src="/images/CompanyLogo.png"
@@ -97,14 +153,19 @@ export default function ForgotPassword() {
         </div>
 
         {/* TITLE */}
+
         <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-white">
           Forgot Password
         </h2>
+
         <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-1 mb-6">
-          Reset your account password securely
+          {isProduction ?
+            "Reset your account password securely"
+          : "Development mode enabled"}
         </p>
 
         {/* ERROR */}
+
         {error && (
           <div className="mb-4 text-sm text-red-600 dark:text-red-400 text-center">
             {error}
@@ -112,18 +173,21 @@ export default function ForgotPassword() {
         )}
 
         {/* SUCCESS */}
+
         {success && (
           <div className="mb-4 text-sm text-green-600 dark:text-green-400 text-center">
             {success}
           </div>
         )}
 
-        {/* STEP 1: EMAIL */}
-        {step === "email" && (
+        {/* ================= STEP 1: EMAIL ================= */}
+
+        {isProduction && step === "email" && (
           <>
             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
               Registered Email
             </label>
+
             <input
               type="email"
               value={email}
@@ -156,12 +220,14 @@ export default function ForgotPassword() {
           </>
         )}
 
-        {/* STEP 2: OTP */}
-        {step === "otp" && (
+        {/* ================= STEP 2: OTP ================= */}
+
+        {isProduction && step === "otp" && (
           <>
             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
               Enter OTP
             </label>
+
             <input
               type="text"
               value={otp}
@@ -194,12 +260,39 @@ export default function ForgotPassword() {
           </>
         )}
 
-        {/* STEP 3: RESET */}
+        {/* ================= STEP 3: RESET ================= */}
+
         {step === "reset" && (
           <>
+            {/* EMAIL INPUT IN DEV MODE */}
+
+            {!isProduction && (
+              <>
+                <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                  Registered Email
+                </label>
+
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your registered email"
+                  disabled={loading}
+                  className="
+                    w-full rounded-xl px-4 py-3 text-sm mb-4
+                    bg-gray-50 dark:bg-[#070814]
+                    border border-gray-300 dark:border-white/10
+                    text-gray-900 dark:text-white
+                    focus:ring-2 focus:ring-purple-600
+                  "
+                />
+              </>
+            )}
+
             <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
               New Password
             </label>
+
             <input
               type="password"
               value={newPassword}
@@ -232,13 +325,20 @@ export default function ForgotPassword() {
           </>
         )}
 
-        {/* STEP 4: DONE */}
+        {/* ================= STEP 4: DONE ================= */}
+
         {step === "done" && (
           <p className="text-center text-sm text-gray-700 dark:text-gray-300">
-            Password reset successful. <br />
+            Password reset successful.
+            <br />
             <Link
               to="/login"
-              className="text-indigo-600 dark:text-indigo-400 font-medium hover:underline"
+              className="
+                text-indigo-600
+                dark:text-indigo-400
+                font-medium
+                hover:underline
+              "
             >
               Go to Login
             </Link>

@@ -5,19 +5,28 @@ import loadRazorpay from "../../utils/loadRazorpay";
 
 const BookInterview = () => {
   const navigate = useNavigate();
+
   const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
+  const isProduction = import.meta.env.VITE_APP_MODE === "production";
+
   const [availability, setAvailability] = useState([]);
+
   const [selectedDate, setSelectedDate] = useState("");
+
   const [selectedSlot, setSelectedSlot] = useState(null);
+
   const [loading, setLoading] = useState(true);
+
   const [booking, setBooking] = useState(false);
 
   /* ================= FETCH AVAILABILITY ================= */
+
   useEffect(() => {
     const fetchAvailability = async () => {
       try {
         const res = await api.get("/api/availability");
+
         setAvailability(res.data.availability || []);
       } catch {
         alert("Failed to load availability");
@@ -25,12 +34,14 @@ const BookInterview = () => {
         setLoading(false);
       }
     };
+
     fetchAvailability();
   }, []);
 
   /* ================= DATES ================= */
+
   const availableDates = useMemo(() => {
-    return [...new Set(availability.map(a => a.date))].sort();
+    return [...new Set(availability.map((a) => a.date))].sort();
   }, [availability]);
 
   useEffect(() => {
@@ -40,33 +51,45 @@ const BookInterview = () => {
   }, [availableDates, selectedDate]);
 
   /* ================= SLOTS ================= */
+
   const slotsForDate = useMemo(() => {
     return availability
-      .filter(a => a.date === selectedDate)
-      .flatMap(a =>
-        a.slots.map(slot => ({
+      .filter((a) => a.date === selectedDate)
+
+      .flatMap((a) =>
+        a.slots.map((slot) => ({
           ...slot,
+
           teacherId: a.teacherId._id,
+
           teacherName: a.teacherId.name,
-        }))
+        })),
       );
   }, [availability, selectedDate]);
 
-  /* ================= PAYMENT ================= */
+  /* ================= VERIFY PAYMENT ================= */
+
   const verifyPayment = async (response, paymentId) => {
     try {
       await api.post("/api/payments/verify", {
         razorpay_order_id: response.razorpay_order_id,
+
         razorpay_payment_id: response.razorpay_payment_id,
+
         razorpay_signature: response.razorpay_signature,
+
         paymentId,
       });
 
       await api.post("/api/interviews/book", {
         teacherId: selectedSlot.teacherId,
+
         date: selectedDate,
+
         startTime: selectedSlot.startTime,
+
         duration: 30,
+
         paymentId,
       });
 
@@ -78,59 +101,146 @@ const BookInterview = () => {
     }
   };
 
+  /* ================= HANDLE BOOK ================= */
+
   const handleBook = async () => {
     if (!selectedSlot) return;
 
     setBooking(true);
-    const loaded = await loadRazorpay();
-    if (!loaded) return setBooking(false);
 
-    const res = await api.post("/api/payments/create");
-    const { orderId, paymentId, amount } = res.data;
+    try {
+      /* ================= DEVELOPMENT MODE ================= */
 
-    new window.Razorpay({
-      key: razorpayKey,
-      amount,
-      currency: "INR",
-      order_id: orderId,
-      handler: (response) => verifyPayment(response, paymentId),
-      modal: { ondismiss: () => setBooking(false) },
-      theme: { color: "#2563eb" },
-    }).open();
+      if (!isProduction) {
+        await api.post("/api/interviews/book", {
+          teacherId: selectedSlot.teacherId,
+
+          date: selectedDate,
+
+          startTime: selectedSlot.startTime,
+
+          duration: 30,
+
+          paymentId: "DEV_PAYMENT",
+        });
+
+        navigate("/student/interviews");
+
+        return;
+      }
+
+      /* ================= PRODUCTION MODE ================= */
+
+      const loaded = await loadRazorpay();
+
+      if (!loaded) {
+        setBooking(false);
+
+        return;
+      }
+
+      const res = await api.post("/api/payments/create");
+
+      const { orderId, paymentId, amount } = res.data;
+
+      new window.Razorpay({
+        key: razorpayKey,
+
+        amount,
+
+        currency: "INR",
+
+        order_id: orderId,
+
+        handler: (response) => verifyPayment(response, paymentId),
+
+        modal: {
+          ondismiss: () => setBooking(false),
+        },
+
+        theme: {
+          color: "#2563eb",
+        },
+      }).open();
+    } catch (error) {
+      console.error(error);
+
+      alert("Booking failed");
+
+      setBooking(false);
+    }
   };
 
   /* ================= LOADING ================= */
+
   if (loading) {
     return (
-      <div className="py-12 text-center text-sm text-gray-500">
+      <div
+        className="
+        py-12 text-center
+        text-sm text-gray-500
+      "
+      >
         Loading availability…
       </div>
     );
   }
 
   /* ================= UI ================= */
-  return (
-    <div className="max-w-5xl mx-auto px-4 py-5 text-gray-900 dark:text-gray-100">
 
+  return (
+    <div
+      className="
+      max-w-5xl mx-auto
+      px-4 py-5
+      text-gray-900
+      dark:text-gray-100
+    "
+    >
       {/* TITLE */}
-      <h2 className="text-2xl font-bold mb-4">
+
+      <h2
+        className="
+        text-2xl font-bold mb-4
+      "
+      >
         Book an Interview
       </h2>
 
       {/* DATE SELECTOR */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {availableDates.map(date => (
+
+      <div
+        className="
+        flex flex-wrap gap-2 mb-6
+      "
+      >
+        {availableDates.map((date) => (
           <button
             key={date}
             onClick={() => {
               setSelectedDate(date);
+
               setSelectedSlot(null);
             }}
             className={`
-              px-3 py-1.5 text-xs font-semibold rounded-md border
-              ${date === selectedDate
-                ? "bg-blue-600 text-white border-blue-600"
-                : "bg-gray-900 text-white border-gray-700 hover:border-blue-500"}
+              px-3 py-1.5
+              text-xs font-semibold
+              rounded-md border
+
+              ${
+                date === selectedDate ?
+                  `
+                  bg-blue-600
+                  text-white
+                  border-blue-600
+                `
+                : `
+                  bg-gray-900
+                  text-white
+                  border-gray-700
+                  hover:border-blue-500
+                `
+              }
             `}
           >
             {date}
@@ -139,18 +249,34 @@ const BookInterview = () => {
       </div>
 
       {/* SLOTS */}
-      <h3 className="text-sm font-semibold mb-3">
+
+      <h3
+        className="
+        text-sm font-semibold mb-3
+      "
+      >
         Available Slots
       </h3>
 
-      {slotsForDate.length === 0 ? (
-        <p className="text-xs text-gray-500">
+      {slotsForDate.length === 0 ?
+        <p
+          className="
+          text-xs text-gray-500
+        "
+        >
           No slots available
         </p>
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-          {slotsForDate.map(slot => {
+      : <div
+          className="
+          grid grid-cols-2
+          sm:grid-cols-3
+          md:grid-cols-4
+          gap-2
+        "
+        >
+          {slotsForDate.map((slot) => {
             const isBooked = slot.isBooked;
+
             const isSelected = selectedSlot?._id === slot._id;
 
             return (
@@ -159,9 +285,14 @@ const BookInterview = () => {
                 disabled={isBooked}
                 onClick={() => setSelectedSlot(slot)}
                 className={`
-                  relative px-3 py-2 rounded-md border text-center transition
-                  
-                  ${isBooked && `
+                  relative
+                  px-3 py-2
+                  rounded-md border
+                  text-center transition
+
+                  ${
+                    isBooked &&
+                    `
                     bg-[repeating-linear-gradient(
                       45deg,
                       #1f2937,
@@ -169,39 +300,70 @@ const BookInterview = () => {
                       #111827 6px,
                       #111827 12px
                     )]
+
                     border-gray-600
                     cursor-not-allowed
                     opacity-70
-                  `}
+                  `
+                  }
 
-                  ${!isBooked && isSelected && `
-                    bg-blue-600 text-white border-blue-600
-                  `}
+                  ${
+                    !isBooked &&
+                    isSelected &&
+                    `
+                    bg-blue-600
+                    text-white
+                    border-blue-600
+                  `
+                  }
 
-                  ${!isBooked && !isSelected && `
-                    bg-gray-900 text-white border-gray-700
+                  ${
+                    !isBooked &&
+                    !isSelected &&
+                    `
+                    bg-gray-900
+                    text-white
+                    border-gray-700
                     hover:border-blue-500
-                  `}
+                  `
+                  }
                 `}
               >
                 {/* TIME */}
-                <div className="text-sm font-semibold">
+
+                <div
+                  className="
+                  text-sm font-semibold
+                "
+                >
                   {slot.startTime}
                 </div>
 
                 {/* TEACHER */}
-                <div className="text-[11px] opacity-80">
+
+                <div
+                  className="
+                  text-[11px]
+                  opacity-80
+                "
+                >
                   {slot.teacherName}
                 </div>
 
                 {/* BOOKED BADGE */}
+
                 {isBooked && (
-                  <span className="
+                  <span
+                    className="
                     absolute top-1 right-1
-                    text-[10px] font-semibold
-                    bg-red-600 text-white
-                    px-1.5 py-0.5 rounded
-                  ">
+                    text-[10px]
+                    font-semibold
+                    bg-red-600
+                    text-white
+                    px-1.5 py-0.5
+                    rounded
+                  "
+                  >
                     BOOKED
                   </span>
                 )}
@@ -209,35 +371,63 @@ const BookInterview = () => {
             );
           })}
         </div>
-      )}
+      }
 
       {/* SELECTED SUMMARY */}
+
       {selectedSlot && (
-        <div className="mt-4 text-xs text-gray-300">
-          Selected: <strong>{selectedSlot.startTime}</strong> with{" "}
+        <div
+          className="
+          mt-4 text-xs
+          text-gray-300
+        "
+        >
+          Selected:
+          <strong> {selectedSlot.startTime}</strong> with{" "}
           <strong>{selectedSlot.teacherName}</strong>
         </div>
       )}
 
       {/* CTA */}
-      <div className="mt-6 flex justify-end">
+
+      <div
+        className="
+        mt-6 flex justify-end
+      "
+      >
         <button
           onClick={handleBook}
           disabled={!selectedSlot || booking}
           className="
-            bg-gradient-to-r from-blue-600 to-indigo-600
-            text-white text-sm font-semibold
-            px-5 py-2 rounded-md
-            shadow-md shadow-blue-500/30
-            hover:from-blue-500 hover:to-indigo-500
-            disabled:opacity-50 disabled:cursor-not-allowed
+            bg-gradient-to-r
+            from-blue-600
+            to-indigo-600
+
+            text-white
+            text-sm font-semibold
+
+            px-5 py-2
+            rounded-md
+
+            shadow-md
+            shadow-blue-500/30
+
+            hover:from-blue-500
+            hover:to-indigo-500
+
+            disabled:opacity-50
+            disabled:cursor-not-allowed
+
             transition
           "
         >
-          {booking ? "Processing…" : "Book ₹9"}
+          {booking ?
+            "Processing…"
+          : isProduction ?
+            "Book ₹9"
+          : "Book Free (Dev)"}
         </button>
       </div>
-
     </div>
   );
 };

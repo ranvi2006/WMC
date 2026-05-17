@@ -9,8 +9,15 @@ export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  /* ================= APP MODE ================= */
+  const isProduction = import.meta.env.VITE_APP_MODE === "production";
+
   /* ================= STATES ================= */
-  const [step, setStep] = useState("email"); // email | otp | register
+
+  // In development -> skip OTP flow
+  // In production -> require email verification
+  const [step, setStep] = useState(isProduction ? "email" : "register");
+
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
 
@@ -27,14 +34,15 @@ export default function Register() {
   /* ================= HANDLERS ================= */
 
   const sendOtp = async () => {
-    if (!email) return setError("Email is required");
+    if (!email) {
+      return setError("Email is required");
+    }
 
     try {
       setLoading(true);
       setError("");
 
-      const res=await api.post("/send-email", { email });
-      console.log(res);
+      await api.post("/send-email", { email });
 
       setStep("otp");
     } catch (err) {
@@ -45,13 +53,19 @@ export default function Register() {
   };
 
   const verifyOtp = async () => {
-    if (!otp) return setError("Enter the OTP");
+    if (!otp) {
+      return setError("Enter the OTP");
+    }
 
     try {
       setLoading(true);
       setError("");
 
-      await api.post("/verify-otp", { email, otp });
+      await api.post("/verify-otp", {
+        email,
+        otp,
+      });
+
       setStep("register");
     } catch (err) {
       setError(err.response?.data?.message || "Invalid OTP");
@@ -71,28 +85,31 @@ export default function Register() {
       return setError("Password must be at least 6 characters");
     }
 
+    // In development mode,
+    // allow fake email if user doesn't enter one
+    const finalEmail = email || `test_${Date.now()}@wemakecoder.dev`;
+
     try {
       setLoading(true);
       setError("");
 
       const res = await registerUser({
         ...formData,
-        email,
+        email: finalEmail,
       });
 
       dispatch(loginSuccess(res.data));
+
       navigate("/");
     } catch (err) {
-      setError(
-        err.response?.data?.message ||
-          "Registration failed"
-      );
+      setError(err.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
     }
   };
 
   /* ================= UI ================= */
+
   return (
     <div
       className="
@@ -115,7 +132,9 @@ export default function Register() {
         </h2>
 
         <p className="text-sm text-center text-gray-600 dark:text-gray-400 mb-6">
-          Verify your email to get started
+          {isProduction ?
+            "Verify your email to get started"
+          : "Development mode enabled"}
         </p>
 
         {error && (
@@ -125,26 +144,31 @@ export default function Register() {
         )}
 
         {/* ================= STEP 1: EMAIL ================= */}
-        {step === "email" && (
+
+        {isProduction && step === "email" && (
           <>
             <input
               type="email"
               placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-xl px-4 py-3 text-sm mb-4
+              className="
+                w-full rounded-xl px-4 py-3 text-sm mb-4
                 bg-gray-50 dark:bg-[#070814]
                 border border-gray-300 dark:border-white/10
-                text-gray-900 dark:text-white"
+                text-gray-900 dark:text-white
+              "
             />
 
             <button
               onClick={sendOtp}
               disabled={loading}
-              className="w-full px-6 py-3 rounded-xl
+              className="
+                w-full px-6 py-3 rounded-xl
                 bg-gradient-to-r from-purple-600 to-indigo-600
                 text-white text-sm font-semibold
-                hover:opacity-90 transition"
+                hover:opacity-90 transition
+              "
             >
               {loading ? "Sending OTP..." : "Send OTP"}
             </button>
@@ -152,26 +176,31 @@ export default function Register() {
         )}
 
         {/* ================= STEP 2: OTP ================= */}
-        {step === "otp" && (
+
+        {isProduction && step === "otp" && (
           <>
             <input
               type="text"
               placeholder="Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              className="w-full rounded-xl px-4 py-3 text-sm mb-4
+              className="
+                w-full rounded-xl px-4 py-3 text-sm mb-4
                 bg-gray-50 dark:bg-[#070814]
                 border border-gray-300 dark:border-white/10
-                text-gray-900 dark:text-white"
+                text-gray-900 dark:text-white
+              "
             />
 
             <button
               onClick={verifyOtp}
               disabled={loading}
-              className="w-full px-6 py-3 rounded-xl
+              className="
+                w-full px-6 py-3 rounded-xl
                 bg-gradient-to-r from-purple-600 to-indigo-600
                 text-white text-sm font-semibold
-                hover:opacity-90 transition"
+                hover:opacity-90 transition
+              "
             >
               {loading ? "Verifying..." : "Verify OTP"}
             </button>
@@ -179,20 +208,42 @@ export default function Register() {
         )}
 
         {/* ================= STEP 3: REGISTER ================= */}
+
         {step === "register" && (
           <form onSubmit={handleRegister} className="space-y-4">
+            {/* EMAIL INPUT IN DEV MODE */}
+
+            {!isProduction && (
+              <input
+                type="email"
+                placeholder="Email (optional in development)"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="
+                  w-full rounded-xl px-4 py-3 text-sm
+                  bg-gray-50 dark:bg-[#070814]
+                  border border-gray-300 dark:border-white/10
+                  text-gray-900 dark:text-white
+                "
+              />
+            )}
 
             <input
               type="text"
               placeholder="Full Name"
               value={formData.name}
               onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
+                setFormData({
+                  ...formData,
+                  name: e.target.value,
+                })
               }
-              className="w-full rounded-xl px-4 py-3 text-sm
+              className="
+                w-full rounded-xl px-4 py-3 text-sm
                 bg-gray-50 dark:bg-[#070814]
                 border border-gray-300 dark:border-white/10
-                text-gray-900 dark:text-white"
+                text-gray-900 dark:text-white
+              "
             />
 
             <input
@@ -200,12 +251,17 @@ export default function Register() {
               placeholder="Phone Number"
               value={formData.phone}
               onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
+                setFormData({
+                  ...formData,
+                  phone: e.target.value,
+                })
               }
-              className="w-full rounded-xl px-4 py-3 text-sm
+              className="
+                w-full rounded-xl px-4 py-3 text-sm
                 bg-gray-50 dark:bg-[#070814]
                 border border-gray-300 dark:border-white/10
-                text-gray-900 dark:text-white"
+                text-gray-900 dark:text-white
+              "
             />
 
             <input
@@ -213,21 +269,28 @@ export default function Register() {
               placeholder="Password (min 6 characters)"
               value={formData.password}
               onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
+                setFormData({
+                  ...formData,
+                  password: e.target.value,
+                })
               }
-              className="w-full rounded-xl px-4 py-3 text-sm
+              className="
+                w-full rounded-xl px-4 py-3 text-sm
                 bg-gray-50 dark:bg-[#070814]
                 border border-gray-300 dark:border-white/10
-                text-gray-900 dark:text-white"
+                text-gray-900 dark:text-white
+              "
             />
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-6 py-3 rounded-xl
+              className="
+                w-full px-6 py-3 rounded-xl
                 bg-gradient-to-r from-purple-600 to-indigo-600
                 text-white text-sm font-semibold
-                hover:opacity-90 transition"
+                hover:opacity-90 transition
+              "
             >
               {loading ? "Creating Account..." : "Create Account"}
             </button>
@@ -238,7 +301,12 @@ export default function Register() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
+            className="
+              text-indigo-600
+              dark:text-indigo-400
+              hover:underline
+              font-medium
+            "
           >
             Sign in
           </Link>
