@@ -85,24 +85,39 @@ export default function Register() {
       return setError("Password must be at least 6 characters");
     }
 
-    // In development mode,
-    // allow fake email if user doesn't enter one
-    const finalEmail = email || `test_${Date.now()}@wemakecoder.dev`;
+    const finalEmail = email?.trim() || `test_${Date.now()}@wemakecoder.dev`;
 
     try {
       setLoading(true);
       setError("");
+
+      console.log("REGISTER PAYLOAD:", {
+        ...formData,
+        email: finalEmail,
+      });
 
       const res = await registerUser({
         ...formData,
         email: finalEmail,
       });
 
+      console.log("REGISTER SUCCESS:", res.data);
+
       dispatch(loginSuccess(res.data));
 
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      console.log("REGISTER ERROR:", err.response?.data);
+
+      const backendErrors = err.response?.data?.errors;
+
+      if (backendErrors?.length > 0) {
+        setError(backendErrors[0].msg);
+      } else {
+        setError(
+          err.response?.data?.message || err.message || "Registration failed",
+        );
+      }
     } finally {
       setLoading(false);
     }

@@ -15,6 +15,8 @@ const generateOTP = () =>
 
 exports.registerUser = async (req, res) => {
   try {
+    console.log("REGISTER BODY:", req.body);
+
     /* =========================================================
        VALIDATION
     ========================================================= */
@@ -22,6 +24,8 @@ exports.registerUser = async (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+      console.log("VALIDATION ERRORS:", errors.array());
+
       return res.status(400).json({
         success: false,
         errors: errors.array(),
@@ -32,7 +36,39 @@ exports.registerUser = async (req, res) => {
        GET DATA
     ========================================================= */
 
-    let { name, email, password, phone, role } = req.body;
+    let { name, email, password, phone } = req.body;
+
+    /* =========================================================
+       BASIC SAFETY CHECKS
+    ========================================================= */
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
+
+    if (!name) {
+      return res.status(400).json({
+        success: false,
+        message: "Name is required",
+      });
+    }
+
+    if (!phone) {
+      return res.status(400).json({
+        success: false,
+        message: "Phone is required",
+      });
+    }
+
+    if (!password) {
+      return res.status(400).json({
+        success: false,
+        message: "Password is required",
+      });
+    }
 
     email = email.trim().toLowerCase();
 
@@ -56,10 +92,10 @@ exports.registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     /* =========================================================
-       AUTO ADMIN ASSIGNMENT
+       AUTO ROLE ASSIGNMENT
     ========================================================= */
 
-    role = isFounderEmail(email) ? "admin" : "student";
+    const role = isFounderEmail(email) ? "admin" : "student";
 
     /* =========================================================
        CREATE USER
@@ -73,14 +109,11 @@ exports.registerUser = async (req, res) => {
       role,
     });
 
+    console.log("USER CREATED:", user._id);
+
     /* =========================================================
        CLEAN OTP RECORDS
     ========================================================= */
-
-    await Otp.deleteMany({
-      email,
-      purpose: "register",
-    });
 
     await Otp.deleteMany({
       email,
@@ -107,7 +140,7 @@ exports.registerUser = async (req, res) => {
        RESPONSE
     ========================================================= */
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
 
       message:
@@ -119,22 +152,18 @@ exports.registerUser = async (req, res) => {
 
       user: {
         id: user._id,
-
         name: user.name,
-
         email: user.email,
-
         role: user.role,
-
         phone: user.phone,
       },
     });
   } catch (error) {
     console.error("REGISTER ERROR:", error);
 
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      message: "Server error",
+      message: error.message || "Server error",
     });
   }
 };
