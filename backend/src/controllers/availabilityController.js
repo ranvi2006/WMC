@@ -1,75 +1,131 @@
 const Availability = require("../models/Availability");
+const User = require("../models/User");
+
+/* =========================================================
+   SET AVAILABILITY
+========================================================= */
 
 const setAvailability = async (req, res) => {
-  const { date, slots } = req.body;
+  try {
+    const { date, slots } = req.body;
 
-  const availability = await Availability.findOneAndUpdate(
-    { teacherId: req.user.id, date },
-    { slots },
-    { upsert: true, new: true }
-  );
+    if (!date || !slots) {
+      return res.status(400).json({
+        success: false,
+        message: "Date and slots are required",
+      });
+    }
 
-  res.status(200).json({
-    success: true,
-    availability,
-  });
+    const availability = await Availability.findOneAndUpdate(
+      {
+        teacherId: req.user.id,
+        date,
+      },
+      {
+        slots,
+      },
+      {
+        upsert: true,
+        new: true,
+      },
+    );
+
+    return res.status(200).json({
+      success: true,
+      availability,
+    });
+  } catch (error) {
+    console.error("SET AVAILABILITY ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
 };
 
+/* =========================================================
+   GET AVAILABILITY
+========================================================= */
 
 const getAvailability = async (req, res) => {
-  // console.log("getAvailability called with body:", req.body);
-  const { date } = req.body;
+  try {
+    const { date } = req.query;
 
-  const availability = await Availability.find({
-    date: date,
-  });
+    const query = date ? { date } : {};
 
-  res.status(200).json({
-    success: true,
-    availability,
-  });
+    const availability = await Availability.find(query).populate(
+      "teacherId",
+      "name email",
+    );
+
+    /* =========================================================
+       REMOVE BROKEN RECORDS
+    ========================================================= */
+
+    const cleanAvailability = availability.filter((item) => item.teacherId);
+
+    return res.status(200).json({
+      success: true,
+      availability: cleanAvailability,
+    });
+  } catch (error) {
+    console.error("GET AVAILABILITY ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch availability",
+    });
+  }
 };
 
- const getAvailabilitys = async (req, res) => {
-  console.log("getAvailabilitys called with query:", req.query);
-  const { date } = req.query;
+/* =========================================================
+   AUTO CREATE SLOTS
+========================================================= */
 
-  const query = date ? { date } : {};
-
-  const availability = await Availability.find(query)
-    .populate("teacherId", "name email");
-
-  res.status(200).json({
-    success: true,
-    availability,
-  });
-};
 const autoCreateSlots = async (req, res) => {
-
   try {
     const DEFAULT_SLOTS = [
-  { startTime: "10:00", endTime: "10:30" },
-  { startTime: "11:00", endTime: "11:30" },
-  { startTime: "14:00", endTime: "14:30" },
-  { startTime: "15:00", endTime: "15:30" },
-];
-    const { dates } = req.body; // ["2026-01-10", "2026-01-12"]
+      {
+        startTime: "10:00",
+        endTime: "10:30",
+      },
+      {
+        startTime: "11:00",
+        endTime: "11:30",
+      },
+      {
+        startTime: "14:00",
+        endTime: "14:30",
+      },
+      {
+        startTime: "15:00",
+        endTime: "15:30",
+      },
+    ];
+
+    const { dates } = req.body;
 
     if (!dates || dates.length === 0) {
-      return res.status(400).json({ message: "Dates required" });
+      return res.status(400).json({
+        success: false,
+        message: "Dates required",
+      });
     }
 
-    // 1️⃣ Get all teachers
-    const teachers = await User.find({ role: "teacher" });
+    const teachers = await User.find({
+      role: "teacher",
+    });
 
     if (teachers.length === 0) {
-      return res.status(400).json({ message: "No teachers found" });
+      return res.status(400).json({
+        success: false,
+        message: "No teachers found",
+      });
     }
 
-    // 2️⃣ Loop teachers & dates
     for (const teacher of teachers) {
       for (const date of dates) {
-        // Prevent duplicate creation
         const exists = await Availability.findOne({
           teacherId: teacher._id,
           date,
@@ -79,7 +135,9 @@ const autoCreateSlots = async (req, res) => {
 
         await Availability.create({
           teacherId: teacher._id,
+
           date,
+
           slots: DEFAULT_SLOTS.map((slot) => ({
             ...slot,
             isBooked: false,
@@ -88,60 +146,107 @@ const autoCreateSlots = async (req, res) => {
       }
     }
 
-    res.json({
+    return res.status(200).json({
       success: true,
       message: "Slots created successfully",
       teachers: teachers.length,
       dates: dates.length,
       slotsPerTeacher: DEFAULT_SLOTS.length,
     });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    console.error("AUTO CREATE SLOTS ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 };
+
+/* =========================================================
+   ADMIN CREATE SLOTS
+========================================================= */
+
 const adminCreateSlots = async (req, res) => {
   try {
     const { teacherIds, date } = req.body;
 
-    if (!teacherIds.length || !date) {
-      return res.status(400).json({ message: "Teacher & date required" });
-    }
-
-    // ❌ Prevent Sunday
-    const day = new Date(date).getDay();
-    if (day === 0) {
-      return res.status(400).json({ message: "Sunday not allowed" });
-    }
-
-    const DEFAULT_SLOTS = [
-      { startTime: "10:00", endTime: "10:30" },
-      { startTime: "11:00", endTime: "11:30" },
-      { startTime: "14:00", endTime: "14:30" },
-      { startTime: "15:00", endTime: "15:30" },
-    ];
-
-    for (const teacherId of teacherIds) {
-      const exists = await Availability.findOne({ teacherId, date });
-      if (exists) continue; // ❌ prevent duplicate
-
-      await Availability.create({
-        teacherId,
-        date,
-        slots: DEFAULT_SLOTS.map(s => ({ ...s, isBooked: false })),
+    if (!teacherIds?.length || !date) {
+      return res.status(400).json({
+        success: false,
+        message: "Teacher IDs and date are required",
       });
     }
 
-    res.json({ success: true, message: "Slots created successfully" });
+    /* =========================================================
+       PREVENT SUNDAY
+    ========================================================= */
 
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const day = new Date(date).getDay();
+
+    if (day === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Sunday not allowed",
+      });
+    }
+
+    const DEFAULT_SLOTS = [
+      {
+        startTime: "10:00",
+        endTime: "10:30",
+      },
+      {
+        startTime: "11:00",
+        endTime: "11:30",
+      },
+      {
+        startTime: "14:00",
+        endTime: "14:30",
+      },
+      {
+        startTime: "15:00",
+        endTime: "15:30",
+      },
+    ];
+
+    for (const teacherId of teacherIds) {
+      const exists = await Availability.findOne({
+        teacherId,
+        date,
+      });
+
+      if (exists) continue;
+
+      await Availability.create({
+        teacherId,
+
+        date,
+
+        slots: DEFAULT_SLOTS.map((slot) => ({
+          ...slot,
+          isBooked: false,
+        })),
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Slots created successfully",
+    });
+  } catch (error) {
+    console.error("ADMIN CREATE SLOTS ERROR:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 };
 
 module.exports = {
   setAvailability,
   getAvailability,
-  getAvailabilitys,
   autoCreateSlots,
-  adminCreateSlots
+  adminCreateSlots,
 };

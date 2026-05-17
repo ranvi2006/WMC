@@ -53,18 +53,23 @@ const BookInterview = () => {
   /* ================= SLOTS ================= */
 
   const slotsForDate = useMemo(() => {
-    return availability
-      .filter((a) => a.date === selectedDate)
+    return (
+      availability
+        .filter((a) => a.date === selectedDate)
 
-      .flatMap((a) =>
-        a.slots.map((slot) => ({
-          ...slot,
+        // REMOVE BROKEN RECORDS
+        .filter((a) => a.teacherId)
 
-          teacherId: a.teacherId._id,
+        .flatMap((a) =>
+          a.slots.map((slot) => ({
+            ...slot,
 
-          teacherName: a.teacherId.name,
-        })),
-      );
+            teacherId: a.teacherId?._id,
+
+            teacherName: a.teacherId?.name || "Unknown Teacher",
+          })),
+        )
+    );
   }, [availability, selectedDate]);
 
   /* ================= VERIFY PAYMENT ================= */
